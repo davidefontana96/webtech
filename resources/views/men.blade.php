@@ -46,7 +46,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-7 col-md-9">
-							<div id="colorlib-logo"><a href="index">Footwear</a></div>
+							<div id="colorlib-logo"><a href="../index">Footwear</a></div>
 						</div>
 						<div class="col-sm-5 col-md-3">
 			            <form action="#" class="search-wrap">
@@ -60,15 +60,15 @@
 					<div class="row">
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
-								<li><a href="index">Home</a></li>
+								<li><a href="../index">Home</a></li>
 								<li class="active">
 									<a href="men">Men</a>
 
 								</li>
 								<li ><a href="women">Women</a></li>
-								<li><a href="about">About</a></li>
-								<li><a href="contact">Contact</a></li>
-								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+								<li><a href="../about">About</a></li>
+								<li><a href="../contact">Contact</a></li>
+								<li class="cart"><a href="../cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
 							</ul>
 						</div>
 					</div>
@@ -102,7 +102,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col">
-						<p class="bread"><span><a href="index">Home</a></span> / <span>Men</span></p>
+						<p class="bread"><span><a href="../index">Home</a></span> / <span>Men</span></p>
 					</div>
 				</div>
 			</div>
