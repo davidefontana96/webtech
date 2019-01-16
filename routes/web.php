@@ -19,23 +19,21 @@ Route::get('/index', 'IndexController@initializePage');
 
 Route::get('/index/{search}', 'IndexController@searchBar');
 
-Route::get('/women', function () {
-    return view('women');
-});
-
-Route::get('/men', function () {
-    return view('men');
-});
-
 Route::get('/cart', function () {
     return view('cart');
-});
+})->middleware('verified');
 
 Route::get('/contact', function () {
     return view('contact');
 });
 
 Auth::routes();
+
+Route::get('/provaMail', function(){
+  \Mail::to("davidefontana96.df@gmail.com")->send(new App\Mail\Registration());
+});
+
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 

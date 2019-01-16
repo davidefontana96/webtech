@@ -47,7 +47,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-7 col-md-9">
-							<div id="colorlib-logo"><a href="index.html">Footwear</a></div>
+							<div id="colorlib-logo"><a href="index">Footwear</a></div>
 						</div>
 						<div class="col-sm-5 col-md-3">
 			            <form action="#" class="search-wrap">
@@ -61,20 +61,20 @@
 					<div class="row">
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
-								<li class="active"><a href="index.html">Home</a></li>
+								<li class="active"><a href="index">Home</a></li>
 								<li class="has-dropdown">
-									<a href="men.html">Men</a>
+									<a href="men">Men</a>
 									<ul class="dropdown">
-										<li><a href="product-detail.html">Product Detail</a></li>
-										<li><a href="cart.html">Shopping Cart</a></li>
-										<li><a href="checkout.html">Checkout</a></li>
-										<li><a href="order-complete.html">Order Complete</a></li>
-										<li><a href="add-to-wishlist.html">Wishlist</a></li>
+										<li><a href="product-detail">Product Detail</a></li>
+										<li><a href="cart">Shopping Cart</a></li>
+										<li><a href="checkout">Checkout</a></li>
+										<li><a href="order-complete">Order Complete</a></li>
+										<li><a href="add-to-wishlist">Wishlist</a></li>
 									</ul>
 								</li>
-								<li><a href="women.html">Women</a></li>
-								<li><a href="about.html">About</a></li>
-								<li><a href="contact.html">Contact</a></li>
+								<li><a href="women">Women</a></li>
+								<li><a href="about">About</a></li>
+								<li><a href="contact">Contact</a></li>
 
 								@guest
 								<li>
@@ -95,7 +95,7 @@
 													<li>
 															<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
 													</li>
-													<li class="cart"><a href="cart.html"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+													<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
 													</ul>
 																<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 																		@csrf
@@ -199,6 +199,9 @@
 											<button type="submit" class="btn btn-primary">
 													{{ __('Login') }}
 											</button>
+											<div class="forgot">
+											<a href="password/reset">Forgot password?</a>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -254,7 +257,7 @@
 					<div class="col footer-col">
 						<h4>News</h4>
 						<ul class="colorlib-footer-links">
-							<li><a href="blog.html">Blog</a></li>
+							<li><a href="blog">Blog</a></li>
 							<li><a href="#">Press</a></li>
 							<li><a href="#">Exhibitions</a></li>
 						</ul>

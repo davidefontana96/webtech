@@ -22,7 +22,8 @@ class shoesController extends Controller
         ->join('images', 'shoes.id', '=', 'images.id_shoe')
         ->groupBy('shoes.id', 'images.id')
         ->where('shoes.sex', '=', 'F')
-        ->select('images.path', 'shoes.name')->get();
+        ->select('images.path', 'shoes.name')
+        ->get();
 
     //  return view('womenExtends', ['results' => $results]);
     // return view('women');
@@ -39,7 +40,7 @@ class shoesController extends Controller
      $shoes = DB::table('shoes')
         ->join('images', 'shoes.id', '=', 'images.id_shoe')
         ->groupBy('shoes.id', 'images.id')
-        ->select('images.path', 'shoes.name')
+        ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id')
         ->where('shoes.sex', '=', 'M' )
         ->get();
 
@@ -47,7 +48,7 @@ class shoesController extends Controller
     // return view('women');
     //  $styles = Style::all();
 
-    return view('men', compact('categories', 'styles', 'brands', 'shoes' ));
+    return view('men', compact('categories', 'styles', 'brands', 'shoes','sex', 'id' ));
     // return View::make('women', compact('styles', 'shoes' ));
     }
   /*  public function brands($id){
@@ -118,6 +119,29 @@ class shoesController extends Controller
             ->get();
         // return View::make('shoesviews', compact('shoes'))->render();
         return view('shoesviews', compact('shoes'));
+    }
+
+    public function detailShoe($id){
+      $shoes = DB::table('shoes')
+        ->join('measurements', 'shoes.id','=', 'measurements.id_shoe')
+        ->select('shoes.name', 'shoes.details', 'shoes.sex', 'shoes.id_category','shoes.id_brand','shoes.id_style', 'measurements.element')
+        ->where('shoes.id', '=', $id)
+        ->get();
+
+      $images = DB::table('shoes')
+        ->join('images', 'shoes.id', '=', 'images.id_shoe')
+        ->select('images.path')
+        ->where('images.id_shoe', '=', $id )
+        ->get();
+
+      $measures = DB::table('shoes')
+        ->join('measurements', 'shoes.id','=', 'measurements.id_shoe')
+        ->select('measurements.size_shoe', 'measurements.element')
+        ->where('measurements.id_shoe', '=', $id)
+        ->get();
+
+
+        return view('product-detail', compact('shoes', 'images', 'measures'));
     }
 
 

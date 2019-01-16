@@ -76,7 +76,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapShoesRoutes()
     {
         Route::prefix('shoes')
-             ->middleware('api')
+             ->middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/shoes.php'));
     }

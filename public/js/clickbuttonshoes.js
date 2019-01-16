@@ -10,20 +10,12 @@ var url= this.value;
 console.log(url);
 $('input[type=checkbox]').prop('checked', false); // Unchecks it
 $(this). prop("checked",true);
-
-
-//$( "div" ).remove( ".col-lg-4 mb-4 text-center" );
-  $('#ceppa').append().load(url);
-  //$window.fadeIn(300);
+$('#ceppa').append().load(url);
 }
-  else if($(this).prop("checked") == false){
-    $('#ceppa').append().load('men1/F');
+  else {
+    var rem = this.value;
+    var toremove = $(document.getElementById(rem));
+    $(toremove).remove();
   }
-
-
-
-
-
-
 });
 });
