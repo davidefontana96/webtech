@@ -1,13 +1,13 @@
 @foreach($shoes as $shoe)
 
 
-    <div class="col-lg-4 mb-4 text-center" id="brands/{{$shoe->id_brand}}/M">
+    <div class="col-lg-4 mb-4 text-center" id="brands/{{$shoe->id}}/M">
       <div class="product-entry border">
-        <a href="{{$shoe->id}}/product-detail" class="prod-img">
+        <a href="ok/product-detail" class="prod-img">
           <img src="{{$shoe->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
         </a>
         <div class="desc">
-          <h2><a href="{{$shoe->name}}">{{$shoe->name}}</a></h2>
+          <h2><a href="ok/product-detail">{{$shoe->name}}</a></h2>
           <span class="price">$139.00</span>
         </div>
       </div>

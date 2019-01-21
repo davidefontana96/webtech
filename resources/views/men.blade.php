@@ -215,13 +215,8 @@
 						</div>
 					</div>
 					<div class="col-lg-9 col-xl-9">
-						<div class="row row-pb-md" id="ceppa">
-
-
-						@include('shoesviews', $shoes)
-
-
-
+						<div class="row row-pb-md" id="poscarpe">
+					@include('shoesviews', $shoes)
 					</div>
 
 					</div>

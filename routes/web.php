@@ -11,13 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+
 
 Route::get('/index', 'IndexController@initializePage');
 
-Route::get('/index/{search}', 'IndexController@searchBar');
+/*Route::get('/index/{search}', 'IndexController@searchBar');*/
 
 Route::get('/cart', function () {
     return view('cart');
@@ -41,6 +39,4 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
-Route::get('/prova', function () {
-    return view('provalog');
-});
+Route::get('/prova', 'IndexController@initializePage');

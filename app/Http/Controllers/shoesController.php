@@ -48,7 +48,7 @@ class shoesController extends Controller
     // return view('women');
     //  $styles = Style::all();
 
-    return view('men', compact('categories', 'styles', 'brands', 'shoes','sex', 'id' ));
+    return view('men', compact('categories', 'styles', 'brands', 'shoes' ));
     // return View::make('women', compact('styles', 'shoes' ));
     }
   /*  public function brands($id){
