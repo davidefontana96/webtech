@@ -7,37 +7,37 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
-	
+
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="{{asset('css/animate.css')}}">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="{{asset('css/icomoon.css')}}">
 	<!-- Ion Icon Fonts-->
-	<link rel="stylesheet" href="css/ionicons.min.css">
+	<link rel="stylesheet" href="{{asset('css/ionicons.min.css')}}">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 
 	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
 
 	<!-- Flexslider  -->
-	<link rel="stylesheet" href="css/flexslider.css">
+	<link rel="stylesheet" href="{{asset('css/flexslider.css')}}">
 
 	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-	
+	<link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+	<link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+
 	<!-- Date Picker -->
-	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}">
 	<!-- Flaticons  -->
-	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+	<link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
 
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="{{asset('css/style.css')}}">
 
 	</head>
 	<body>
-		
+
 	<div class="colorlib-loader"></div>
 
 	<div id="page">
@@ -46,7 +46,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-7 col-md-9">
-							<div id="colorlib-logo"><a href="index.html">Footwear</a></div>
+							<div id="colorlib-logo"><a href="index">Footwear</a></div>
 						</div>
 						<div class="col-sm-5 col-md-3">
 			            <form action="#" class="search-wrap">
@@ -60,21 +60,15 @@
 					<div class="row">
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
-								<li><a href="index.html">Home</a></li>
+								<li><a href="index">Home</a></li>
 								<li class="has-dropdown active">
-									<a href="men.html">Men</a>
-									<ul class="dropdown">
-										<li><a href="product-detail.html">Product Detail</a></li>
-										<li><a href="cart.html">Shopping Cart</a></li>
-										<li><a href="checkout.html">Checkout</a></li>
-										<li><a href="order-complete.html">Order Complete</a></li>
-										<li><a href="add-to-wishlist.html">Wishlist</a></li>
-									</ul>
+									<a href="shoes/men">Men</a>
+
 								</li>
-								<li><a href="women.html">Women</a></li>
-								<li><a href="about.html">About</a></li>
-								<li><a href="contact.html">Contact</a></li>
-								<li class="cart"><a href="cart.html"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+								<li><a href="shoes/women">Women</a></li>
+								<li><a href="about">About</a></li>
+								<li><a href="contact">Contact</a></li>
+								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
 							</ul>
 						</div>
 					</div>
@@ -108,7 +102,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col">
-						<p class="bread"><span><a href="index.html">Home</a></span> / <span>Product Details</span></p>
+						<p class="bread"><span><a href="index">Home</a></span> / <span>Product Details</span></p>
 					</div>
 				</div>
 			</div>
@@ -120,41 +114,24 @@
 				<div class="row row-pb-lg product-detail-wrap">
 					<div class="col-sm-8">
 						<div class="owl-carousel">
+
+
+							@foreach($images as $image)
 							<div class="item">
 								<div class="product-entry border">
 									<a href="#" class="prod-img">
-										<img src="images/item-1.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+										<img src="{{$image->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
 									</a>
 								</div>
 							</div>
-							<div class="item">
-								<div class="product-entry border">
-									<a href="#" class="prod-img">
-										<img src="images/item-2.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="product-entry border">
-									<a href="#" class="prod-img">
-										<img src="images/item-3.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="product-entry border">
-									<a href="#" class="prod-img">
-										<img src="images/item-4.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-									</a>
-								</div>
-							</div>
+						@endforeach
 						</div>
 					</div>
 					<div class="col-sm-4">
 						<div class="product-desc">
 							<h3>Women's Boots Shoes Maca</h3>
 							<p class="price">
-								<span>$68.00</span> 
+								<span>$68.00</span>
 								<span class="rate">
 									<i class="icon-star-full"></i>
 									<i class="icon-star-full"></i>
@@ -169,21 +146,12 @@
 								<div class="block-26 mb-2">
 									<h4>Size</h4>
 				               <ul>
-				                  <li><a href="#">7</a></li>
-				                  <li><a href="#">7.5</a></li>
-				                  <li><a href="#">8</a></li>
-				                  <li><a href="#">8.5</a></li>
-				                  <li><a href="#">9</a></li>
-				                  <li><a href="#">9.5</a></li>
-				                  <li><a href="#">10</a></li>
-				                  <li><a href="#">10.5</a></li>
-				                  <li><a href="#">11</a></li>
-				                  <li><a href="#">11.5</a></li>
-				                  <li><a href="#">12</a></li>
-				                  <li><a href="#">12.5</a></li>
-				                  <li><a href="#">13</a></li>
-				                  <li><a href="#">13.5</a></li>
-				                  <li><a href="#">14</a></li>
+												 @foreach ($measurements as $measurement)
+
+
+				                  <li><a href="#">{{$measurement->size_shoe}}</a></li>
+
+												@endforeach
 				               </ul>
 				            </div>
 				            <div class="block-26 mb-4">
@@ -209,7 +177,7 @@
                   	</div>
                   	<div class="row">
 	                  	<div class="col-sm-12 text-center">
-									<p class="addtocart"><a href="cart.html" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
+									<p class="addtocart"><a href="cart" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
 								</div>
 							</div>
 						</div>
@@ -257,7 +225,7 @@
 								   		<div class="col-md-8">
 								   			<h3 class="head">23 Reviews</h3>
 								   			<div class="review">
-										   		<div class="user-img" style="background-image: url(images/person1.jpg)"></div>
+										   		<div class="user-img" style="background-image: url({{ URL::asset('images/person1.jpg')}})"></div>
 										   		<div class="desc">
 										   			<h4>
 										   				<span class="text-left">Jacob Webb</span>
@@ -277,7 +245,7 @@
 										   		</div>
 										   	</div>
 										   	<div class="review">
-										   		<div class="user-img" style="background-image: url(images/person2.jpg)"></div>
+										   		<div class="user-img" style="background-image: url({{ URL::asset('images/person2.jpg')}})"></div>
 										   		<div class="desc">
 										   			<h4>
 										   				<span class="text-left">Jacob Webb</span>
@@ -297,7 +265,7 @@
 										   		</div>
 										   	</div>
 										   	<div class="review">
-										   		<div class="user-img" style="background-image: url(images/person3.jpg)"></div>
+										   		<div class="user-img" style="background-image: url({{ URL::asset('images/person3.jpg')}})"></div>
 										   		<div class="desc">
 										   			<h4>
 										   				<span class="text-left">Jacob Webb</span>
@@ -435,7 +403,7 @@
 					<div class="col footer-col">
 						<h4>News</h4>
 						<ul class="colorlib-footer-links">
-							<li><a href="blog.html">Blog</a></li>
+							<li><a href="blog">Blog</a></li>
 							<li><a href="#">Press</a></li>
 							<li><a href="#">Exhibitions</a></li>
 						</ul>
@@ -458,7 +426,7 @@
 						<p>
 							<span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span> 
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
 							<span class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a> , <a href="http://pexels.com/" target="_blank">Pexels.com</a></span>
 						</p>
 					</div>
@@ -470,49 +438,49 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 	</div>
-	
+
 	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
+	<script src="{{asset('js/jquery.min.js')}}"></script>
    <!-- popper -->
-   <script src="js/popper.min.js"></script>
+   <script src="{{asset('js/popper.min.js')}}"></script>
    <!-- bootstrap 4.1 -->
-   <script src="js/bootstrap.min.js"></script>
+   <script src="{{asset('js/bootstrap.min.js')}}"></script>
    <!-- jQuery easing -->
-   <script src="js/jquery.easing.1.3.js"></script>
+   <script src="{{asset('js/jquery.easing.1.3.js')}}"></script>
 	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
 	<!-- Flexslider -->
-	<script src="js/jquery.flexslider-min.js"></script>
+	<script src="{{asset('js/jquery.flexslider-min.js')}}"></script>
 	<!-- Owl carousel -->
-	<script src="js/owl.carousel.min.js"></script>
+	<script src="{{asset('js/owl.carousel.min.js')}}"></script>
 	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
+	<script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+	<script src="{{asset('js/magnific-popup-options.js')}}"></script>
 	<!-- Date Picker -->
-	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
 	<!-- Stellar Parallax -->
-	<script src="js/jquery.stellar.min.js"></script>
+	<script src="{{asset('js/jquery.stellar.min.js')}}"></script>
 	<!-- Main -->
-	<script src="js/main.js"></script>
+	<script src="{{asset('js/main.js')}}"></script>
 
 	<script>
 		$(document).ready(function(){
 
 		var quantitiy=0;
 		   $('.quantity-right-plus').click(function(e){
-		        
+
 		        // Stop acting like a button
 		        e.preventDefault();
 		        // Get the field name
 		        var quantity = parseInt($('#quantity').val());
-		        
+
 		        // If is not undefined
-		            
+
 		            $('#quantity').val(quantity + 1);
 
-		          
+
 		            // Increment
-		        
+
 		    });
 
 		     $('.quantity-left-minus').click(function(e){
@@ -520,19 +488,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		        e.preventDefault();
 		        // Get the field name
 		        var quantity = parseInt($('#quantity').val());
-		        
+
 		        // If is not undefined
-		      
+
 		            // Increment
 		            if(quantity>0){
 		            $('#quantity').val(quantity - 1);
 		            }
 		    });
-		    
+
 		});
 	</script>
 
 
 	</body>
 </html>
-

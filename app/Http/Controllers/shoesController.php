@@ -8,6 +8,7 @@ use App\Style;
 use App\Brand;
 use App\Category;
 use App\Shoe;
+use App\Measurement;
 use Illuminate\Support\Facades\DB;
 use View;
 
@@ -118,6 +119,49 @@ class shoesController extends Controller
             ->get();
         // return View::make('shoesviews', compact('shoes'))->render();
         return view('shoesviews', compact('shoes'));
+    }
+
+    // aprire la pagina di dettaglio della scarpa
+
+    public function details($name){
+    /*  $shoes = DB::table('shoes')
+         ->join('images', 'shoes.id', '=', 'images.id_shoe')
+         ->groupBy('shoes.id', 'images.id')
+         ->select('images.path', 'shoes.name', 'shoes.id_style', 'shoes.sex')
+         ->where([
+            ['shoes.color', '=', $id],
+            ['shoes.sex', '=', $sex]])
+            ->get(); */
+        // return View::make('shoesviews', compact('shoes'
+      /*  $shoes = DB::table('shoes')
+        ->join('measurements', 'shoes.id', '=', 'measurements.id_shoe')
+        ->select('size_shoe')
+        ->where('shoes.id', '=', $nome)
+        ->get();
+*/
+
+    $id = DB::table('shoes')
+    ->select('id')
+    ->where('name', '=', $name)
+    ->first()
+    ->id;
+
+    //controllare l'eccezione in laravel
+
+
+
+    $measurements = DB::table('measurements')
+    ->select('measurements.size_shoe')
+    ->where('measurements.id_shoe', '=', $id)
+    ->get();
+
+    $images = DB::table('images')
+    ->select('images.path')
+    ->where('images.id_shoe', '=', $id)
+    ->get();
+
+return view('product-detail' ,  compact('measurements', 'images'));
+
     }
 
 
