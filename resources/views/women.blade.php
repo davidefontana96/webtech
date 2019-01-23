@@ -67,7 +67,39 @@
 								<li class="active"><a href="women">Women</a></li>
 								<li><a href="../about">About</a></li>
 								<li><a href="../contact">Contact</a></li>
-								<li class="cart"><a href="../cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+								@guest
+								<li>
+														<a href="{{ route('login') }}">{{ __('Login') }}</a>
+								</li>
+								@if (Route::has('register'))
+								<li>
+														<a href="{{ route('register') }}">{{ __('Register') }}</a>
+								</li>
+
+								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+							  @endif
+								@else
+
+								<li class="has-dropdown" >
+												<a id="navbarDropdown"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+														{{ Auth::user()->name }}
+											  </a>
+													<ul class="dropdown">
+													<li>
+															<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+													</li>
+													<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+													</ul>
+																<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+																		@csrf
+																</form>
+
+									</li>
+									@endguest
+
+
+
+							</ul>
 							</ul>
 						</div>
 					</div>

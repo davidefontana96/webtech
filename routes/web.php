@@ -11,25 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+
 
 Route::get('/index', 'IndexController@initializePage');
 
-Route::get('/index/{search}', 'IndexController@searchBar');
-
-Route::get('/women', function () {
-    return view('women');
-});
-
-Route::get('/men', function () {
-    return view('men');
-});
+/*Route::get('/index/{search}', 'IndexController@searchBar');*/
 
 Route::get('/cart', function () {
     return view('cart');
-});
+})->middleware('verified');
 
 Route::get('/contact', function () {
     return view('contact');
@@ -44,12 +34,16 @@ Route::get('/prod', function () {
 
 Auth::routes();
 
+Route::get('/provaMail', function(){
+  \Mail::to("davidefontana96.df@gmail.com")->send(new App\Mail\Registration());
+});
+
+Auth::routes(['verify' => true]);
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
-Route::get('/prova', function () {
-    return view('provalog');
-});
+Route::get('/prova', 'IndexController@initializePage');

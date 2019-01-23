@@ -23,7 +23,8 @@ class shoesController extends Controller
         ->join('images', 'shoes.id', '=', 'images.id_shoe')
         ->groupBy('shoes.id', 'images.id')
         ->where('shoes.sex', '=', 'F')
-        ->select('images.path', 'shoes.name')->get();
+        ->select('images.path', 'shoes.name')
+        ->get();
 
     //  return view('womenExtends', ['results' => $results]);
     // return view('women');
@@ -40,7 +41,7 @@ class shoesController extends Controller
      $shoes = DB::table('shoes')
         ->join('images', 'shoes.id', '=', 'images.id_shoe')
         ->groupBy('shoes.id', 'images.id')
-        ->select('images.path', 'shoes.name')
+        ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id')
         ->where('shoes.sex', '=', 'M' )
         ->get();
 
@@ -121,47 +122,27 @@ class shoesController extends Controller
         return view('shoesviews', compact('shoes'));
     }
 
-    // aprire la pagina di dettaglio della scarpa
-
-    public function details($name){
-    /*  $shoes = DB::table('shoes')
-         ->join('images', 'shoes.id', '=', 'images.id_shoe')
-         ->groupBy('shoes.id', 'images.id')
-         ->select('images.path', 'shoes.name', 'shoes.id_style', 'shoes.sex')
-         ->where([
-            ['shoes.color', '=', $id],
-            ['shoes.sex', '=', $sex]])
-            ->get(); */
-        // return View::make('shoesviews', compact('shoes'
-      /*  $shoes = DB::table('shoes')
-        ->join('measurements', 'shoes.id', '=', 'measurements.id_shoe')
-        ->select('size_shoe')
-        ->where('shoes.id', '=', $nome)
+    public function detailShoe($id){
+      $shoes = DB::table('shoes')
+        ->join('measurements', 'shoes.id','=', 'measurements.id_shoe')
+        ->select('shoes.name', 'shoes.details', 'shoes.sex', 'shoes.id_category','shoes.id_brand','shoes.id_style', 'measurements.element')
+        ->where('shoes.id', '=', $id)
         ->get();
-*/
 
-    $id = DB::table('shoes')
-    ->select('id')
-    ->where('name', '=', $name)
-    ->first()
-    ->id;
+      $images = DB::table('shoes')
+        ->join('images', 'shoes.id', '=', 'images.id_shoe')
+        ->select('images.path')
+        ->where('images.id_shoe', '=', $id )
+        ->get();
 
-    //controllare l'eccezione in laravel
+      $measures = DB::table('shoes')
+        ->join('measurements', 'shoes.id','=', 'measurements.id_shoe')
+        ->select('measurements.size_shoe', 'measurements.element')
+        ->where('measurements.id_shoe', '=', $id)
+        ->get();
 
 
-
-    $measurements = DB::table('measurements')
-    ->select('measurements.size_shoe')
-    ->where('measurements.id_shoe', '=', $id)
-    ->get();
-
-    $images = DB::table('images')
-    ->select('images.path')
-    ->where('images.id_shoe', '=', $id)
-    ->get();
-
-return view('product-detail' ,  compact('measurements', 'images'));
-
+        return view('product-detail', compact('shoes', 'images', 'measures'));
     }
 
 
