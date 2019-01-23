@@ -1,9 +1,5 @@
 <?php
 
-Auth::routes();
-
-Auth::routes(['verify' => true]);
-
 Route::get('/women', 'shoesController@womenShoes');
 
 Route::get('brands/{id}/{sex}', 'shoesController@brandShoes');

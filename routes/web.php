@@ -34,10 +34,6 @@ Route::get('/prod', function () {
 
 Auth::routes();
 
-Route::get('/provaMail', function(){
-  \Mail::to("davidefontana96.df@gmail.com")->send(new App\Mail\Registration());
-});
-
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
