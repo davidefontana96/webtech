@@ -11,8 +11,7 @@ console.log(url);
 $("input[type=checkbox]").prop("checked", false); // Unchecks it
 $(this). prop("checked",true);
 
-$('#poscarpe').
-append().load(url);
+$('#poscarpe').append().load(url);
 }
   else {
     var rem = this.value;

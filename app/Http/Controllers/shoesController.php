@@ -16,21 +16,21 @@ class shoesController extends Controller
 {
 
     public function womenShoes(){
-     $styles = DB::select('select name, id from styles');
-     $brands= DB::select('select id,name from brands');
-    $categories = DB::select('select * from categories');
-     $shoes = DB::table('shoes')
-        ->join('images', 'shoes.id', '=', 'images.id_shoe')
-        ->groupBy('shoes.id', 'images.id')
-        ->where('shoes.sex', '=', 'F')
-        ->select('images.path', 'shoes.name')
-        ->get();
+      $styles = DB::select('select name, id from styles');
+      $brands= DB::select('select id,name from brands');
+     $categories = DB::select('select * from categories');
+      $shoes = DB::table('shoes')
+         ->join('images', 'shoes.id', '=', 'images.id_shoe')
+         ->groupBy('shoes.id', 'images.id')
+         ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id')
+         ->where('shoes.sex', '=', 'F' )
+         ->get();
 
-    //  return view('womenExtends', ['results' => $results]);
-    // return view('women');
-  //  $styles = Style::all();
+     //  return view('womenExtends', ['results' => $results]);
+     // return view('women');
+     //  $styles = Style::all();
 
-    return view('women', compact('categories', 'styles', 'brands', 'shoes' ));
+     return view('women', compact('categories', 'styles', 'brands', 'shoes' ));
     // return View::make('women', compact('styles', 'shoes' ));
     }
 
