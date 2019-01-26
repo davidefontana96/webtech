@@ -21,7 +21,7 @@ class shoesController extends Controller
      $categories = DB::select('select * from categories');
       $shoes = DB::table('shoes')
          ->join('images', 'shoes.id', '=', 'images.id_shoe')
-         ->groupBy('shoes.id', 'images.id')
+         ->groupby('shoes.id', 'images.id_shoe')
          ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id')
          ->where('shoes.sex', '=', 'F' )
          ->get();
@@ -40,7 +40,7 @@ class shoesController extends Controller
     $categories = DB::select('select * from categories');
      $shoes = DB::table('shoes')
         ->join('images', 'shoes.id', '=', 'images.id_shoe')
-        ->groupBy('shoes.id', 'images.id')
+        ->groupby('shoes.id', 'images.id_shoe')
         ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id')
         ->where('shoes.sex', '=', 'M' )
         ->get();
@@ -61,21 +61,73 @@ class shoesController extends Controller
 
     } */
 
-    public function brandShoes($id, $sex){
-      $shoes = DB::table('shoes')
-         ->join('images', 'shoes.id', '=', 'images.id_shoe')
-         ->groupBy('shoes.id', 'images.id')
-         ->select('images.path', 'shoes.name', 'shoes.id_brand')
-         ->where([
-           ['shoes.id_brand', '=', $id],
-            ['shoes.sex', '=', $sex]])
-         ->get();
-        // return View::make('shoesviews', compact('shoes'))->render();
-        return view('shoesviews', compact('shoes'));
-      //  $html = View::make('shoesviews', compact('shoes'))->render();
-      //  return $html;
+    public function brandShoes($sex, Request $request){
 
-    }
+        $selected = $request->input('brands');
+      //  $selected = array("1");
+       $categories = $request->input('categories');
+        $styles = $request->input('styles');
+          // modificare html + js
+
+
+      /*  if(!is_null($selected)) {
+          $shoes = DB::table('shoes')
+          ->join('images', 'shoes.id', '=', 'images.id_shoe')
+          ->select('shoes.id','images.path', 'shoes.name')
+          ->where('shoes.sex', '=', $sex)
+          ->groupby('shoes.id', 'images.id_shoe')
+          ->get();
+      }
+*/
+      /*   foreach ($selected as $selected)
+         {
+           echo $selected;
+         } */
+      /*  $shoes = DB::table('shoes')
+           ->join('images', 'shoes.id', '=', 'images.id_shoe')
+           ->groupBy('shoes.id', 'images.id')
+           ->select('images.path', 'shoes.name', 'shoes.id_brand')
+           ->wherein('shoes.id_brand', '=', $selected)
+           ->get();
+           */
+           // funziona ma è un po' da migliorare
+
+           $shoes = DB::table('shoes')
+               ->join('images', 'shoes.id', '=', 'images.id_shoe')
+               ->select('shoes.id','images.path', 'shoes.name', 'shoes.sex')
+               ->where('shoes.sex', '=', $sex)
+              ->where(function($query) use($selected)
+                {
+
+                if(!is_null($selected)) $query->whereIn('shoes.id_brand',$selected);
+
+                })
+               ->where(function($query) use ($categories)
+               {
+
+               if(!is_null($categories))  $query->whereIn('shoes.id_category',$categories);
+
+              })
+               ->where(function($query) use($styles)
+              {
+
+              if(!is_null($styles)) $query->whereIn('shoes.id_style', $styles);
+
+              })
+               ->groupby('shoes.id', 'images.id_shoe')
+               ->get();
+
+
+
+
+
+
+          // return View::make('shoesviews', compact('shoes'))->render();
+            return view('shoesviews', compact('shoes'));
+      //  return View::make('shoesviews', compact('shoes'))->render();
+        //  return $html;
+
+      }
 
     public function categoryShoes($id, $sex){
       $shoes = DB::table('shoes')

@@ -1,23 +1,57 @@
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 $(document).ready(function() {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
 if($("input:checkbox:not(:checked)")) console.log("not checked anyone");
 
- $( "input[type=checkbox]" ).on("click", function(){
+ $( "input[type=checkbox]" ).on("change", function(e) {
 
-// inserire la chiamata ajax con POST
-console.log($(this));
-if($(this). prop("checked") == true){
-var url= this.value;
-console.log(url);
-$("input[type=checkbox]").prop("checked", false); // Unchecks it
-$(this). prop("checked",true);
+    var brands=[];
+    var styles=[];
+    var categories=[];
 
-$('#poscarpe').append().load(url);
-}
-  else {
-    var rem = this.value;
-    console.log(rem)
-    var toremove = $(document.getElementById(rem));
-    $(toremove).remove();
-  }
+        e.preventDefault();
+        $('input[name="brands[]"]:checked').each(function()
+        {
+            brands.push($(this).val());
+        });
+
+        $('input[name="categories[]"]:checked').each(function()
+        {
+            categories.push($(this).val());
+        });
+
+        $('input[name="styles[]"]:checked').each(function()
+        {
+            styles.push($(this).val());
+        });
+
+        console.log(window.location.pathname);
+        console.log("-------------------------------------------------------------------------------")
+        console.log($(this).val());
+        console.log(brands);
+        console.log(styles);
+        console.log(categories);
+        if(window.location.pathname == '/shoes/men'){
+
+        $.get('brands/M', {brands: brands, styles: styles, categories: categories}, function(markup)
+        {
+            $('#html').html(markup);
+        });
+      }
+      else{
+        $.get('brands/F', {brands: brands, styles: styles, categories: categories}, function(markup)
+        {
+            $('#html').html(markup);
+        });
+      }
+
+
 });
+
+
+
 });

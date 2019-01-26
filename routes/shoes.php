@@ -2,7 +2,7 @@
 
 Route::get('/women', 'shoesController@womenShoes');
 
-Route::get('brands/{id}/{sex}', 'shoesController@brandShoes');
+Route::get('brands/{sex}', 'shoesController@brandShoes');
 
 Route::get('categories/{id}/{sex}', 'shoesController@categoryShoes');
 
