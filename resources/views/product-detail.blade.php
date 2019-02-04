@@ -12,6 +12,9 @@
 	<link rel="stylesheet" href="{{asset('css/animate.css')}}">
 	<!-- Icomoon Icon Fonts-->
 	<link rel="stylesheet" href="{{asset('css/icomoon.css')}}">
+
+	<link rel="stylesheet" href="{{asset('css/cart.css')}}">
+
 	<!-- Ion Icon Fonts-->
 	<link rel="stylesheet" href="{{asset('css/ionicons.min.css')}}">
 	<!-- Bootstrap  -->
@@ -68,7 +71,40 @@
 								<li><a href="shoes/women">Women</a></li>
 								<li><a href="about">About</a></li>
 								<li><a href="contact">Contact</a></li>
-								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+								@guest
+								<li>
+														<a href="{{ route('login') }}">{{ __('Login') }}</a>
+								</li>
+								@if (Route::has('register'))
+								<li>
+														<a href="{{ route('register') }}">{{ __('Register') }}</a>
+								</li>
+
+								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i>Cart [0]</a></li>
+							  @endif
+								@else
+
+								<li class="has-dropdown" >
+												<a id="navbarDropdown" class="{{ Auth::user()->id }}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+														{{ Auth::user()->name }}
+											  </a>
+													<ul class="dropdown">
+													<li>
+															<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+													</li>
+													</ul>
+																<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+																		@csrf
+																</form>
+
+									</li>
+
+
+									@include('cartviews',[ $items, $itemsInCart])
+
+
+
+									@endguest
 							</ul>
 						</div>
 					</div>
@@ -114,8 +150,6 @@
 				<div class="row row-pb-lg product-detail-wrap">
 					<div class="col-sm-8">
 						<div class="owl-carousel">
-
-
 							@foreach($images as $image)
 							<div class="item">
 								<div class="product-entry border">
@@ -124,32 +158,40 @@
 									</a>
 								</div>
 							</div>
-						@endforeach
+							@endforeach
 						</div>
 					</div>
 					<div class="col-sm-4">
 						<div class="product-desc">
-							<h3>Women's Boots Shoes Maca</h3>
+							@foreach($shoes as $shoe)
+							<h3 class="idshoe" id="{{$shoe->id}}">{{$shoe->name}}</h3>
+							@endforeach
 							<p class="price">
-								<span>$68.00</span>
+								<span id="price"></span>
 								<span class="rate">
-									<i class="icon-star-full"></i>
-									<i class="icon-star-full"></i>
-									<i class="icon-star-full"></i>
-									<i class="icon-star-full"></i>
-									<i class="icon-star-half"></i>
-									(74 Rating)
+									@if((!(empty($medium)))&($medium < 1) )<i class="icon-star-empty"></i>@else<i class="icon-star-full"></i>@endif
+									@if((!(empty($medium)))&($medium < 2) )<i class="icon-star-empty"></i>@else<i class="icon-star-full"></i>@endif
+									@if((!(empty($medium)))&($medium < 3) )<i class="icon-star-empty"></i>@else<i class="icon-star-full"></i>@endif
+									@if((!(empty($medium)))&($medium < 4) )<i class="icon-star-empty"></i>@else<i class="icon-star-full"></i>@endif
+									@if((!(empty($medium)))&($medium < 5) )<i class="icon-star-empty"></i>@else<i class="icon-star-full"></i>@endif
+
+									@if (!(empty($reviews_counter)))
+									({{$reviews_counter}})
+									@else
+									(Nobody rates this)
+									@endif
 								</span>
 							</p>
-							<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+							@foreach($shoes as $shoe)
+								 <p>{{$shoe->details}}</p>
+							@endforeach
 							<div class="size-wrap">
 								<div class="block-26 mb-2">
 									<h4>Size</h4>
-				               <ul>
-												 @foreach ($measurements as $measurement)
+				               <ul class="js-size">
+												 @foreach ($measures as $measure)
 
-
-				                  <li><a href="#">{{$measurement->size_shoe}}</a></li>
+				                  <li><a id="{{$measure->size_shoe}}">{{$measure->size_shoe}}</a></li>
 
 												@endforeach
 				               </ul>
@@ -162,22 +204,22 @@
 				               </ul>
 				            </div>
 							</div>
-                     <div class="input-group mb-4">
-                     	<span class="input-group-btn">
-                        	<button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
-                           <i class="icon-minus2"></i>
-                        	</button>
-                    		</span>
-                     	<input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
-                     	<span class="input-group-btn ml-1">
-                        	<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-                             <i class="icon-plus2"></i>
-                         </button>
-                     	</span>
-                  	</div>
+							<div class="input-group mb-4">
+							 <span class="input-group-btn">
+									 <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
+										<i class="icon-minus2"></i>
+									 </button>
+								 </span>
+							 <input type="text" id="quantity" name="quantity" class="form-control input-number" value="0" min="1" max="5">
+							 <span class="input-group-btn ml-1">
+									 <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+											<i class="icon-plus2"></i>
+									</button>
+							 </span>
+						 </div>
                   	<div class="row">
 	                  	<div class="col-sm-12 text-center">
-									<p class="addtocart"><a href="cart" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
+									<p class="addtocart"><a class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
 								</div>
 							</div>
 						</div>
@@ -204,15 +246,9 @@
 
 								  <div class="tab-content" id="pills-tabContent">
 								    <div class="tab-pane border fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
-								      <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-										<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
-										<ul>
-											<li>The Big Oxmox advised her not to do so</li>
-											<li>Because there were thousands of bad Commas</li>
-											<li>Wild Question Marks and devious Semikoli</li>
-											<li>She packed her seven versalia</li>
-											<li>tial into the belt and made herself on the way.</li>
-										</ul>
+										 @foreach($shoes as $shoe)
+										    <p>{{$shoe->details}}</p>
+										 @endforeach
 								    </div>
 
 								    <div class="tab-pane border fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
@@ -222,127 +258,174 @@
 
 								    <div class="tab-pane border fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
 								      <div class="row">
-								   		<div class="col-md-8">
-								   			<h3 class="head">23 Reviews</h3>
-								   			<div class="review">
+								   		<div class="col-md-8" id="prova">
+												@if (!(empty($reviews_counter)))
+												 <h3 class="head prova400" id="counterReview">{{$reviews_counter}} Reviews</h3>
+												@else
+												<h3 class="head" id="zeroReviews">Nobody review</h3>
+												@endif
+												@foreach($reviews as $review)
+								   			<div class="review totalist" itemid="{{$review->id}}" id="feedbacks">
 										   		<div class="user-img" style="background-image: url({{ URL::asset('images/person1.jpg')}})"></div>
 										   		<div class="desc">
 										   			<h4>
-										   				<span class="text-left">Jacob Webb</span>
-										   				<span class="text-right">14 March 2018</span>
+										   				<span class="text-left">{{$review->name}} {{$review->surname}}</span>
+										   				<span class="text-right">{{$review->created_at}}</span>
 										   			</h4>
 										   			<p class="star">
 										   				<span>
+																@if(($review->star) == 5)
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-full"></i>
-										   					<i class="icon-star-half"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+																@elseif(($review->star) == 4)
+																<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-empty"></i>
+																@elseif(($review->star) == 3)
+																<i class="icon-star-full"></i>
+																<i class="icon-star-full"></i>
+																<i class="icon-star-full"></i>
+																<i class="icon-star-empty"></i>
+																<i class="icon-star-empty"></i>
+																@elseif(($review->star) == 2)
+																<i class="icon-star-full"></i>
+																<i class="icon-star-full"></i>
+																<i class="icon-star-empty"></i>
+																<i class="icon-star-empry"></i>
+																<i class="icon-star-empty"></i>
+																@else(($review->star) == 1)
+																<i class="icon-star-full"></i>
+																<i class="icon-star-empty"></i>
+																<i class="icon-star-empty"></i>
+																<i class="icon-star-empty"></i>
+																<i class="icon-star-empty"></i>
+																@endif
 									   					</span>
 									   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
 										   			</p>
-										   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+										   			<p>{{$review->text}}</p>
 										   		</div>
 										   	</div>
-										   	<div class="review">
-										   		<div class="user-img" style="background-image: url({{ URL::asset('images/person2.jpg')}})"></div>
-										   		<div class="desc">
-										   			<h4>
-										   				<span class="text-left">Jacob Webb</span>
-										   				<span class="text-right">14 March 2018</span>
+												@endforeach
+
+															@guest
+
+															@if(!(Route::has('register')))
+
+
+															@endif
+															@elseif($alreadyReviewed == 0)
+															<div class="review 2" id="formReview">
+													   		<div class="user-img" style="background-image: url({{ URL::asset('images/person1.jpg')}})"></div>
+													   		<div class="desc">
+													   			<h4>
+															<span class="text-left obtain-user-js" title="{{Auth::user()->id}}" id="userid">{{ Auth::user()->name }} {{ Auth::user()->surname }}, review it.</span>
+															<p class ="star">
+																<span id="span">
+																	<i class="icon-star-full" id="first"></i>
+																	<i class="icon-star-empty" id="second"></i>
+																	<i class="icon-star-empty" id="third"></i>
+																	<i class="icon-star-empty" id="fourth"></i>
+																	<i class="icon-star-empty" id="fifth"></i>
+																</span>
+																	<span class="text-right">From 1 to 5 stars, rate it.</span>
+															</p>
 										   			</h4>
-										   			<p class="star">
-										   				<span>
-										   					<i class="icon-star-full"></i>
-										   					<i class="icon-star-full"></i>
-										   					<i class="icon-star-full"></i>
-										   					<i class="icon-star-half"></i>
-										   					<i class="icon-star-empty"></i>
-									   					</span>
-									   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-										   			</p>
-										   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-										   		</div>
-										   	</div>
-										   	<div class="review">
-										   		<div class="user-img" style="background-image: url({{ URL::asset('images/person3.jpg')}})"></div>
-										   		<div class="desc">
-										   			<h4>
-										   				<span class="text-left">Jacob Webb</span>
-										   				<span class="text-right">14 March 2018</span>
-										   			</h4>
-										   			<p class="star">
-										   				<span>
-										   					<i class="icon-star-full"></i>
-										   					<i class="icon-star-full"></i>
-										   					<i class="icon-star-full"></i>
-										   					<i class="icon-star-half"></i>
-										   					<i class="icon-star-empty"></i>
-									   					</span>
-									   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-										   			</p>
-										   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-										   		</div>
-										   	</div>
+															<div class="form-group">
+																<span class="text-left">
+																	<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Say something about this product"></textarea>
+																</span>
+															</div>
+															<span class="text-left">
+															<div class="col-sm-12">
+																<div class="form-group">
+																	<input id="reviewit" type="submit" value="Send Message" class="btn btn-primary">
+																</div>
+															</div>
+														</span>
+														</div>
+												</div>
+												@else
+
+
+												@endguest
+
+
+
 								   		</div>
 								   		<div class="col-md-4">
 								   			<div class="rating-wrap">
-									   			<h3 class="head">Give a Review</h3>
+									   			<h3 class="head">All the review.</h3>
 									   			<div class="wrap">
 										   			<p class="star">
+															@if($fivestars >= 0)
 										   				<span>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-full"></i>
-										   					(98%)
+																@if($fivepercentage >= 0)({{$fivepercentage}}%) @endif
 									   					</span>
-									   					<span>20 Reviews</span>
+									   					<span id="fiveSum" >{{$fivestars}} Review</span>
+															@endif
 										   			</p>
 										   			<p class="star">
+															@if($fourstars >= 0)
 										   				<span>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-empty"></i>
-										   					(85%)
+										   					@if($fourpercentage >= 0)({{$fourpercentage}}%) @endif
 									   					</span>
-									   					<span>10 Reviews</span>
+									   					<span id="fourSum">{{$fourstars}} Review</span>
+															@endif
 										   			</p>
 										   			<p class="star">
+															@if($threestars >= 0)
 										   				<span>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-empty"></i>
 										   					<i class="icon-star-empty"></i>
-										   					(70%)
+																@if($threepercentage >= 0)({{$threepercentage}}%) @endif
 									   					</span>
-									   					<span>5 Reviews</span>
+									   					<span id="threeSum">{{$threestars}} Review</span>
+															@endif
 										   			</p>
 										   			<p class="star">
-										   				<span>
+															@if($twostars >= 0)
+															<span>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-empty"></i>
 										   					<i class="icon-star-empty"></i>
 										   					<i class="icon-star-empty"></i>
-										   					(10%)
+																@if($twopercentage >= 0)({{$twopercentage}}%) @endif
 									   					</span>
-									   					<span>0 Reviews</span>
+									   					<span id="twoSum">{{$twostars}} Review</span>
+															@endif
 										   			</p>
 										   			<p class="star">
-										   				<span>
+															@if($onestars >= 0)
+															<span>
 										   					<i class="icon-star-full"></i>
 										   					<i class="icon-star-empty"></i>
 										   					<i class="icon-star-empty"></i>
 										   					<i class="icon-star-empty"></i>
 										   					<i class="icon-star-empty"></i>
-										   					(0%)
+																@if($onepercentage >= 0)({{$onepercentage}}%) @endif
 									   					</span>
-									   					<span>0 Reviews</span>
+									   					<span id="oneSum">{{$onestars}} Review</span>
+															@endif
 										   			</p>
 										   		</div>
 									   		</div>
@@ -441,6 +524,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 	<!-- jQuery -->
 	<script src="{{asset('js/jquery.min.js')}}"></script>
+
+	<script src="{{asset('js/selectSize.js')}}"></script>
+
+	<script src="{{asset('js/addToCart.js')}}"></script>
+
+		<script src="{{asset('js/starsInsertReview.js')}}"></script>
+
+		<script src="{{asset('js/plusminus.js')}}"></script>
+
+		<script src="{{asset('js/review.js')}}"></script>
+
+		<script src="{{asset('js/rmfromcart.js')}}"></script>
    <!-- popper -->
    <script src="{{asset('js/popper.min.js')}}"></script>
    <!-- bootstrap 4.1 -->
@@ -455,6 +550,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="{{asset('js/owl.carousel.min.js')}}"></script>
 	<!-- Magnific Popup -->
 	<script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+
 	<script src="{{asset('js/magnific-popup-options.js')}}"></script>
 	<!-- Date Picker -->
 	<script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
@@ -463,42 +559,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<!-- Main -->
 	<script src="{{asset('js/main.js')}}"></script>
 
-	<script>
-		$(document).ready(function(){
-
-		var quantitiy=0;
-		   $('.quantity-right-plus').click(function(e){
-
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-
-		        // If is not undefined
-
-		            $('#quantity').val(quantity + 1);
-
-
-		            // Increment
-
-		    });
-
-		     $('.quantity-left-minus').click(function(e){
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-
-		        // If is not undefined
-
-		            // Increment
-		            if(quantity>0){
-		            $('#quantity').val(quantity - 1);
-		            }
-		    });
-
-		});
-	</script>
 
 
 	</body>

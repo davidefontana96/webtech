@@ -122,28 +122,7 @@ class shoesController extends Controller
         return view('shoesviews', compact('shoes'));
     }
 
-    public function detailShoe($id){
-      $shoes = DB::table('shoes')
-        ->join('measurements', 'shoes.id','=', 'measurements.id_shoe')
-        ->select('shoes.name', 'shoes.details', 'shoes.sex', 'shoes.id_category','shoes.id_brand','shoes.id_style', 'measurements.element')
-        ->where('shoes.id', '=', $id)
-        ->get();
-
-      $images = DB::table('shoes')
-        ->join('images', 'shoes.id', '=', 'images.id_shoe')
-        ->select('images.path')
-        ->where('images.id_shoe', '=', $id )
-        ->get();
-
-      $measures = DB::table('shoes')
-        ->join('measurements', 'shoes.id','=', 'measurements.id_shoe')
-        ->select('measurements.size_shoe', 'measurements.element')
-        ->where('measurements.id_shoe', '=', $id)
-        ->get();
-
-
-        return view('product-detail', compact('shoes', 'images', 'measures'));
-    }
+  
 
 
 }

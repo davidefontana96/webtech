@@ -32,6 +32,10 @@ Route::get('/prod', function () {
     return view('product-detail');
 });
 
+Route::get('/wishlist', function(){
+    return view('add-to-wishlist');
+});
+
 Auth::routes();
 
 Auth::routes(['verify' => true]);
