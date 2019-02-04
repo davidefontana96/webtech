@@ -67,20 +67,22 @@
 								<li class="active"><a href="women">Women</a></li>
 								<li><a href="../about">About</a></li>
 								<li><a href="../contact">Contact</a></li>
+								<li><a href="../news">News</a></li>
+
 								@guest
-								<li>
+								<li class="cart">
 														<a href="{{ route('login') }}">{{ __('Login') }}</a>
 								</li>
 								@if (Route::has('register'))
-								<li>
+								<li class="cart">
 														<a href="{{ route('register') }}">{{ __('Register') }}</a>
 								</li>
 
-								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+								<li class="cart"><a href="../cart"><i class="icon-shopping-cart"></i>Cart[0]</a></li>
 							  @endif
 								@else
 
-								<li class="has-dropdown" >
+								<li class="has-dropdown cart">
 												<a id="navbarDropdown"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 														{{ Auth::user()->name }}
 											  </a>
@@ -88,7 +90,7 @@
 													<li>
 															<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
 													</li>
-													<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+													<li><a href="cart"><i class="icon-shopping-cart"></i>Cart[0]</a></li>
 													</ul>
 																<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 																		@csrf
@@ -96,6 +98,7 @@
 
 									</li>
 									@endguest
+
 
 
 

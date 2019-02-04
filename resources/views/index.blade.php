@@ -66,13 +66,14 @@
 								<li><a href="/shoes/women">Women</a></li>
 								<li><a href="about">About</a></li>
 								<li><a href="contact">Contact</a></li>
+								<li><a href="news">News</a></li>
 
 								@guest
-								<li>
+								<li class="cart">
 														<a href="{{ route('login') }}">{{ __('Login') }}</a>
 								</li>
 								@if (Route::has('register'))
-								<li>
+								<li class="cart">
 														<a href="{{ route('register') }}">{{ __('Register') }}</a>
 								</li>
 
@@ -80,7 +81,7 @@
 							  @endif
 								@else
 
-								<li class="has-dropdown" >
+								<li class="has-dropdown cart">
 												<a id="navbarDropdown"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 														{{ Auth::user()->name }}
 											  </a>
@@ -88,7 +89,7 @@
 													<li>
 															<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
 													</li>
-													<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+													<li><a href="cart"><i class="icon-shopping-cart"></i>Cart[0]</a></li>
 													</ul>
 																<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 																		@csrf
@@ -214,7 +215,7 @@
 							<div class="col-lg-3 mb-4 text-center">
 								<div class="product-entry border">
 									<a href="#" class="prod-img">
-										<img src="{{$shoe->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
+										<img src="/images/{{$shoe->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
 									</a>
 									<div class="desc">
 										<h2><a href="#">{{$shoe->name}}</a></h2>
@@ -230,7 +231,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12 text-center">
-						<p><a href="#" class="btn btn-primary btn-lg">Shop All Products</a></p>
+						<p><a href="index2" class="btn btn-primary btn-lg">Shop All Products</a></p>
 					</div>
 				</div>
 			</div>

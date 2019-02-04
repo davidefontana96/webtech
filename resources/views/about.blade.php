@@ -2,42 +2,42 @@
 <html>
 	<head>
 	<title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
-	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Ion Icon Fonts-->
-	<link rel="stylesheet" href="css/ionicons.min.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link href="{{asset('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700')}}" rel="stylesheet">
+ 	<link href="{{asset('https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700')}}" rel="stylesheet">
 
-	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
+ 	<!-- Animate.css -->
+ 	<link rel="stylesheet" href="{{asset('css/animate.css')}}">
+ 	<!-- Icomoon Icon Fonts-->
+ 	<link rel="stylesheet" href="{{asset('css/icomoon.css')}}">
+ 	<!-- Ion Icon Fonts-->
+ 	<link rel="stylesheet" href="{{asset('css/ionicons.min.css')}}">
+ 	<!-- Bootstrap  -->
+ 	<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 
-	<!-- Flexslider  -->
-	<link rel="stylesheet" href="css/flexslider.css">
+ 	<!-- Magnific Popup -->
+ 	<link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
 
-	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-	
-	<!-- Date Picker -->
-	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
-	<!-- Flaticons  -->
-	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+ 	<!-- Flexslider  -->
+ 	<link rel="stylesheet" href="{{asset('css/flexslider.css')}}">
 
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+ 	<!-- Owl Carousel -->
+ 	<link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+ 	<link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+
+ 	<!-- Date Picker -->
+ 	<link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}">
+ 	<!-- Flaticons  -->
+ 	<link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
+
+ 	<!-- Theme style  -->
+ 	<link rel="stylesheet" href="{{asset('css/style.css')}}">
 
 	</head>
 	<body>
-		
+
 	<div class="colorlib-loader"></div>
 
 	<div id="page">
@@ -60,26 +60,62 @@
 					<div class="row">
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
-								<li><a href="index">Home</a></li>
-								<li class="has-dropdown">
-									<a href="men">Men</a>
-									<ul class="dropdown">
-										<li><a href="product-detail">Product Detail</a></li>
-										<li><a href="cart">Shopping Cart</a></li>
-										<li><a href="checkout">Checkout</a></li>
-										<li><a href="order-complete">Order Complete</a></li>
-										<li><a href="add-to-wishlist">Wishlist</a></li>
-									</ul>
+								<li><a href="../index">Home</a></li>
+								<li>
+									<a href="../shoes/men">Men</a>
 								</li>
-								<li><a href="women">Women</a></li>
-								<li class="active"><a href="about">About</a></li>
-								<li><a href="contact">Contact</a></li>
-								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+								<li><a href="../shoes/women">Women</a></li>
+								<li class="active"><a href="../about">About</a></li>
+								<li><a href="../contact">Contact</a></li>
+								<li><a href="../news">News</a></li>
+
+								@guest
+								<li class="cart">
+														<a href="{{ route('login') }}">{{ __('Login') }}</a>
+								</li>
+								@if (Route::has('register'))
+								<li class="cart">
+														<a href="{{ route('register') }}">{{ __('Register') }}</a>
+								</li>
+
+								<li class="cart"><a href="../cart"><i class="icon-shopping-cart"></i>Cart[0]</a></li>
+							  @endif
+								@else
+
+								<li class="has-dropdown cart">
+												<a id="navbarDropdown"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+														{{ Auth::user()->name }}
+											  </a>
+													<ul class="dropdown">
+													<li>
+															<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+													</li>
+													<li><a href="cart"><i class="icon-shopping-cart"></i>Cart[0]</a></li>
+													</ul>
+																<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+																		@csrf
+																</form>
+
+									</li>
+									@endguest
+
+
+
+
+							</ul>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
+
+
+
+
+
+
+
+
 			<div class="sale">
 				<div class="container">
 					<div class="row">
@@ -114,8 +150,7 @@
 			</div>
 		</div>
 
-
-		<div class="colorlib-about">
+	</br>
 			<div class="container">
 				<div class="row row-pb-lg">
 					<div class="col-sm-6 mb-3">
@@ -133,7 +168,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+
 
 		<footer id="colorlib-footer" role="contentinfo">
 			<div class="container">
@@ -202,8 +237,8 @@
 					<div class="col-sm-12 text-center">
 						<p>
 							<span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span> 
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
 							<span class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a> , <a href="http://pexels.com/" target="_blank">Pexels.com</a></span>
 						</p>
 					</div>
@@ -215,7 +250,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 	</div>
-	
+
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
    <!-- popper -->
@@ -242,4 +277,3 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 	</body>
 </html>
-

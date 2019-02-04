@@ -25,6 +25,71 @@ class IndexController extends Controller
       }
     }
 
+
+
+   public function initializePage2(Request $request){
+     $styles = DB::select('select name, id from styles');
+     $brands= DB::select('select id,name from brands');
+     $categories = DB::select('select * from categories');
+     $shoes = DB::table('shoes')
+           ->join('images', 'images.id_shoe', '=', 'shoes.id')
+           ->select('shoes.id','images.path', 'shoes.name', 'shoes.sex')
+           ->groupby('shoes.id', 'images.id_shoe')
+           ->paginate(6);
+           if($request->ajax()){
+
+            return view('shoesviews',compact('shoes'))->render();
+
+           }
+
+           return view('index2',compact('shoes', 'styles', 'brands', 'categories') );
+   }
+
+   public function indexFilter(Request $request){
+     $sex = $request->input('sex');
+       $selected = $request->input('brands');
+      $categories = $request->input('categories');
+       $styles = $request->input('styles');
+          $shoes = DB::table('shoes')
+              ->join('images', 'shoes.id', '=', 'images.id_shoe')
+              ->select('shoes.id','images.path', 'shoes.name', 'shoes.sex')
+             ->where(function($query) use($sex){
+               if(!is_null($sex)) $query->whereIn('shoes.sex', $sex);
+              })
+             ->where(function($query) use($selected)
+               {
+
+               if(!is_null($selected)) $query->whereIn('shoes.id_brand',$selected);
+
+               })
+              ->where(function($query) use ($categories)
+              {
+
+              if(!is_null($categories))  $query->whereIn('shoes.id_category',$categories);
+
+             })
+              ->where(function($query) use($styles)
+             {
+
+             if(!is_null($styles)) $query->whereIn('shoes.id_style', $styles);
+
+             })
+              ->groupby('shoes.id', 'images.id_shoe')
+              ->paginate(6);
+
+
+
+
+
+
+         // return View::make('shoesviews', compact('shoes'))->render();
+           return view('shoesviews', compact('shoes'));
+     //  return View::make('shoesviews', compact('shoes'))->render();
+       //  return $html;
+
+     }
+
+
   /*  public function searchBar(){
         $shoes = DB::table('shoes')
               ->select('name')

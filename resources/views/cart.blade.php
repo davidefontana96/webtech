@@ -61,20 +61,37 @@
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
 								<li><a href="index">Home</a></li>
-								<li class="has-dropdown active">
-									<a href="men">Men</a>
-									<ul class="dropdown">
-										<li><a href="product-detail">Product Detail</a></li>
-										<li><a href="cart">Shopping Cart</a></li>
-										<li><a href="checkout">Checkout</a></li>
-										<li><a href="order-complete">Order Complete</a></li>
-										<li><a href="add-to-wishlist">Wishlist</a></li>
-									</ul>
-								</li>
-								<li><a href="women">Women</a></li>
+								<li><a href="/shoes/men">Men</a></li>
+								<li><a href="/shoes/women">Women</a></li>
 								<li><a href="about">About</a></li>
 								<li><a href="contact">Contact</a></li>
-								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+								<li><a href="/news">News</a></li>
+
+								@guest
+								<li class="cart"><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
+									@if (Route::has('register'))
+									<li class="cart">		<a href="{{ route('register') }}">{{ __('Register') }}</a></li>
+								<li class="cart"><a href="../cart"><i class="icon-shopping-cart"></i>Cart[0]</a></li>
+
+								@endif
+								@else
+
+								<li class="has-dropdown cart">
+												<a id="navbarDropdown"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+														{{ Auth::user()->name }}
+												</a>
+													<ul class="dropdown">
+													<li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></li>
+													<li class="active"><a href="cart"><i class="icon-shopping-cart"></i>Cart[0]</a></li>
+													<li><a href="../profile"><i class="profile"></i>profile</a></li>
+
+													</ul>
+																<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+																		@csrf
+																</form>
+
+									</li>
+									@endguest
 							</ul>
 						</div>
 					</div>

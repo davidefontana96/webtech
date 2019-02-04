@@ -62,10 +62,9 @@ class shoesController extends Controller
     } */
 
     public function brandShoes($sex, Request $request){
-
         $selected = $request->input('brands');
       //  $selected = array("1");
-       $categories = $request->input('categories');
+        $categories = $request->input('categories');
         $styles = $request->input('styles');
           // modificare html + js
 
@@ -96,10 +95,9 @@ class shoesController extends Controller
                ->join('images', 'shoes.id', '=', 'images.id_shoe')
                ->select('shoes.id','images.path', 'shoes.name', 'shoes.sex')
                ->where('shoes.sex', '=', $sex)
-              ->where(function($query) use($selected)
+               ->where(function($query) use($selected)
                 {
-
-                if(!is_null($selected)) $query->whereIn('shoes.id_brand',$selected);
+                  if(!is_null($selected)) $query->whereIn('shoes.id_brand',$selected);
 
                 })
                ->where(function($query) use ($categories)
