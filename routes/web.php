@@ -32,9 +32,11 @@ Route::get('/prod', function () {
     return view('product-detail');
 });
 
-Route::get('/wishlist', function(){
-    return view('add-to-wishlist');
-});
+Route::get('/index2', 'IndexController@initializePage2');
+
+Route::get('/index2/fetchData', 'IndexController@initializePage2');
+
+Route::get('/filterFunction', 'IndexController@indexFilter');
 
 Auth::routes();
 
@@ -44,6 +46,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+Route::get('/profile', '\App\Http\Controllers\Auth\LoginController@profile');
+
 $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
 Route::get('/prova', 'IndexController@initializePage');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

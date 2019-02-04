@@ -15,4 +15,13 @@
 {{--    <div class="w-100"></div> per andare a capo ogni volta
 --}}
 
+
   @endforeach
+
+  @if($shoes instanceof \Illuminate\Pagination\LengthAwarePaginator )
+
+                      <div class="w-100">
+                            {{$shoes->links()}}
+                      </div>
+
+  @endif

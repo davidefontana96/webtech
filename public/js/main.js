@@ -207,6 +207,7 @@
 			animation: "fade",
 			slideshowSpeed: 5000,
 			directionNav: true,
+			singleItem : true,
 			start: function(){
 				setTimeout(function(){
 					$('.slider-text').removeClass('animated fadeInUp');
@@ -238,6 +239,7 @@
 		   dots: true,
 		   autoHeight: false,
 		   items: 1,
+			 singleItem : true,
 		   navText: [
 		      "<i class='icon-chevron-left owl-direction'></i>",
 		      "<i class='icon-chevron-right owl-direction'></i>"
@@ -256,6 +258,7 @@
 		   dots: false,
 		   autoHeight: true,
 		   items: 1,
+			 singleItem : true,
 		   navText: [
 		      "<i class='icon-chevron-left owl-direction'></i>",
 		      "<i class='icon-chevron-right owl-direction'></i>"

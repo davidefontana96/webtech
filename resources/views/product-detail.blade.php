@@ -154,7 +154,7 @@
 							<div class="item">
 								<div class="product-entry border">
 									<a href="#" class="prod-img">
-										<img src="{{$image->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
+										<img src="https://s7d2.scene7.com/is/image/VansBrand/190123-drillchorecoat-2?$SCALE-ORIGINAL$" class="img-fluid" alt="Free html5 bootstrap 4 template">
 									</a>
 								</div>
 							</div>

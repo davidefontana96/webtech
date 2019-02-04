@@ -4,6 +4,7 @@
 	<title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<link href="{{asset('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700')}}" rel="stylesheet">
  	<link href="{{asset('https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700')}}" rel="stylesheet">
@@ -61,27 +62,26 @@
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
 								<li><a href="../index">Home</a></li>
-								<li class="active">
-									<a href="men">Men</a>
-
-								</li>
+								<li class="active"><a href="men">Men</a></li>
 								<li ><a href="women">Women</a></li>
 								<li><a href="../about">About</a></li>
 								<li><a href="../contact">Contact</a></li>
+								<li><a href="../news">News</a></li>
+
 								@guest
-								<li>
+								<li class="cart">
 														<a href="{{ route('login') }}">{{ __('Login') }}</a>
 								</li>
 								@if (Route::has('register'))
-								<li>
+								<li class="cart">
 														<a href="{{ route('register') }}">{{ __('Register') }}</a>
 								</li>
 
-								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+								<li class="cart"><a href="../cart"><i class="icon-shopping-cart"></i>Cart[0]</a></li>
 							  @endif
 								@else
 
-								<li class="has-dropdown" >
+								<li class="has-dropdown cart">
 												<a id="navbarDropdown"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 														{{ Auth::user()->name }}
 											  </a>
@@ -89,7 +89,7 @@
 													<li>
 															<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
 													</li>
-													<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+													<li><a href="cart"><i class="icon-shopping-cart"></i>Cart[0]</a></li>
 													</ul>
 																<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 																		@csrf
@@ -97,7 +97,6 @@
 
 									</li>
 									@endguest
-
 
 
 							</ul>
@@ -164,7 +163,7 @@
 									<ul>
 										@foreach ($brands as $brand )
 
-									  <li>  <input type="checkbox" id="brands" value="brands/{{$brand->id}}/M">
+									  <li>  <input type="checkbox" name="brands[]" id="brands" value="{{$brand->id}}">
 
 									    {{$brand->name}}</li>
 									@endforeach
@@ -176,7 +175,7 @@
 									<h3>Categories</h3>
 									<ul>
 										@foreach ($categories as $category )
-									    <li>    <input type="checkbox" name="categories" value="categories/{{$category->id}}/M">
+									    <li>    <input type="checkbox" name="categories[]" value="{{$category->id}}">
 									{{$category->name}}</li>
 									@endforeach
 
@@ -190,7 +189,7 @@
 									<h3>Style</h3>
 									<ul>
 										@foreach ($styles as $style )
-									    <li>  <input type="checkbox" name="{{$style->name}}" value="styles/{{$style->id}}/F"> {{$style->name}} </li>
+									    <li>  <input type="checkbox" name="styles[]" value="{{$style->id}}"> {{$style->name}} </li>
 
 									@endforeach
 									</ul>
@@ -215,9 +214,14 @@
 						</div>
 					</div>
 					<div class="col-lg-9 col-xl-9">
-						<div class="row row-pb-md" id="poscarpe">
-					@include('shoesviews', $shoes)
-					</div>
+						<div class="row row-pb-md" id="html">
+
+
+							@include('shoesviews', $shoes)
+
+
+
+						</div>
 
 					</div>
 
