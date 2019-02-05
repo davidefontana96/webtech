@@ -16,8 +16,8 @@ $('.btn-addtocart').click(function(){
        var url = 'product-detail/'+size+'/add-cart';
        $.get('/shoes/'+idshoe+'/product-detail/'+size+'/addtocart' , {size:size, quantity:quantity, idshoe:idshoe, iduser:iduser},
                 function(returned){
-                  console.log(returned);
-                  $('.divider').before(
+                  $(".dropdown.cart").html(returned);
+                  /*$('.divider').before(
                     '<li class="object-in-cart" id="'+returned[5]+'">'+
                          '<span class="item">'+
                            '<span class="item-left">'+
@@ -33,6 +33,7 @@ $('.btn-addtocart').click(function(){
                        '</span>'+
                      '</li>'
                    );
+                   */
                 });
 
 

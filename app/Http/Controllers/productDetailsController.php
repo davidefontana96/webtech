@@ -125,13 +125,16 @@ class productDetailsController extends Controller
                 ->where('id_user', '=', $userid)
                 ->count();
 
+        $likedBy = DB::table('likes')
+                ->where('id_shoe', '=', $id)
+                ->count();
+
 
       return view('product-detail', compact('shoes', 'images', 'measures', 'reviews', 'reviews_counter',
                                             'fivestars', 'fourstars', 'threestars', 'twostars', 'onestars',
                                             'fivepercentage', 'fourpercentage', 'threepercentage', 'twopercentage',
-                                            'onepercentage', 'alreadyReviewed', 'medium', 'items', 'itemsInCart'
-                                            ));
-  }
+                                            'onepercentage', 'alreadyReviewed', 'medium', 'items', 'itemsInCart', 'likedBy'));
+    }
 
     public function availability(Request $request)
     {
@@ -240,15 +243,26 @@ class productDetailsController extends Controller
       ->where('subtotal', '=', $subtotal)
       ->pluck('id');
 
+      $items = DB::table('carts')
+              ->join('measurements', 'measurements.id', '=', 'carts.id_measure')
+              ->join('shoes', 'shoes.id', '=', 'measurements.id_shoe')
+              ->select('carts.subtotal', 'shoes.name', 'carts.quantity', 'carts.id')
+              ->where('id_user', '=', $iduser)
+              ->get();
+
+      $itemsInCart = DB::table('carts')
+              ->where('id_user', '=', $iduser)
+              ->count();
 
       $toreturn = Array($quantity, $price1, $size, $subtotal, $nameShoe,$idcarts);
 
-      return $toreturn;
+      return view('cartviews', compact('items', 'itemsInCart'));
     }
 
     public function removeFromCart(Request $request)
     {
       $idcart = $request->input('idtopass');
+      $iduser = (int)$request->input('iduser');
 
       $idmeasure = DB::table('carts')
                       ->select('id_measure')
@@ -265,12 +279,25 @@ class productDetailsController extends Controller
                       ->where('id', '=', $idmeasure[0])
                       ->pluck('element');
 
+
+
       $torefresh = $takecurrquantity[0] + $quantity[0];
 
       DB::table('measurements')->where('id', '=', $idmeasure[0])->update(['element' => $torefresh]);
 
       DB::table('carts')->where('id', '=', $idcart)->delete();
 
-      return   $torefresh;
+      $items = DB::table('carts')
+              ->join('measurements', 'measurements.id', '=', 'carts.id_measure')
+              ->join('shoes', 'shoes.id', '=', 'measurements.id_shoe')
+              ->select('carts.subtotal', 'shoes.name', 'carts.quantity', 'carts.id')
+              ->where('id_user', '=', $iduser)
+              ->get();
+
+      $itemsInCart = DB::table('carts')
+              ->where('id_user', '=', $iduser)
+              ->count();
+
+      return view('cartviews', compact('items', 'itemsInCart'));
     }
 }

@@ -1,6 +1,3 @@
-
-
-<li class="dropdown cart">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="glyphicon glyphicon-shopping-cart"></span>
     <i class="icon-shopping-cart"></i>Cart[{{$itemsInCart}}]

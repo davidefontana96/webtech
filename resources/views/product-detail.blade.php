@@ -4,7 +4,8 @@
 	<title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
 
@@ -37,7 +38,17 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="{{asset('css/style.css')}}">
+	<style>
+	.fa {
+	  font-size: 50px;
+	  cursor: pointer;
+	  user-select: none;
+	}
 
+	.fa:hover {
+	  color: darkblue;
+	}
+	</style>
 	</head>
 	<body>
 
@@ -99,10 +110,11 @@
 
 									</li>
 
+									<li class="dropdown cart" id="dropdown-cart-js">
 
 									@include('cartviews',[ $items, $itemsInCart])
 
-
+								</li>
 
 									@endguest
 							</ul>
@@ -166,6 +178,7 @@
 							@foreach($shoes as $shoe)
 							<h3 class="idshoe" id="{{$shoe->id}}">{{$shoe->name}}</h3>
 							@endforeach
+
 							<p class="price">
 								<span id="price"></span>
 								<span class="rate">
@@ -197,11 +210,7 @@
 				               </ul>
 				            </div>
 				            <div class="block-26 mb-4">
-									<h4>Width</h4>
-				               <ul>
-				                  <li><a href="#">M</a></li>
-				                  <li><a href="#">W</a></li>
-				               </ul>
+
 				            </div>
 							</div>
 							<div class="input-group mb-4">
@@ -219,9 +228,16 @@
 						 </div>
                   	<div class="row">
 	                  	<div class="col-sm-12 text-center">
-									<p class="addtocart"><a class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
+									<p class="addtocart"><a class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart </a></p>
+
 								</div>
 							</div>
+							<div>
+							</br>
+							</div>
+
+								@include('likeview', [$likedBy])
+
 						</div>
 					</div>
 				</div>
