@@ -175,20 +175,102 @@ class productDetailsController extends Controller
       ['id_user' => $iduser, 'star' => $stars, 'text' => $testo, 'id_shoe' => $shoeid, 'created_at' => $currdate]
     ]);
 
-    $name = DB::table('users')
-            ->select('name')
-            ->where('id', '=', $iduser)
-            ->pluck('name');
+    $reviews_counter = DB::table('shoes')
+      ->join('reviews', 'shoes.id' ,'=', 'reviews.id_shoe')
+      ->where('reviews.id_shoe', '=', $shoeid)
+      ->count();
 
-    $surname = DB::table('users')
-            ->select('surname')
-            ->where('id', '=', $iduser)
-            ->pluck('surname');
+    $reviews = DB::table('shoes')
+      ->join('reviews', 'shoes.id' ,'=', 'reviews.id_shoe')
+      ->join('users', 'reviews.id_user', '=', 'users.id')
+      ->select('reviews.text', 'users.name', 'users.surname', 'reviews.created_at', 'reviews.star', 'reviews.id')
+      ->where('reviews.id_shoe', '=', $shoeid)
+      ->get();
+
+     $fivestars = DB::table('shoes')
+      ->join('reviews', 'shoes.id', '=', 'reviews.id_shoe')
+      ->where([['reviews.id_shoe', '=', $shoeid],
+              ['reviews.star', '=', '5'],
+              ])
+      ->count();
+
+      $fourstars = DB::table('shoes')
+       ->join('reviews', 'shoes.id', '=', 'reviews.id_shoe')
+       ->where([['reviews.id_shoe', '=', $shoeid],
+               ['reviews.star', '=', '4'],
+               ])
+       ->count();
+
+       $threestars = DB::table('shoes')
+        ->join('reviews', 'shoes.id', '=', 'reviews.id_shoe')
+        ->where([['reviews.id_shoe', '=', $shoeid],
+                ['reviews.star', '=', '3'],
+                ])
+        ->count();
+
+      $twostars = DB::table('shoes')
+       ->join('reviews', 'shoes.id', '=', 'reviews.id_shoe')
+       ->where([['reviews.id_shoe', '=', $shoeid],
+               ['reviews.star', '=', '2'],
+               ])
+       ->count();
+
+       $onestars = DB::table('shoes')
+        ->join('reviews', 'shoes.id', '=', 'reviews.id_shoe')
+        ->where([['reviews.id_shoe', '=', $shoeid],
+                ['reviews.star', '=', '1'],
+                ])
+        ->count();
+
+        if(($reviews_counter!=0) && ($fivestars!=0)){
+            $fivepercentage = ($fivestars/$reviews_counter)*100;
+          } else { $fivepercentage = 0;}
+
+        if(($reviews_counter!=0) && ($fourstars!=0)){
+            $fourpercentage = ($fourstars/$reviews_counter)*100;
+          } else { $fourpercentage = 0;}
+
+        if(($reviews_counter!=0) && ($threestars!=0)){
+            $threepercentage = ($threestars/$reviews_counter)*100;
+            } else { $threepercentage = 0;}
+
+        if(($reviews_counter!=0) && ($twostars!=0)){
+            $twopercentage = ($twostars/$reviews_counter)*100;
+            } else { $twopercentage = 0;}
+
+        if(($reviews_counter!=0) && ($onestars!=0)){
+            $onepercentage = ($onestars/$reviews_counter)*100;
+            } else { $onepercentage = 0;}
+        $userid = null;
+        $user = auth()->user();
+        if($user=='')
+        {
+
+        } else {
+          $userid = $user->id;
+        }
+
+        $alreadyReviewed = DB::table('reviews')
+                          ->where([['id_user', '=', $userid],
+                                  ['id_shoe', '=', $shoeid],])
+                          ->count();
 
 
-    $toreturn = Array($testo,$stars,$iduser,$shoeid,$currdate,$name,$surname);
+        $name = DB::table('users')
+                ->select('name')
+                ->where('id', '=', $iduser)
+                ->pluck('name');
 
-    return $toreturn;
+        $surname = DB::table('users')
+                ->select('surname')
+                ->where('id', '=', $iduser)
+                ->pluck('surname');
+
+
+        return view( 'reviewview', compact('reviews', 'reviews_counter', 'fivestars', 'fourstars',
+                                            'threestars', 'twostars', 'onestars', 'fivepercentage',
+                                            'fourpercentage', 'threepercentage', 'twopercentage',
+                                            'onepercentage', 'alreadyReviewed'));
 
     }
 
