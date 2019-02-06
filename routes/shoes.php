@@ -19,3 +19,7 @@ Route::get('/{id}/product-detail/{number}/addtocart', 'productDetailsController@
 Route::get('/{id}/product-detail/{number}/reviewed', 'productDetailsController@review');
 
 Route::get('/{id}/product-detail/{number}/removed', 'productDetailsController@removeFromCart');
+
+Route::get('/{id}/product-detail/{number}/like', 'productDetailsController@addLike');
+
+Route::get('/{id}/product-detail/{number}/removelike', 'productDetailsController@removeLike');

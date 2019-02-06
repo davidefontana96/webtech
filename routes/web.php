@@ -17,6 +17,10 @@ Route::get('/index', 'IndexController@initializePage');
 
 /*Route::get('/index/{search}', 'IndexController@searchBar');*/
 
+Route::get('/checkout', function () {
+    return view('checkout');
+});
+
 Route::get('/cart', function () {
     return view('cart');
 })->middleware('verified');

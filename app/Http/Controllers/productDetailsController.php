@@ -129,11 +129,16 @@ class productDetailsController extends Controller
                 ->where('id_shoe', '=', $id)
                 ->count();
 
+        $alreadyLiked = DB::table('likes')
+                      ->where('id_user', '=', $userid)
+                      ->where('id_shoe', '=', $id)
+                      ->count();
+
 
       return view('product-detail', compact('shoes', 'images', 'measures', 'reviews', 'reviews_counter',
                                             'fivestars', 'fourstars', 'threestars', 'twostars', 'onestars',
                                             'fivepercentage', 'fourpercentage', 'threepercentage', 'twopercentage',
-                                            'onepercentage', 'alreadyReviewed', 'medium', 'items', 'itemsInCart', 'likedBy'));
+                                            'onepercentage', 'alreadyReviewed', 'medium', 'items', 'itemsInCart', 'likedBy', 'alreadyLiked'));
     }
 
     public function availability(Request $request)
@@ -256,7 +261,7 @@ class productDetailsController extends Controller
 
       $toreturn = Array($quantity, $price1, $size, $subtotal, $nameShoe,$idcarts);
 
-      return view('cartviews', compact('items', 'itemsInCart'));
+      return view('cartviews', compact('items', 'itemsInCart','dispAfterCartAdd'));
     }
 
     public function removeFromCart(Request $request)
@@ -300,4 +305,63 @@ class productDetailsController extends Controller
 
       return view('cartviews', compact('items', 'itemsInCart'));
     }
+
+    public function addLike(Request $request)
+    {
+        $iduser = $request->input('iduser');
+        $idshoe = $request->input('idshoe');
+        $currdate = date("Y-m-d");
+
+        $alreadyLiked = DB::table('likes')
+                      ->where('id_user', '=', $iduser)
+                      ->where('id_shoe', '=', $idshoe)
+                      ->count();
+
+
+        if($alreadyLiked == 1)
+        {
+
+          $likedBy = DB::table('likes')
+                      ->where('id_shoe', '=', $idshoe)
+                      ->count();
+
+          return view('likeview', compact('likedBy', 'alreadyLiked'));
+
+        }
+        else
+        {
+            DB::table('likes')->insert([
+              ['created_at' => $currdate,  'id_shoe' => $idshoe, 'id_user' => $iduser ]
+              ]);
+
+            $likedBy = DB::table('likes')
+                        ->where('id_shoe', '=', $idshoe)
+                        ->count();
+
+            return view('likeview', compact('likedBy', 'alreadyLiked'));
+        }
+    }
+
+    public function removeLike(Request $request)
+    {
+        $iduser = $request->input('iduser');
+        $idshoe = $request->input('idshoe');
+
+        DB::table('likes')
+          ->where('id_shoe', '=', $idshoe)
+          ->where('id_user', '=', $iduser)
+          ->delete();
+
+        $likedBy = DB::table('likes')
+                    ->where('id_shoe', '=', $idshoe)
+                    ->count();
+
+        $alreadyLiked = DB::table('likes')
+                      ->where('id_user', '=', $iduser)
+                      ->where('id_shoe', '=', $idshoe)
+                      ->count();
+
+        return view('likeview', compact('likedBy', 'alreadyLiked'));
+      }
+
 }

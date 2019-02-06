@@ -12,11 +12,15 @@ $('.btn-addtocart').click(function(){
        size = $(this).children().attr('id');
        quantity = $('#quantity').val();
        idshoe = $('.idshoe').attr('id');
-       console.log('fino a qua ok');
        var url = 'product-detail/'+size+'/add-cart';
        $.get('/shoes/'+idshoe+'/product-detail/'+size+'/addtocart' , {size:size, quantity:quantity, idshoe:idshoe, iduser:iduser},
                 function(returned){
                   $(".dropdown.cart").html(returned);
+                  var y =($("#quantity").attr('max'));
+                  y = y-quantity;
+                  $('#quantity').attr('max', y);
+                  $('#quantity').val(0);
+
                   /*$('.divider').before(
                     '<li class="object-in-cart" id="'+returned[5]+'">'+
                          '<span class="item">'+

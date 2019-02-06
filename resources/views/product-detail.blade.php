@@ -236,7 +236,7 @@
 							</br>
 							</div>
 
-								@include('likeview', [$likedBy])
+								@include('likeview', [$likedBy, $alreadyLiked])
 
 						</div>
 					</div>
@@ -552,6 +552,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		<script src="{{asset('js/review.js')}}"></script>
 
 		<script src="{{asset('js/rmfromcart.js')}}"></script>
+
+		<script src="{{asset('js/like.js')}}"></script>
+
    <!-- popper -->
    <script src="{{asset('js/popper.min.js')}}"></script>
    <!-- bootstrap 4.1 -->
