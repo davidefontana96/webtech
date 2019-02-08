@@ -10,10 +10,11 @@ use App\Category;
 use App\Shoe;
 use Illuminate\Support\Facades\DB;
 use View;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class productDetailsController extends Controller
 {
-  public function detailShoe($id){
+  public function detailShoe($id, Request $request){
     $shoes = DB::table('shoes')
       ->select('shoes.name', 'shoes.details', 'shoes.sex', 'shoes.id_category','shoes.id_brand','shoes.id_style', 'shoes.id')
       ->where('shoes.id', '=', $id)
@@ -41,7 +42,7 @@ class productDetailsController extends Controller
       ->join('users', 'reviews.id_user', '=', 'users.id')
       ->select('reviews.text', 'users.name', 'users.surname', 'reviews.created_at', 'reviews.star', 'reviews.id')
       ->where('reviews.id_shoe', '=', $id)
-      ->get();
+      ->paginate(2);
 
      $fivestars = DB::table('shoes')
       ->join('reviews', 'shoes.id', '=', 'reviews.id_shoe')
@@ -134,6 +135,13 @@ class productDetailsController extends Controller
                       ->where('id_shoe', '=', $id)
                       ->count();
 
+      if ($request->ajax())
+      {
+        return view( 'reviewview', compact('reviews', 'reviews_counter', 'fivestars', 'fourstars',
+                                            'threestars', 'twostars', 'onestars', 'fivepercentage',
+                                            'fourpercentage', 'threepercentage', 'twopercentage',
+                                            'onepercentage', 'alreadyReviewed'));
+      } else
 
       return view('product-detail', compact('shoes', 'images', 'measures', 'reviews', 'reviews_counter',
                                             'fivestars', 'fourstars', 'threestars', 'twostars', 'onestars',
@@ -162,6 +170,8 @@ class productDetailsController extends Controller
       return $toreturn;
     }
 
+
+
     public function review(Request $request)
     {
     $testo = $request->input('testo');
@@ -185,7 +195,7 @@ class productDetailsController extends Controller
       ->join('users', 'reviews.id_user', '=', 'users.id')
       ->select('reviews.text', 'users.name', 'users.surname', 'reviews.created_at', 'reviews.star', 'reviews.id')
       ->where('reviews.id_shoe', '=', $shoeid)
-      ->get();
+      ->paginate(2);
 
      $fivestars = DB::table('shoes')
       ->join('reviews', 'shoes.id', '=', 'reviews.id_shoe')
@@ -265,6 +275,8 @@ class productDetailsController extends Controller
                 ->select('surname')
                 ->where('id', '=', $iduser)
                 ->pluck('surname');
+
+
 
 
         return view( 'reviewview', compact('reviews', 'reviews_counter', 'fivestars', 'fourstars',

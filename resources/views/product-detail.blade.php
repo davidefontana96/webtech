@@ -383,6 +383,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 		<script src="{{asset('js/like.js')}}"></script>
 
+		<script src="{{asset('js/paginatorReview.js')}}"></script>
    <!-- popper -->
    <script src="{{asset('js/popper.min.js')}}"></script>
    <!-- bootstrap 4.1 -->

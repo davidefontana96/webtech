@@ -54,6 +54,7 @@
     </div>
     @endforeach
 
+
           @guest
 
           @if(!(Route::has('register')))
@@ -99,6 +100,8 @@
 
 
   </div>
+
+
   <div class="col-md-4">
     <div class="rating-wrap">
       <h3 class="head">All the review.</h3>
@@ -171,4 +174,9 @@
       </div>
     </div>
   </div>
+  @if($reviews instanceof \Illuminate\Pagination\LengthAwarePaginator )
+  <div class="w-100">
+            {{$reviews->links()}}
+  </div>
+  @endif
 </div>
