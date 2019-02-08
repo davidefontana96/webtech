@@ -44,19 +44,35 @@ class cartController extends Controller
       $user = auth()->user()->id;
       $code = $request->input('coupon');
 
-      $percentage = DB::table('coupons')
-                    ->select('percentage')
-                    ->where('code_coupon', '=', $code)
-                    ->pluck('percentage');
+      $codeexists = DB::table('coupons')
+                    ->where('code_coupon', $code)
+                    ->exists();
 
       $total = DB::table('carts')
               ->where('id_user', '=', $user)
               ->sum('subtotal');
 
-      $discount = ($total * $percentage[0])/100;
+      $discount = 0;
+      $newtotal = 0;
 
-      $newtotal = $total - $discount;
+      if($codeexists)
+      {
+          $percentage = DB::table('coupons')
+                        ->select('percentage')
+                        ->where('code_coupon', '=', $code)
+                        ->pluck('percentage');
 
-      return view('countview', compact('discount', 'newtotal', 'total'));
+          $discount = ($total * $percentage[0])/100;
+
+          $newtotal = $total - $discount;
+
+          return view('countview', compact('discount', 'newtotal', 'total'));
+      }
+      else
+      {
+          $discount = 0;
+          $newtotal = $total;
+          return view('countview', compact('discount', 'newtotal', 'total'));
+      }
     }
 }

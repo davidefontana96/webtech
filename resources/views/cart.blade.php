@@ -184,7 +184,9 @@
 									<form action="#">
 										<div class="row form-group">
 											<div class="col-sm-9">
-												<input id="mycoupon" type="text" name="quantity" class="form-control" placeholder="Your Coupon Number...">
+												<form>
+												<input id="mycoupon" type="text" name="quantity" class="form-control" placeholder="Your Coupon Number..." required="required">
+											</form>
 											</div>
 											<div class="col-sm-3">
 												<p><a id = "applyCoupon" class="btn btn-primary ">Apply Coupon </a></p>
