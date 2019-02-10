@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class StylesTableSeeder extends Seeder
 {
@@ -11,9 +12,12 @@ class StylesTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('styles')->insert([
-      'name'     => str_random(10),
-      'description' => str_random(20),
-    ]);
+      $faker = Faker::create();
+      foreach (range(1,10) as $index) {
+        DB::table('styles')->insert([
+        'name'     => $faker->name,
+        'description' => $faker->paragraph,
+      ]);
+      }
     }
 }

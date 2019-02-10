@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Faker\Factory as Faker;
+
 class PromotionsTableSeeder extends Seeder
 {
     /**
@@ -11,10 +13,13 @@ class PromotionsTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('promotions')->insert([
-      'percentage'     => '10',
-      'starting_at' => Carbon::parse('2000-01-01'),
-      'terminate_at' => Carbon::parse('2002-01-01'),
-    ]);
-    }
+      $faker = Faker::create();
+      foreach (range(1,50) as $index) {
+        DB::table('promotions')->insert([
+        'percentage'     => $faker->numberBetween(1,35),
+        'starting_at' => $faker->dateTimeBetween($startDate = '-10 years', $endDate = 'now', $timezone = null),
+        'terminate_at' => $faker->dateTimeBetween($startDate = '+10 years', $endDate = '+20 years', $timezone = null)
+        ]);
+        }
+      }
 }
