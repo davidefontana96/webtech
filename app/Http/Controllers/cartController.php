@@ -22,7 +22,7 @@ class cartController extends Controller
       $elements = DB::table('carts')
                 ->join('measurements', 'carts.id_measure', '=', 'measurements.id')
                 ->join('shoes', 'shoes.id', '=', 'measurements.id_shoe')
-                ->select('shoes.name', 'carts.price', 'carts.quantity', 'carts.subtotal')
+                ->select('shoes.name', 'carts.price', 'carts.quantity', 'carts.subtotal', 'carts.id')
                 ->where('carts.id_user', '=', $user->id)
                 ->get();
 
@@ -75,4 +75,23 @@ class cartController extends Controller
           return view('countview', compact('discount', 'newtotal', 'total'));
       }
     }
+
+    public function removeProduct(Request $request)
+    {
+      $iduser = auth()->user()->id;
+      $idcart = $request->input('idcart');
+
+      DB::table('carts')->where('id', '=', $idcart)->delete();
+
+      $elements = DB::table('carts')
+                ->join('measurements', 'carts.id_measure', '=', 'measurements.id')
+                ->join('shoes', 'shoes.id', '=', 'measurements.id_shoe')
+                ->select('shoes.name', 'carts.price', 'carts.quantity', 'carts.subtotal', 'carts.id')
+                ->where('carts.id_user', '=', $iduser)
+                ->get();
+
+     return view('cartviewpage', compact('elements'));
+
+    }
+
 }

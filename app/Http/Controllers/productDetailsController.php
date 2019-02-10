@@ -41,7 +41,7 @@ class productDetailsController extends Controller
     $reviews = DB::table('shoes')
       ->join('reviews', 'shoes.id' ,'=', 'reviews.id_shoe')
       ->join('users', 'reviews.id_user', '=', 'users.id')
-      ->select('reviews.text', 'users.name', 'users.surname', 'reviews.created_at', 'reviews.star', 'reviews.id')
+      ->select('reviews.text', 'users.name', 'users.surname', 'users.avatar', 'reviews.created_at', 'reviews.star', 'reviews.id')
       ->where('reviews.id_shoe', '=', $id)
       ->paginate(2);
 
@@ -140,18 +140,23 @@ class productDetailsController extends Controller
                       ->where('id_shoe', '=', $id)
                       ->count();
 
+        $avatar = DB::table('users')
+                ->select('avatar')
+                ->where('id', '=', $userid)
+                ->pluck('avatar');
+
       if ($request->ajax())
       {
         return view( 'reviewview', compact('reviews', 'reviews_counter', 'fivestars', 'fourstars',
                                             'threestars', 'twostars', 'onestars', 'fivepercentage',
                                             'fourpercentage', 'threepercentage', 'twopercentage',
-                                            'onepercentage', 'alreadyReviewed'));
+                                            'onepercentage', 'alreadyReviewed', 'avatar'));
       } else
 
       return view('product-detail', compact('shoes', 'images', 'measures', 'reviews', 'reviews_counter',
                                             'fivestars', 'fourstars', 'threestars', 'twostars', 'onestars',
                                             'fivepercentage', 'fourpercentage', 'threepercentage', 'twopercentage',
-                                            'onepercentage', 'alreadyReviewed', 'medium', 'items', 'itemsInCart', 'likedBy', 'alreadyLiked'));
+                                            'onepercentage', 'alreadyReviewed', 'medium', 'items', 'itemsInCart', 'likedBy', 'alreadyLiked','avatar'));
     }
 
     public function availability(Request $request)
@@ -284,7 +289,7 @@ class productDetailsController extends Controller
         $avatar = DB::table('users')
                 ->select('avatar')
                 ->where('id', '=', $iduser)
-                ->pluck('avatar');
+                ->get('avatar');
 
 
 
@@ -292,7 +297,7 @@ class productDetailsController extends Controller
         return view( 'reviewview', compact('reviews', 'reviews_counter', 'fivestars', 'fourstars',
                                             'threestars', 'twostars', 'onestars', 'fivepercentage',
                                             'fourpercentage', 'threepercentage', 'twopercentage',
-                                            'onepercentage', 'alreadyReviewed'));
+                                            'onepercentage', 'alreadyReviewed', 'avatar'));
 
     }
 

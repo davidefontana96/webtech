@@ -171,8 +171,9 @@
 								<span>Remove</span>
 							</div>
 						</div>
+						<div class="removefromcart">
 						@include('cartviewpage', [$elements])
-
+					</div>
 
 					</div>
 				</div>

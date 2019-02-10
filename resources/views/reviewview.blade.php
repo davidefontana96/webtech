@@ -7,7 +7,7 @@
     @endif
     @foreach($reviews as $review)
     <div class="review totalist" itemid="{{$review->id}}" id="feedbacks">
-      <div class="user-img" style="background-image: url({{ URL::asset('images/person1.jpg')}})"></div>
+      <div class="user-img" style="background-image: url({{$review->avatar}})"></div>
       <div class="desc">
         <h4>
           <span class="text-left">{{$review->name}} {{$review->surname}}</span>
@@ -63,7 +63,7 @@
           @endif
           @elseif($alreadyReviewed == 0)
           <div class="review 2" id="formReview">
-            <div class="user-img" style="background-image: url({{ URL::asset('images/person1.jpg')}})"></div>
+            <div class="user-img" style="background-image: url({{Auth::user()->avatar}})"></div>
 
             <div class="desc">
               <h4>

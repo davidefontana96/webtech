@@ -1,4 +1,6 @@
+
 @foreach($elements as $element)
+
 <div class="product-cart d-flex">
   <div class="one-forth">
     <div class="product-img" style="background-image: url(images/item-6.jpg);">
@@ -24,7 +26,7 @@
   </div>
   <div class="one-eight text-center">
     <div class="display-tc">
-      <a class="closed"></a>
+      <a class="closed" id="{{$element->id}}"></a>
     </div>
   </div>
 </div>

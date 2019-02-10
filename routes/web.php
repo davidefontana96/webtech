@@ -25,6 +25,8 @@ Route::get('/cart', 'cartController@ShowProductInCart')->middleware('verified');
 
 Route::get('/cart/couponapply', 'cartController@applyCoupon')->middleware('verified');
 
+Route::get('/cart/removeproduct', 'cartController@removeproduct')->middleware('verified');
+
 Route::get('/contact', function () {
     return view('contact');
 });
