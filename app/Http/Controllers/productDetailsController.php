@@ -30,6 +30,7 @@ class productDetailsController extends Controller
       ->join('measurements', 'shoes.id','=', 'measurements.id_shoe')
       ->select('measurements.size_shoe', 'measurements.element')
       ->where('measurements.id_shoe', '=', $id)
+      ->orderBy('measurements.size_shoe', 'asc')
       ->get();
 
     $reviews_counter = DB::table('shoes')
@@ -78,8 +79,12 @@ class productDetailsController extends Controller
                 ['reviews.star', '=', '1'],
                 ])
         ->count();
-
-        $medium = (($onestars) + ($twostars*2) + ($threestars*3) + ($fourstars*4) + ($fivestars*5))/$reviews_counter;
+        if($reviews_counter != 0 )
+        {
+          $medium = (($onestars) + ($twostars*2) + ($threestars*3) + ($fourstars*4) + ($fivestars*5))/$reviews_counter;
+        } else {
+          $medium = 0;
+        }
 
         if(($reviews_counter!=0) && ($fivestars!=0)){
             $fivepercentage = ($fivestars/$reviews_counter)*100;
@@ -193,7 +198,7 @@ class productDetailsController extends Controller
     $reviews = DB::table('shoes')
       ->join('reviews', 'shoes.id' ,'=', 'reviews.id_shoe')
       ->join('users', 'reviews.id_user', '=', 'users.id')
-      ->select('reviews.text', 'users.name', 'users.surname', 'reviews.created_at', 'reviews.star', 'reviews.id')
+      ->select('reviews.text', 'users.name', 'users.surname', 'reviews.created_at', 'reviews.star', 'reviews.id', 'users.avatar')
       ->where('reviews.id_shoe', '=', $shoeid)
       ->paginate(2);
 
@@ -275,6 +280,11 @@ class productDetailsController extends Controller
                 ->select('surname')
                 ->where('id', '=', $iduser)
                 ->pluck('surname');
+
+        $avatar = DB::table('users')
+                ->select('avatar')
+                ->where('id', '=', $iduser)
+                ->pluck('avatar');
 
 
 

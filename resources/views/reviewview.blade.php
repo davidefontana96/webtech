@@ -64,6 +64,7 @@
           @elseif($alreadyReviewed == 0)
           <div class="review 2" id="formReview">
             <div class="user-img" style="background-image: url({{ URL::asset('images/person1.jpg')}})"></div>
+
             <div class="desc">
               <h4>
           <span class="text-left obtain-user-js" title="{{Auth::user()->id}}" id="userid">{{ Auth::user()->name }} {{ Auth::user()->surname }}, review it.</span>
