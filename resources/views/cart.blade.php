@@ -174,95 +174,10 @@
 								<span>Remove</span>
 							</div>
 						</div>
-						<div class="product-cart d-flex">
-							<div class="one-forth">
-								<div class="product-img" style="background-image: url(images/item-6.jpg);">
-								</div>
-								<div class="display-tc">
-									<h3>Product Name</h3>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$68.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$120.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<a href="#" class="closed"></a>
-								</div>
-							</div>
-						</div>
-						<div class="product-cart d-flex">
-							<div class="one-forth">
-								<div class="product-img" style="background-image: url(images/item-7.jpg);">
-								</div>
-								<div class="display-tc">
-									<h3>Product Name</h3>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$68.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<form action="#">
-										<input type="text" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
-									</form>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$120.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<a href="#" class="closed"></a>
-								</div>
-							</div>
-						</div>
-						<div class="product-cart d-flex">
-							<div class="one-forth">
-								<div class="product-img" style="background-image: url(images/item-8.jpg);">
-								</div>
-								<div class="display-tc">
-									<h3>Product Name</h3>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$68.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$120.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<a href="#" class="closed"></a>
-								</div>
-							</div>
-						</div>
+						<div class="removefromcart">
+						@include('cartviewpage', [$elements])
+					</div>
+
 					</div>
 				</div>
 				<div class="row row-pb-lg">
@@ -273,25 +188,18 @@
 									<form action="#">
 										<div class="row form-group">
 											<div class="col-sm-9">
-												<input type="text" name="quantity" class="form-control input-number" placeholder="Your Coupon Number...">
+												<form>
+												<input id="mycoupon" type="text" name="quantity" class="form-control" placeholder="Your Coupon Number..." required="required">
+											</form>
 											</div>
 											<div class="col-sm-3">
-												<input type="submit" value="Apply Coupon" class="btn btn-primary">
+												<p><a id = "applyCoupon" class="btn btn-primary ">Apply Coupon </a></p>
 											</div>
 										</div>
 									</form>
 								</div>
-								<div class="col-sm-4 text-center">
-									<div class="total">
-										<div class="sub">
-											<p><span>Subtotal:</span> <span>$200.00</span></p>
-											<p><span>Delivery:</span> <span>$0.00</span></p>
-											<p><span>Discount:</span> <span>$45.00</span></p>
-										</div>
-										<div class="grand-total">
-											<p><span><strong>Total:</strong></span> <span>$450.00</span></p>
-										</div>
-									</div>
+								<div class="col-sm-4 text-center final-prices">
+								@include('countview', [$total, $discount, $newtotal])
 								</div>
 							</div>
 						</div>
@@ -438,6 +346,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
 
 	<!-- jQuery -->
+<<<<<<< HEAD
+=======
+	<script src="js/jquery.min.js"></script>
+
+	<script src="js/applyCoupon.js"></script>
+
+	<script src="js/deletefrompagecart.js"></script>
+>>>>>>> cacffc8c7ade33c0bd73d94558bbe9b0ae5dddfe
    <!-- popper -->
    <script src="js/popper.min.js"></script>
    <!-- bootstrap 4.1 -->
@@ -452,6 +368,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="js/owl.carousel.min.js"></script>
 	<!-- Magnific Popup -->
 	<script src="js/jquery.magnific-popup.min.js"></script>
+
 	<script src="js/magnific-popup-options.js"></script>
 	<!-- Date Picker -->
 	<script src="js/bootstrap-datepicker.js"></script>

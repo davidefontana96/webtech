@@ -21,9 +21,11 @@ Route::get('/checkout', function () {
     return view('checkout');
 });
 
-Route::get('/cart', function () {
-    return view('cart');
-})->middleware('verified');
+Route::get('/cart', 'cartController@ShowProductInCart')->middleware('verified');
+
+Route::get('/cart/couponapply', 'cartController@applyCoupon')->middleware('verified');
+
+Route::get('/cart/removeproduct', 'cartController@removeproduct')->middleware('verified');
 
 Route::get('/contact', function () {
     return view('contact');

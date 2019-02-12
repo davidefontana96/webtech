@@ -7,7 +7,7 @@
     @endif
     @foreach($reviews as $review)
     <div class="review totalist" itemid="{{$review->id}}" id="feedbacks">
-      <div class="user-img" style="background-image: url({{ URL::asset('images/person1.jpg')}})"></div>
+      <div class="user-img" style="background-image: url({{$review->avatar}})"></div>
       <div class="desc">
         <h4>
           <span class="text-left">{{$review->name}} {{$review->surname}}</span>
@@ -54,6 +54,7 @@
     </div>
     @endforeach
 
+
           @guest
 
           @if(!(Route::has('register')))
@@ -62,7 +63,8 @@
           @endif
           @elseif($alreadyReviewed == 0)
           <div class="review 2" id="formReview">
-            <div class="user-img" style="background-image: url({{ URL::asset('images/person1.jpg')}})"></div>
+            <div class="user-img" style="background-image: url({{Auth::user()->avatar}})"></div>
+
             <div class="desc">
               <h4>
           <span class="text-left obtain-user-js" title="{{Auth::user()->id}}" id="userid">{{ Auth::user()->name }} {{ Auth::user()->surname }}, review it.</span>
@@ -99,6 +101,8 @@
 
 
   </div>
+
+
   <div class="col-md-4">
     <div class="rating-wrap">
       <h3 class="head">All the review.</h3>
@@ -171,4 +175,9 @@
       </div>
     </div>
   </div>
+  @if($reviews instanceof \Illuminate\Pagination\LengthAwarePaginator )
+  <div class="w-100">
+            {{$reviews->links()}}
+  </div>
+  @endif
 </div>
