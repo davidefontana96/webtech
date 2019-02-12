@@ -12,8 +12,11 @@ class IndexController extends Controller
     {
 
       $shoes = DB::table('shoes')
+            ->join('measurements', 'measurements.id_shoe', '=', 'shoes.id' )
             ->join('images', 'images.id_shoe', '=', 'shoes.id')
-            ->select('shoes.name', 'images.path')
+            ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id', 'measurements.price')
+            ->groupby('shoes.id', 'images.id_shoe')
+            ->groupby('shoes.id', 'measurements.id_shoe')
             ->get();
       if(empty($shoes))
       {
@@ -32,9 +35,11 @@ class IndexController extends Controller
      $brands= DB::select('select id,name from brands');
      $categories = DB::select('select * from categories');
      $shoes = DB::table('shoes')
+           ->join('measurements', 'measurements.id_shoe', '=', 'shoes.id' )
            ->join('images', 'images.id_shoe', '=', 'shoes.id')
-           ->select('shoes.id','images.path', 'shoes.name', 'shoes.sex')
+           ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id', 'measurements.price')
            ->groupby('shoes.id', 'images.id_shoe')
+           ->groupby('shoes.id', 'measurements.id_shoe')
            ->paginate(6);
            if($request->ajax()){
 
@@ -51,9 +56,10 @@ class IndexController extends Controller
       $categories = $request->input('categories');
        $styles = $request->input('styles');
           $shoes = DB::table('shoes')
+              ->join('measurements', 'measurements.id_shoe', '=', 'shoes.id' )
               ->join('images', 'shoes.id', '=', 'images.id_shoe')
-              ->select('shoes.id','images.path', 'shoes.name', 'shoes.sex')
-             ->where(function($query) use($sex){
+              ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id', 'measurements.price')
+              ->where(function($query) use($sex){
                if(!is_null($sex)) $query->whereIn('shoes.sex', $sex);
               })
              ->where(function($query) use($selected)
@@ -75,6 +81,8 @@ class IndexController extends Controller
 
              })
               ->groupby('shoes.id', 'images.id_shoe')
+              ->groupby('shoes.id', 'measurements.id_shoe')
+
               ->paginate(6);
 
 
@@ -97,7 +105,36 @@ class IndexController extends Controller
 
         return view('index', ['shoes' => $shoes]);
     }*/
+    public function autocomplete(Request $request)
+    {
+       $term = $request->term;
 
+       $queries = DB::table('shoes') //Your table name
+           ->where('name', 'like', '%'.$term.'%') //Your selected row
+           ->join('images', 'shoes.id', '=', 'images.id_shoe')
+           ->select('shoes.name', 'shoes.id', 'images.path')
+           ->take(6)->get();
+
+        $news = DB::table('news')
+                     ->where('title', 'like', '%'.$term.'%') //Your selected row
+                     ->join('shoes', 'news.id', '=', 'shoes.id_news')
+                     ->join('images', 'shoes.id', '=', 'images.id_shoe')
+                     ->select('images.path', 'news.title', 'news.id')
+                     ->groupBy('news.id', 'shoes.id_news')
+                     ->get();
+
+
+
+       foreach ($queries as $query)
+       {
+           $results[] = ['id' => $query->id, 'value' => $query->name,'path' => $query->path, 'type' => 'shoes']; //you can take custom values as you want
+       }
+       foreach ($news as $new)
+       {
+           $results[] = ['id' => $new->id, 'value' => $new->title, 'path' => $new->path, 'type' => 'news/detail']; //you can take custom values as you want
+       }
+    return response()->json($results);
+    }
     public function action(Request $request)
     {
         if($request->ajax())

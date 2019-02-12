@@ -7,7 +7,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
-	
+
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -26,7 +26,7 @@
 	<!-- Owl Carousel -->
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-	
+
 	<!-- Date Picker -->
 	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
 	<!-- Flaticons  -->
@@ -37,7 +37,8 @@
 
 	</head>
 	<body>
-		
+		<meta name="csrf-token" content="{{ csrf_token() }}">
+
 	<div class="colorlib-loader"></div>
 
 	<div id="page">
@@ -49,13 +50,14 @@
 							<div id="colorlib-logo"><a href="index">Footwear</a></div>
 						</div>
 						<div class="col-sm-5 col-md-3">
-			            <form action="#" class="search-wrap">
-			               <div class="form-group">
-			                  <input type="search" class="form-control search" placeholder="Search">
-			                  <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
-			               </div>
-			            </form>
-			         </div>
+							<form  class="search-wrap">
+								<div class="form-group">
+								 <input  class="form-control search autocomplete"   id="complete" placeholder="Search Shoes or News" />
+								 {{ csrf_field() }}
+								 <button id="none"class="btn submit-search text-center " disabled><i style = " color: white;"class="icon-search"></i></button>
+								</div>
+						 </form>
+					 </div>
 		         </div>
 					<div class="row">
 						<div class="col-sm-12 text-left menu-1">
@@ -217,7 +219,7 @@
 						<p>
 							<span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span> 
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
 							<span class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a> , <a href="http://pexels.com/" target="_blank">Pexels.com</a></span>
 						</p>
 					</div>
@@ -229,15 +231,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 	</div>
-	
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+
 	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-   <!-- popper -->
-   <script src="js/popper.min.js"></script>
-   <!-- bootstrap 4.1 -->
-   <script src="js/bootstrap.min.js"></script>
-   <!-- jQuery easing -->
-   <script src="js/jquery.easing.1.3.js"></script>
+	 <!-- popper -->
+	 <script src="js/popper.min.js"></script>
+	 <!-- bootstrap 4.1 -->
+	 <script src="js/bootstrap.min.js"></script>
+	 <!-- jQuery easing -->
+	 <script src="js/jquery.easing.1.3.js"></script>
 	<!-- Waypoints -->
 	<script src="js/jquery.waypoints.min.js"></script>
 	<!-- Flexslider -->
@@ -254,6 +259,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<!-- Main -->
 	<script src="js/main.js"></script>
 
+	<script src="js/searchnav.js"></script>
 	</body>
 </html>
-

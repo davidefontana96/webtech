@@ -49,13 +49,14 @@
 							<div id="colorlib-logo"><a href="index">Footwear</a></div>
 						</div>
 						<div class="col-sm-5 col-md-3">
-			            <form action="#" class="search-wrap">
-			               <div class="form-group">
-			                  <input type="search" class="form-control search" placeholder="Search">
-			                  <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
-			               </div>
-			            </form>
-			         </div>
+							<form  class="search-wrap">
+								<div class="form-group">
+								 <input  class="form-control search autocomplete"   id="complete" placeholder="Search Shoes or News" />
+								 {{ csrf_field() }}
+								 <button id="none"class="btn submit-search text-center " disabled><i style = " color: white;"class="icon-search"></i></button>
+								</div>
+						 </form>
+					 </div>
 						</div>
 					<div class="row">
 						<div class="col-sm-12 text-left menu-1">

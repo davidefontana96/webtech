@@ -42,6 +42,22 @@ Route::get('/index2/fetchData', 'IndexController@initializePage2');
 
 Route::get('/filterFunction', 'IndexController@indexFilter');
 
+// modificare la route con metodo post
+Route::post('/autocomplete','IndexController@autocomplete'); //Instead of Theme your Controller name
+
+Route::get('wishlist', function(){
+  return view('add-to-wishlist');
+});
+
+Route::get('orderComplete', function(){
+  return view('order-complete');
+});
+
+// Route di prova per il button load more
+
+
+
+
 Auth::routes();
 
 Auth::routes(['verify' => true]);

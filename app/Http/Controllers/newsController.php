@@ -11,14 +11,20 @@ use App\User;
 
 class newsController extends Controller
 {
-    public function getIndexNews(){
+    public function getIndexNews(Request $request){
 
       $news = DB::table('news')
                 ->join('shoes', 'news.id', '=', 'shoes.id_news')
                 ->join('images', 'shoes.id', '=', 'images.id_shoe')
                 ->select('images.path', 'news.title', 'news.id')
                 ->groupBy('news.id', 'shoes.id_news')
-                ->get();
+                ->paginate(8);
+
+
+                if ($request->ajax()) {
+                  $view = view('news',compact('news'))->render();
+                      return response()->json(['html'=>$view]);
+                  }
       return view('newsIndex', compact('news'));
 
     }

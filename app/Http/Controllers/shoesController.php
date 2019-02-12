@@ -21,8 +21,10 @@ class shoesController extends Controller
      $categories = DB::select('select * from categories');
       $shoes = DB::table('shoes')
          ->join('images', 'shoes.id', '=', 'images.id_shoe')
+         ->join('measurements', 'measurements.id_shoe', '=', 'shoes.id' )
          ->groupby('shoes.id', 'images.id_shoe')
-         ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id')
+         ->groupby('shoes.id', 'measurements.id_shoe')
+         ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id', 'measurements.price')
          ->where('shoes.sex', '=', 'F' )
          ->get();
 
@@ -39,9 +41,11 @@ class shoesController extends Controller
      $brands= DB::select('select id,name from brands');
     $categories = DB::select('select * from categories');
      $shoes = DB::table('shoes')
+        ->join('measurements', 'measurements.id_shoe', '=', 'shoes.id' )
         ->join('images', 'shoes.id', '=', 'images.id_shoe')
         ->groupby('shoes.id', 'images.id_shoe')
-        ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id')
+         ->groupby('shoes.id', 'measurements.id_shoe')
+         ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id', 'measurements.price')
         ->where('shoes.sex', '=', 'M' )
         ->get();
 
@@ -93,7 +97,9 @@ class shoesController extends Controller
 
            $shoes = DB::table('shoes')
                ->join('images', 'shoes.id', '=', 'images.id_shoe')
-               ->select('shoes.id','images.path', 'shoes.name', 'shoes.sex')
+               ->join('measurements', 'measurements.id_shoe', '=', 'shoes.id' )
+
+               ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id', 'measurements.price')
                ->where('shoes.sex', '=', $sex)
                ->where(function($query) use($selected)
                 {
@@ -113,6 +119,7 @@ class shoesController extends Controller
 
               })
                ->groupby('shoes.id', 'images.id_shoe')
+               ->groupby('shoes.id', 'measurements.id_shoe')
                ->get();
 
 
@@ -172,7 +179,7 @@ class shoesController extends Controller
         return view('shoesviews', compact('shoes'));
     }
 
-  
+
 
 
 }

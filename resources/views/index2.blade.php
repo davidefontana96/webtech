@@ -38,6 +38,7 @@
 
 	</head>
 	<body>
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<div class="colorlib-loader"></div>
 
@@ -50,13 +51,14 @@
 							<div id="colorlib-logo"><a href="../index">Footwear</a></div>
 						</div>
 						<div class="col-sm-5 col-md-3">
-									<form action="#" class="search-wrap">
-										 <div class="form-group">
-												<input type="search" class="form-control search" placeholder="Search">
-												<button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
-										 </div>
-									</form>
-							 </div>
+							<form  class="search-wrap">
+								<div class="form-group">
+								 <input  class="form-control search autocomplete"   id="complete" placeholder="Search Shoes or News" />
+								 {{ csrf_field() }}
+								 <button id="none"class="btn submit-search text-center " disabled><i style = " color: white;"class="icon-search"></i></button>
+								</div>
+						 </form>
+					 </div>
 						 </div>
 					<div class="row">
 						<div class="col-sm-12 text-left menu-1">
@@ -327,30 +329,35 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 	</div>
 
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-   <!-- popper -->
-   <script src="js/popper.min.js"></script>
-   <!-- bootstrap 4.1 -->
-   <script src="js/bootstrap.min.js"></script>
-   <!-- jQuery easing -->
-   <script src="js/jquery.easing.1.3.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Flexslider -->
-	<script src="js/jquery.flexslider-min.js"></script>
-	<!-- Owl carousel -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
-	<!-- Date Picker -->
-	<script src="js/bootstrap-datepicker.js"></script>
-	<!-- Stellar Parallax -->
-	<script src="js/jquery.stellar.min.js"></script>
-	<!-- Main -->
-	<script src="js/main.js"></script>
 
+			<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+			<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+			<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+
+			<!-- jQuery -->
+			 <!-- popper -->
+			 <script src="js/popper.min.js"></script>
+			 <!-- bootstrap 4.1 -->
+			 <script src="js/bootstrap.min.js"></script>
+			 <!-- jQuery easing -->
+			 <script src="js/jquery.easing.1.3.js"></script>
+			<!-- Waypoints -->
+			<script src="js/jquery.waypoints.min.js"></script>
+			<!-- Flexslider -->
+			<script src="js/jquery.flexslider-min.js"></script>
+			<!-- Owl carousel -->
+			<script src="js/owl.carousel.min.js"></script>
+			<!-- Magnific Popup -->
+			<script src="js/jquery.magnific-popup.min.js"></script>
+			<script src="js/magnific-popup-options.js"></script>
+			<!-- Date Picker -->
+			<script src="js/bootstrap-datepicker.js"></script>
+			<!-- Stellar Parallax -->
+			<script src="js/jquery.stellar.min.js"></script>
+			<!-- Main -->
+			<script src="js/main.js"></script>
+
+			<script src="js/searchnav.js"></script>
 	<script src="{{asset('js/paginator.js')}}"></script>
 	<script src="{{asset('js/filterIndexPage.js')}}"></script>
 

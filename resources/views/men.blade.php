@@ -50,13 +50,14 @@
 							<div id="colorlib-logo"><a href="../index">Footwear</a></div>
 						</div>
 						<div class="col-sm-5 col-md-3">
-			            <form action="#" class="search-wrap">
-			               <div class="form-group">
-			                  <input type="search" class="form-control search" placeholder="Search">
-			                  <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
-			               </div>
-			            </form>
-			         </div>
+							<form  class="search-wrap">
+								<div class="form-group">
+								 <input  class="form-control search autocomplete"   id="complete" placeholder="Search Shoes or News" />
+								 {{ csrf_field() }}
+								 <button id="none"class="btn submit-search text-center " disabled><i style = " color: white;"class="icon-search"></i></button>
+								</div>
+						 </form>
+					 </div>
 		         </div>
 					<div class="row">
 						<div class="col-sm-12 text-left menu-1">
@@ -336,9 +337,9 @@
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 	</div>
-
-	<!-- jQuery -->
-		<script src="{{asset('js/jquery.min.js')}}"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
 	   <!-- popper -->
 	   <script src="{{asset('js/popper.min.js')}}"></script>
 	   <!-- bootstrap 4.1 -->
@@ -360,8 +361,10 @@
 		<script src="{{asset('js/jquery.stellar.min.js')}}"></script>
 		<!-- Main -->
 		<script src="{{asset('js/main.js')}}"></script>
+
 		<!-- Gestione ajax per brands, style e categories-->
 		<script src="{{asset('js/clickbuttonshoes.js')}}"></script>
+		<script src="{{asset('js/searchnav.js')}}"></script>
 
 		</body>
 	</html>

@@ -10,34 +10,35 @@
 	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
 
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="{{asset('css/animate.css')}}">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="{{asset('css/icomoon.css')}}">
 	<!-- Ion Icon Fonts-->
-	<link rel="stylesheet" href="css/ionicons.min.css">
+	<link rel="stylesheet" href="{{asset('css/ionicons.min.css')}}">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 
 	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
 
 	<!-- Flexslider  -->
-	<link rel="stylesheet" href="css/flexslider.css">
+	<link rel="stylesheet" href="{{asset('css/flexslider.css')}}">
 
 	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+	<link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
 
 	<!-- Date Picker -->
-	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}">
 	<!-- Flaticons  -->
-	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+	<link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
 
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="{{asset('css/style.css')}}">
 
 	</head>
 	<body>
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<div class="colorlib-loader"></div>
 
@@ -49,14 +50,15 @@
 						<div class="col-sm-7 col-md-9">
 							<div id="colorlib-logo"><a href="index">Footwear</a></div>
 						</div>
-						<div class="col-sm-5 col-md-3">
-			            <form action="#" class="search-wrap">
-			               <div class="form-group">
-			                  <input type="search" name="search" class="form-control search" placeholder="Search">
-			                  <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
-			               </div>
-			            </form>
-			         </div>
+							<div class="col-sm-5 col-md-3">
+ 								<form  class="search-wrap">
+									<div class="form-group">
+							     <input  class="form-control search autocomplete"   id="complete" placeholder="Search Shoes or News" />
+									 {{ csrf_field() }}
+									 <button id="none"class="btn submit-search text-center " disabled><i style = " color: white;"class="icon-search"></i></button>
+								 	</div>
+							 </form>
+						 </div>
 						</div>
 					<div class="row">
 						<div class="col-sm-12 text-left menu-1">
@@ -125,40 +127,17 @@
 					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
 						<h2>ULTIME NOTIZIE FOOTWEAR</h2>
 					</div>
-				<div class="row row-pb-md">
+				<div class="row row-pb-md" id="post-data">
 
-								@foreach ( $news as $new)
-
-
-							<div class="col-lg-3 mb-4 text-center">
-								<div class="product-entry border">
-									<a href="news/detail/{{$new->id}}" class="prod-img">
-										<img src="/images/{{$new->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
-									</a>
-									<div class="desc">
-										<h2><a href="news/{{$new->id}}">{{$new->title}}</a></h2>
-									</div>
-								</div>
-							</div>
-								@endforeach
+							@include('news')
 
 					</div>
 
 
-
-
-
-
-
-
-
-
-
-
-				</div>
+				 </div>
 				<div class="row">
 					<div class="col-md-12 text-center">
-						<p><a href="#" class="btn btn-primary btn-lg">Shop All Products</a></p>
+						<p><button href="#" id="action" class="btn btn-primary btn-lg">See More</button></p>
 					</div>
 				</div>
 			</div>
@@ -191,6 +170,10 @@
 				</div>
 			</div>
 		</div>
+
+
+
+
 
 		<footer id="colorlib-footer" role="contentinfo">
 			<div class="container">
@@ -272,30 +255,36 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 	</div>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
 
 	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
    <!-- popper -->
-   <script src="js/popper.min.js"></script>
+   <script src="{{asset('js/popper.min.js')}}"></script>
    <!-- bootstrap 4.1 -->
-   <script src="js/bootstrap.min.js"></script>
+   <script src="{{asset('js/bootstrap.min.js')}}"></script>
    <!-- jQuery easing -->
-   <script src="js/jquery.easing.1.3.js"></script>
+   <script src="{{asset('js/jquery.easing.1.3.js')}}"></script>
 	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
 	<!-- Flexslider -->
-	<script src="js/jquery.flexslider-min.js"></script>
+	<script src="{{asset('js/jquery.flexslider-min.js')}}"></script>
 	<!-- Owl carousel -->
-	<script src="js/owl.carousel.min.js"></script>
+	<script src="{{asset('js/owl.carousel.min.js')}}"></script>
 	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
+	<script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+	<script src="{{asset('js/magnific-popup-options.js')}}"></script>
 	<!-- Date Picker -->
-	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
 	<!-- Stellar Parallax -->
-	<script src="js/jquery.stellar.min.js"></script>
+	<script src="{{asset('js/jquery.stellar.min.js')}}"></script>
 	<!-- Main -->
-	<script src="js/main.js"></script>
+	<script src="{{asset('js/main.js')}}"></script>
+
+	<script src="{{asset('js/searchnav.js')}}"></script>
+
+	<script src="{{asset('js/loadMoreButton.js')}}"></script>
 
 	</body>
 </html>
