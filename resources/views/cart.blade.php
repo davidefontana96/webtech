@@ -346,14 +346,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
 
 	<!-- jQuery -->
-<<<<<<< HEAD
-=======
-	<script src="js/jquery.min.js"></script>
+
 
 	<script src="js/applyCoupon.js"></script>
 
 	<script src="js/deletefrompagecart.js"></script>
->>>>>>> cacffc8c7ade33c0bd73d94558bbe9b0ae5dddfe
    <!-- popper -->
    <script src="js/popper.min.js"></script>
    <!-- bootstrap 4.1 -->
