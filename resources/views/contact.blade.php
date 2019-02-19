@@ -3,7 +3,7 @@
 	<head>
 	<title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
    <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="viewport" content="width=device-width, initial-scale=0, shrink-to-fit=no">
 
   <!-- Facebook and Twitter integration -->
 	<meta property="og:title" content=""/>
@@ -53,92 +53,7 @@
 	<div class="colorlib-loader"></div>
 
 	<div id="page">
-		<nav class="colorlib-nav" role="navigation">
-			<div class="top-menu">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-7 col-md-9">
-							<div id="colorlib-logo"><a href="index.html">Footwear</a></div>
-						</div>
-						<div class="col-sm-5 col-md-3">
-							<form  class="search-wrap">
-								<div class="form-group">
-								 <input  class="form-control search autocomplete"   id="complete" placeholder="Search Shoes or News" />
-								 {{ csrf_field() }}
-								 <button id="none"class="btn submit-search text-center " disabled><i style = " color: white;"class="icon-search"></i></button>
-								</div>
-						 </form>
-					 </div>
-		         </div>
-					<div class="row">
-						<div class="col-sm-12 text-left menu-1">
-							<ul>
-								<li><a href="/index">Home</a></li>
-								<li>
-									<a href="../shoes/men">Men</a></li>
-								<li><a href="../shoes/women">Women</a></li>
-								<li><a href="/about">About</a></li>
-								<li class="active"><a href="contact">Contact</a></li>
-								<li><a href="/news">News</a></li>
-
-								@guest
-								<li class="cart">
-														<a href="{{ route('login') }}">{{ __('Login') }}</a>
-								</li>
-								@if (Route::has('register'))
-								<li class="cart">
-														<a href="{{ route('register') }}">{{ __('Register') }}</a>
-								</li>
-
-								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i>Cart [0]</a></li>
-								@endif
-								@else
-
-								<li class="has-dropdown cart">
-												<a id="navbarDropdown"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-														{{ Auth::user()->name }}
-												</a>
-													<ul class="dropdown">
-													<li>
-															<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-													</li>
-													<li><a href="cart"><i class="icon-shopping-cart"></i>Cart[0]</a></li>
-													</ul>
-																<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-																		@csrf
-																</form>
-
-									</li>
-									@endguest
-
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="sale">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-8 offset-sm-2 text-center">
-							<div class="row">
-								<div class="owl-carousel2">
-									<div class="item">
-										<div class="col">
-											<h3><a href="#">25% off (Almost) Everything! Use Code: Summer Sale</a></h3>
-										</div>
-									</div>
-									<div class="item">
-										<div class="col">
-											<h3><a href="#">Our biggest sale yet 50% off all summer shoes</a></h3>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
+		@include('top')
 
 		<div class="breadcrumbs">
 			<div class="container">
@@ -176,7 +91,7 @@
 					<div class="col-md-6">
 						<div class="contact-wrap">
 							<h3>Get In Touch</h3>
-							<form action="#" class="contact-form">
+							<form class="contact-form">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -308,11 +223,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 	</div>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+	<!-- jQuery -->
+	<script src="{{asset('js/searchnav.js')}}"></script>
 
-
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+	<script src="{{asset('js/jquery.min.js')}}"></script>
 
 		<!-- jQuery -->
 		 <!-- popper -->
@@ -337,7 +254,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		<!-- Main -->
 		<script src="js/main.js"></script>
 
-		<script src="js/searchnav.js"></script>
+		<script src="{{asset('js/activeNavigation.js')}}"></script>
+
 
 
 	</body>

@@ -23,7 +23,7 @@ class newsController extends Controller
 
                 if ($request->ajax()) {
                   $view = view('news',compact('news'))->render();
-                      return response()->json(['html'=>$view]);
+                  return response()->json(['html'=>$view]);
                   }
       return view('newsIndex', compact('news'));
 
@@ -38,7 +38,7 @@ class newsController extends Controller
 
     $news = DB::table('news')
             ->join('users', 'users.id','news.id_user')
-            ->select('text', 'title', 'name')
+            ->select('texts', 'title', 'name')
             ->where('news.id', '=', $id)
             ->get();
 

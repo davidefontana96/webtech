@@ -346,6 +346,10 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
 	<!-- jQuery -->
+	<script src="{{asset('js/searchnav.js')}}"></script>
+
+	<script src="{{asset('js/jquery.min.js')}}"></script>
+	<!-- jQuery -->
 	   <!-- popper -->
 	   <script src="{{asset('js/popper.min.js')}}"></script>
 	   <!-- bootstrap 4.1 -->
@@ -369,7 +373,6 @@
 		<script src="{{asset('js/main.js')}}"></script>
 
 		<script src="{{asset('js/clickbuttonshoes.js')}}"></script>
-		<script src="{{asset('js/searchnav.js')}}"></script>
 
 		</body>
 	</html>

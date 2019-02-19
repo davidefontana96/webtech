@@ -12,7 +12,7 @@
                 $.get(url, function(data){
                 $('#html').html(data);
                 });
-                
+
 
 
             });

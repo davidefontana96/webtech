@@ -379,11 +379,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 	</div>
-
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+	<!-- jQuery -->
+	<script src="{{asset('js/searchnav.js')}}"></script>
 
+	<script src="{{asset('js/jquery.min.js')}}"></script>
 	<!-- jQuery -->
 	 <!-- popper -->
 	 <script src="js/popper.min.js"></script>
@@ -407,7 +409,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<!-- Main -->
 	<script src="js/main.js"></script>
 
-	<script src="js/searchnav.js"></script>
 
 	</body>
 </html>

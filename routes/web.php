@@ -55,6 +55,7 @@ Route::get('orderComplete', function(){
   return view('order-complete');
 });
 
+
 // Route di prova per il button load more
 
 
@@ -73,6 +74,7 @@ Route::get('/profile', '\App\Http\Controllers\Auth\LoginController@profile');
 $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
 Route::get('/prova', 'IndexController@initializePage');
+
 
 
 Route::group(['prefix' => 'admin'], function () {
