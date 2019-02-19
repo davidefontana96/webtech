@@ -17,15 +17,19 @@ Route::get('/index', 'IndexController@initializePage');
 
 /*Route::get('/index/{search}', 'IndexController@searchBar');*/
 
-Route::get('/checkout', function () {
-    return view('checkout');
+Route::get('/checkout', 'checkoutController@initializePage')->middleware('verified');
+
+Route::post('/ordercomplete', 'checkoutController@orderComplete')->middleware('verified');
+
+Route::get('/wishlist', function () {
+    return view('wishlistview');
 });
 
 Route::get('/cart', 'cartController@ShowProductInCart')->middleware('verified');
 
 Route::get('/cart/couponapply', 'cartController@applyCoupon')->middleware('verified');
 
-Route::get('/cart/removeproduct', 'cartController@removeproduct')->middleware('verified');
+Route::get('/cart/removeproduct', 'cartController@removeProduct')->middleware('verified');
 
 Route::get('/contact', function () {
     return view('contact');
@@ -34,9 +38,7 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/prod', function () {
-    return view('product-detail');
-});
+Route::get('/history', 'pastOrdersController@initializePage'); 
 
 Route::get('/index2', 'IndexController@initializePage2');
 
@@ -47,16 +49,13 @@ Route::get('/filterFunction', 'IndexController@indexFilter');
 // modificare la route con metodo post
 Route::post('/autocomplete','IndexController@autocomplete'); //Instead of Theme your Controller name
 
-Route::get('wishlist', function(){
-  return view('add-to-wishlist');
-});
+Route::get('wishlist', 'wishlistController@initializePage')->middleware('verified');
 
-Route::get('orderComplete', function(){
-  return view('order-complete');
-});
+Route::get('/wishlist/remove', 'wishlistController@removeWish')->middleware('verified');
+
+
 
 // Route di prova per il button load more
-
 
 
 

@@ -84,6 +84,8 @@
 								<li><a href="shoes/women">Women</a></li>
 								<li><a href="about">About</a></li>
 								<li><a href="contact">Contact</a></li>
+								<li><a href="news">News</a></li>
+
 								@guest
 								<li>
 														<a href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -180,7 +182,9 @@
 							@foreach($shoes as $shoe)
 							<h3 class="idshoe" id="{{$shoe->id}}">{{$shoe->name}}</h3>
 							@endforeach
-
+							<p id="wisheshandler">
+							@include('productinwishview', [$alreadyWished])
+						</p>
 							<p class="price">
 								<span id="price"></span>
 								<span class="rate">
@@ -239,6 +243,8 @@
 							</div>
 
 								@include('likeview', [$likedBy, $alreadyLiked])
+
+
 
 						</div>
 					</div>
@@ -368,10 +374,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 	</div>
 
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
-	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
 	<script src="{{asset('js/selectSize.js')}}"></script>
 
@@ -387,7 +392,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 		<script src="{{asset('js/like.js')}}"></script>
 
-		<script src="{{asset('js/paginatorReview.js')}}"></script>
+		<script src="{{asset('js/paginatorreview.js')}}"></script>
+
+		<script src="{{asset('js/addtowish.js')}}"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
    <!-- popper -->
    <script src="{{asset('js/popper.min.js')}}"></script>
    <!-- bootstrap 4.1 -->
@@ -412,6 +424,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="{{asset('js/main.js')}}"></script>
 
 	<script src="{{asset('js/searchnav.js')}}"></script>
+
+
 
 
 

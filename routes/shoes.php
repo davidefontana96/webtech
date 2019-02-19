@@ -23,3 +23,7 @@ Route::get('/{id}/product-detail/{number}/removed', 'productDetailsController@re
 Route::get('/{id}/product-detail/{number}/like', 'productDetailsController@addLike');
 
 Route::get('/{id}/product-detail/{number}/removelike', 'productDetailsController@removeLike');
+
+Route::get('/{id}/product-detail/{number}/addtowish', 'productDetailsController@addToWish');
+
+Route::get('/{id}/product-detail/{number}/removefromwish', 'productDetailsController@removeFromWish');

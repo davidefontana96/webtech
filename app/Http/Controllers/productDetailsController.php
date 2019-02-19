@@ -28,8 +28,10 @@ class productDetailsController extends Controller
 
     $measures = DB::table('shoes')
       ->join('measurements', 'shoes.id','=', 'measurements.id_shoe')
-      ->select('measurements.size_shoe', 'measurements.element')
+      ->selectRaw('sum(measurements.element) as element, measurements.size_shoe')
       ->where('measurements.id_shoe', '=', $id)
+      ->where('measurements.element', '>', 0)
+      ->groupBy('measurements.size_shoe')
       ->orderBy('measurements.size_shoe', 'asc')
       ->get();
 
@@ -123,12 +125,17 @@ class productDetailsController extends Controller
         $items = DB::table('carts')
                 ->join('measurements', 'measurements.id', '=', 'carts.id_measure')
                 ->join('shoes', 'shoes.id', '=', 'measurements.id_shoe')
-                ->select('carts.subtotal', 'shoes.name', 'carts.quantity', 'carts.id')
-                ->where('id_user', '=', $userid)
+                ->join('images', 'images.id_shoe', '=', 'shoes.id')
+                ->select('carts.subtotal','carts.price', 'shoes.name', 'carts.quantity', 'carts.id', 'images.path')
+                ->groupBy('measurements.id_shoe', 'carts.id')
+                ->groupby('shoes.id', 'images.id_shoe')
+                ->where('carts.id_user', '=', $userid)
+                ->where('carts.purchased', '=', 0)
                 ->get();
 
         $itemsInCart = DB::table('carts')
                 ->where('id_user', '=', $userid)
+                ->where('purchased', '=', 0)
                 ->count();
 
         $likedBy = DB::table('likes')
@@ -145,18 +152,23 @@ class productDetailsController extends Controller
                 ->where('id', '=', $userid)
                 ->pluck('avatar');
 
+        $alreadyWished = DB::table('wishes_lists')
+                      ->where('id_shoe', '=', $id)
+                      ->where('id_user', '=', $userid)
+                      ->count();
+
       if ($request->ajax())
       {
         return view( 'reviewview', compact('reviews', 'reviews_counter', 'fivestars', 'fourstars',
                                             'threestars', 'twostars', 'onestars', 'fivepercentage',
                                             'fourpercentage', 'threepercentage', 'twopercentage',
-                                            'onepercentage', 'alreadyReviewed', 'avatar'));
+                                            'onepercentage', 'alreadyReviewed', 'avatar', 'alreadyWished'));
       } else
 
       return view('product-detail', compact('shoes', 'images', 'measures', 'reviews', 'reviews_counter',
                                             'fivestars', 'fourstars', 'threestars', 'twostars', 'onestars',
                                             'fivepercentage', 'fourpercentage', 'threepercentage', 'twopercentage',
-                                            'onepercentage', 'alreadyReviewed', 'medium', 'items', 'itemsInCart', 'likedBy', 'alreadyLiked','avatar'));
+                                            'onepercentage', 'alreadyReviewed', 'medium', 'items', 'itemsInCart', 'likedBy', 'alreadyLiked','avatar', 'alreadyWished'));
     }
 
     public function availability(Request $request)
@@ -165,7 +177,7 @@ class productDetailsController extends Controller
       $idShoe = $request->input('idShoe');
 
       $availability = DB::table('measurements')
-                      ->select('element')
+                      ->selectRaw('sum(measurements.element) as element')
                       ->where('size_shoe', '=', $numshoe)
                       ->where('id_shoe', '=', $idShoe)
                       ->pluck('element');
@@ -188,7 +200,7 @@ class productDetailsController extends Controller
     $stars = $request->input('full');
     $iduser = $request->input('iduser');
     $shoeid = $request->input('idshoe');
-    $currdate = date("Y-m-d");
+    $currdate = date("Y-m-d H:i:s");
 
 
     DB::table('reviews')->insert([
@@ -307,7 +319,7 @@ class productDetailsController extends Controller
       $quantity = (int)$request->input('quantity');
       $idshoe = (int)$request->input('idshoe');
       $iduser = (int)$request->input('iduser');
-      $currdate = date("Y-m-d");
+      $currdate = date("Y-m-d H:i:s");
 
       $nameShoe = DB::table('shoes')
                 ->select('name')
@@ -340,7 +352,7 @@ class productDetailsController extends Controller
       $dispAfterCartAdd = $currDisp[0] - $quantity;
 
       DB::table('carts')->insert([
-        ['id_user' => $iduser, 'id_measure' => $idmeasure[0], 'price' => $price1,  'quantity' => $quantity, 'subtotal' => $subtotal]
+        ['id_user' => $iduser, 'created_at' => $currdate,'id_measure' => $idmeasure[0], 'price' => $price1,  'quantity' => $quantity, 'subtotal' => $subtotal, 'purchased' => 0]
       ]);
 
 
@@ -355,6 +367,7 @@ class productDetailsController extends Controller
       ->where('price', '=', $price1)
       ->where('quantity', '=', $quantity)
       ->where('subtotal', '=', $subtotal)
+      ->where('purchased', '=', 0)
       ->pluck('id');
 
       $items = DB::table('carts')
@@ -362,10 +375,12 @@ class productDetailsController extends Controller
               ->join('shoes', 'shoes.id', '=', 'measurements.id_shoe')
               ->select('carts.subtotal', 'shoes.name', 'carts.quantity', 'carts.id')
               ->where('id_user', '=', $iduser)
+              ->where('purchased', '=', 0)
               ->get();
 
       $itemsInCart = DB::table('carts')
               ->where('id_user', '=', $iduser)
+              ->where('purchased', '=', 0)
               ->count();
 
       $toreturn = Array($quantity, $price1, $size, $subtotal, $nameShoe,$idcarts);
@@ -399,17 +414,19 @@ class productDetailsController extends Controller
 
       DB::table('measurements')->where('id', '=', $idmeasure[0])->update(['element' => $torefresh]);
 
-      DB::table('carts')->where('id', '=', $idcart)->delete();
+      DB::table('carts')->where('id', '=', $idcart)->where('purchased', '=', 0)->delete();
 
       $items = DB::table('carts')
               ->join('measurements', 'measurements.id', '=', 'carts.id_measure')
               ->join('shoes', 'shoes.id', '=', 'measurements.id_shoe')
               ->select('carts.subtotal', 'shoes.name', 'carts.quantity', 'carts.id')
               ->where('id_user', '=', $iduser)
+              ->where('purchased', '=', 0)
               ->get();
 
       $itemsInCart = DB::table('carts')
               ->where('id_user', '=', $iduser)
+              ->where('purchased', '=', 0)
               ->count();
 
       return view('cartviews', compact('items', 'itemsInCart'));
@@ -419,7 +436,7 @@ class productDetailsController extends Controller
     {
         $iduser = $request->input('iduser');
         $idshoe = $request->input('idshoe');
-        $currdate = date("Y-m-d");
+        $currdate = date("Y-m-d H:i:s");
 
         $alreadyLiked = DB::table('likes')
                       ->where('id_user', '=', $iduser)
@@ -471,6 +488,48 @@ class productDetailsController extends Controller
                       ->count();
 
         return view('likeview', compact('likedBy', 'alreadyLiked'));
+      }
+
+      public function addToWish(Request $request)
+      {
+        $idshoe = $request->input('idshoe');
+        $userid = auth()->user()->id;
+        $currdate = date("Y-m-d H:i:s");
+
+        $priceshoeAvg = DB::table('measurements')
+                  ->select('price')
+                  ->where('id_shoe', '=', $idshoe)
+                  ->min('price');
+
+        DB::table('wishes_lists')->insert(['id_user' => $userid, 'id_shoe' => $idshoe, 'created_at' => $currdate, 'price' => $priceshoeAvg]);
+
+        $alreadyWished = DB::table('wishes_lists')
+                      ->where('id_shoe', '=', $idshoe)
+                      ->where('id_user', '=', $userid)
+                      ->count();
+
+        return view('productinwishview', compact('alreadyWished'));
+      }
+
+      public function removeFromWish(Request $request)
+      {
+        $idshoe = $request->input('idshoe');
+        $userid = auth()->user()->id;
+        $currdate = date("Y-m-d H:i:s");
+
+
+
+        DB::table('wishes_lists')
+            ->where('id_user', '=', $userid)
+            ->where('id_shoe', '=', $idshoe)
+            ->delete();
+
+        $alreadyWished = DB::table('wishes_lists')
+                      ->where('id_shoe', '=', $idshoe)
+                      ->where('id_user', '=', $userid)
+                      ->count();
+
+        return view('productinwishview', compact('alreadyWished'));
       }
 
 }

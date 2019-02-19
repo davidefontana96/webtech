@@ -13,7 +13,7 @@ class BrandsTableSeeder extends Seeder
     public function run()
     {
       $faker = Faker::create();
-      foreach (range(1,50) as $index) {
+      foreach (range(1,20) as $index) {
         DB::table('brands')->insert([
         'name' => $faker->name,
         ]);      }

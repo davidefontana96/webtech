@@ -13,7 +13,7 @@ class LikesTableSeeder extends Seeder
     public function run()
     {
       $faker = Faker::create();
-      foreach (range(1,25) as $index) {
+      foreach (range(1,1500) as $index) {
         DB::table('likes')->insert([
         'created_at'     => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now', $timezone = null),
         'id_shoe'        => $faker->numberBetween($min = 5, $max = 44),

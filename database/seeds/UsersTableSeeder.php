@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
       $faker = Faker::create();
-      foreach (range(1,50) as $index) {
+      foreach (range(1,300) as $index) {
         DB::table('users')->insert([
         'created_at'     => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now', $timezone = null),
         'name'           => $faker->name,

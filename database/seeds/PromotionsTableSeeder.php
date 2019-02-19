@@ -14,7 +14,7 @@ class PromotionsTableSeeder extends Seeder
     public function run()
     {
       $faker = Faker::create();
-      foreach (range(1,50) as $index) {
+      foreach (range(1,20) as $index) {
         DB::table('promotions')->insert([
         'percentage'     => $faker->numberBetween(1,35),
         'starting_at' => $faker->dateTimeBetween($startDate = '-10 years', $endDate = 'now', $timezone = null),

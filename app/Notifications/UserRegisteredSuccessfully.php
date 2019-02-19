@@ -10,7 +10,6 @@ use Illuminate\Notifications\Messages\MailMessage;
 class UserRegisteredSuccessfully extends Notification
 {
     use Queueable;
-
     /**
      * Create a new notification instance.
      *

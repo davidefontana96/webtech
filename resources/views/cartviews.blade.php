@@ -15,10 +15,10 @@
                 </span>
             </span>
             <span class="item-right">
-                <button class="btn btn-xs btn-primary pull-right">x</button>
+              <i class="fas fa-minus-circle" aria-hidden="true"></i>
             </span>
         </span>
       </li>
       @endforeach
       <li class="divider"></li>
-              <li><a class="text-center" href="">View Cart</a></li>
+              <li><a class="text-center" href="/cart">View Cart</a></li>

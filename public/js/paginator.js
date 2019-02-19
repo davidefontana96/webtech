@@ -10,9 +10,10 @@
                 var page= $(this).attr('href').split('page=')[1];
                 console.log(page);
                 $.get(url, function(data){
+                  console.log(data);
                 $('#html').html(data);
                 });
-                
+
 
 
             });

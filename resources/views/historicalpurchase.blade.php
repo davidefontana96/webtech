@@ -37,7 +37,7 @@
 
 	</head>
 	<body>
-		<meta name="csrf-token" content="{{ csrf_token() }}">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<div class="colorlib-loader"></div>
 
@@ -63,9 +63,9 @@
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
 								<li><a href="index">Home</a></li>
-								<li class="has-dropdown">
+								<li class="has-dropdown active">
 									<a href="men">Men</a>
-									<ul class="dropdown active">
+									<ul class="dropdown">
 										<li><a href="product-detail">Product Detail</a></li>
 										<li><a href="cart">Shopping Cart</a></li>
 										<li><a href="checkout">Checkout</a></li>
@@ -74,7 +74,6 @@
 									</ul>
 								</li>
 								<li><a href="women">Women</a></li>
-								<li><a href="blog">Nonricordo</a></li>
 								<li><a href="about">About</a></li>
 								<li><a href="contact">Contact</a></li>
 								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
@@ -111,7 +110,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col">
-						<p class="bread"><span><a href="index">Home</a></span> / <span>Purchase Complete</span></p>
+						<p class="bread"><span><a href="index">Home</a></span> / <span>My Wishlist</span></p>
 					</div>
 				</div>
 			</div>
@@ -121,31 +120,97 @@
 		<div class="colorlib-product">
 			<div class="container">
 				<div class="row row-pb-lg">
-					<div class="col-sm-10 offset-md-1">
+					<div class="col-md-10 offset-md-1">
 						<div class="process-wrap">
 							<div class="process text-center active">
 								<p><span>01</span></p>
 								<h3>Shopping Cart</h3>
 							</div>
-							<div class="process text-center active">
+							<div class="process text-center">
 								<p><span>02</span></p>
 								<h3>Checkout</h3>
 							</div>
-							<div class="process text-center active">
+							<div class="process text-center">
 								<p><span>03</span></p>
 								<h3>Order Complete</h3>
 							</div>
 						</div>
 					</div>
 				</div>
+				<div class="row row-pb-lg">
+					<div class="col-md-12">
+						<div class="product-name d-flex">
+							<div class="one-forth text-left px-4">
+								<span>Product Details</span>
+							</div>
+
+							<div class="one-eight text-center">
+								<span>Date</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>Quantity</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>Price</span>
+							</div>
+							<div class="one-eight text-center px-4">
+								<span>Subtotal</span>
+							</div>
+						</div>
+						<div class="addtowishlist">
+						@include('ordersstoric', [$products])
+					</div>
+					</div>
+				</div>
 				<div class="row">
-					<div class="col-sm-10 offset-sm-1 text-center">
-						<p class="icon-addcart"><span><i class="icon-check"></i></span></p>
-						<h2 class="mb-4">Thank you for purchasing, Your order is complete</h2>
-						<p>
-							<a href="index"class="btn btn-primary btn-outline-primary">Home</a>
-							<a href="shop"class="btn btn-primary btn-outline-primary"><i class="icon-shopping-cart"></i> Continue Shopping</a>
-						</p>
+					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
+						<h2>Shop more</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3 col-lg-3 mb-4 text-center">
+						<div class="product-entry border">
+							<a href="#" class="prod-img">
+								<img src="images/item-1.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+							</a>
+							<div class="desc">
+								<h2><a href="#">Women's Boots Shoes Maca</a></h2>
+								<span class="price">$139.00</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-lg-3 mb-4 text-center">
+						<div class="product-entry border">
+							<a href="#" class="prod-img">
+								<img src="images/item-2.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+							</a>
+							<div class="desc">
+								<h2><a href="#">Women's Minam Meaghan</a></h2>
+								<span class="price">$139.00</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-lg-3 mb-4 text-center">
+						<div class="product-entry border">
+							<a href="#" class="prod-img">
+								<img src="images/item-3.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+							</a>
+							<div class="desc">
+								<h2><a href="#">Men's Taja Commissioner</a></h2>
+								<span class="price">$139.00</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-lg-3 mb-4 text-center">
+						<div class="product-entry border">
+							<a href="#" class="prod-img">
+								<img src="images/item-4.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+							</a>
+							<div class="desc">
+								<h2><a href="#">Russ Men's Sneakers</a></h2>
+								<span class="price">$139.00</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -237,28 +302,32 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
 
 	<!-- jQuery -->
-	 <!-- popper -->
-	 <script src="js/popper.min.js"></script>
-	 <!-- bootstrap 4.1 -->
-	 <script src="js/bootstrap.min.js"></script>
-	 <!-- jQuery easing -->
-	 <script src="js/jquery.easing.1.3.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Flexslider -->
-	<script src="js/jquery.flexslider-min.js"></script>
-	<!-- Owl carousel -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
-	<!-- Date Picker -->
-	<script src="js/bootstrap-datepicker.js"></script>
-	<!-- Stellar Parallax -->
-	<script src="js/jquery.stellar.min.js"></script>
-	<!-- Main -->
-	<script src="js/main.js"></script>
+   <!-- popper -->
+	 <script src="{{asset('js/rmfromwishlist.js')}}"></script>
 
-	<script src="js/searchnav.js"></script>
+	 <script src="{{asset('js/popper.min.js')}}"></script>
+	 <!-- bootstrap 4.1 -->
+	 <script src="{{asset('js/bootstrap.min.js')}}"></script>
+	 <!-- jQuery easing -->
+	 <script src="{{asset('js/jquery.easing.1.3.js')}}"></script>
+ <!-- Waypoints -->
+ <script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
+ <!-- Flexslider -->
+ <script src="{{asset('js/jquery.flexslider-min.js')}}"></script>
+ <!-- Owl carousel -->
+ <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+ <!-- Magnific Popup -->
+ <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+
+ <script src="{{asset('js/magnific-popup-options.js')}}"></script>
+ <!-- Date Picker -->
+ <script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
+ <!-- Stellar Parallax -->
+ <script src="{{asset('js/jquery.stellar.min.js')}}"></script>
+ <!-- Main -->
+ <script src="{{asset('js/main.js')}}"></script>
+
+ <script src="{{asset('js/searchnav.js')}}"></script>
+
 	</body>
 </html>

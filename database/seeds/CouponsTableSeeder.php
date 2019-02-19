@@ -13,7 +13,7 @@ class CouponsTableSeeder extends Seeder
     public function run()
     {
       $faker = Faker::create();
-      foreach (range(1,100) as $index) {
+      foreach (range(1,10) as $index) {
         DB::table('coupons')->insert([
         'created_at'     => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now', $timezone = null),
         'code_coupon'    => $faker->word,

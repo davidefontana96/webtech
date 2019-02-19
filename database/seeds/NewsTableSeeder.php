@@ -14,7 +14,7 @@ class NewsTableSeeder extends Seeder
     public function run()
     {
       $faker = Faker::create();
-      foreach (range(1,50) as $index) {
+      foreach (range(1,100) as $index) {
         DB::table('news')->insert([
         'created_at'     => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now', $timezone = null),
         'title'        => $faker->name,

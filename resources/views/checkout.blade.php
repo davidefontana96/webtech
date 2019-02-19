@@ -4,37 +4,41 @@
 	<title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+	 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
 
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{{asset('css/animate.css')}}">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="{{asset('css/icomoon.css')}}">
+
+	<link rel="stylesheet" href="{{asset('css/cart.css')}}">
+
 	<!-- Ion Icon Fonts-->
-	<link rel="stylesheet" href="css/ionicons.min.css">
+	<link rel="stylesheet" href="{{asset('css/ionicons.min.css')}}">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 
 	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
 
 	<!-- Flexslider  -->
-	<link rel="stylesheet" href="css/flexslider.css">
+	<link rel="stylesheet" href="{{asset('css/flexslider.css')}}">
 
 	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+	<link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
 
 	<!-- Date Picker -->
-	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}">
 	<!-- Flaticons  -->
-	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+	<link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
 
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
-
+	<link rel="stylesheet" href="{{asset('css/style.css')}}">
 	</head>
 	<body>
 		<meta name="csrf-token" content="{{ csrf_token() }}">
@@ -76,8 +80,41 @@
 								<li><a href="women">Women</a></li>
 								<li><a href="about">About</a></li>
 								<li><a href="contact">Contact</a></li>
-								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
-							</ul>
+								@guest
+								<li>
+														<a href="{{ route('login') }}">{{ __('Login') }}</a>
+								</li>
+								@if (Route::has('register'))
+								<li>
+														<a href="{{ route('register') }}">{{ __('Register') }}</a>
+								</li>
+
+								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i>Cart [0]</a></li>
+								@endif
+								@else
+
+								<li class="has-dropdown" >
+												<a id="navbarDropdown" class="{{ Auth::user()->id }}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+														{{ Auth::user()->name }}
+												</a>
+													<ul class="dropdown">
+													<li>
+															<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+													</li>
+													</ul>
+																<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+																		@csrf
+																</form>
+
+									</li>
+
+									<li class="dropdown cart" id="dropdown-cart-js">
+
+									@include('cartviews',[ $items, $itemsInCart])
+
+								</li>
+
+									@endguest							</ul>
 						</div>
 					</div>
 				</div>
@@ -139,7 +176,8 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-8">
-						<form method="post" class="colorlib-form">
+						<form method="post" action="/ordercomplete" class="colorlib-form" id="form10000">
+							@csrf
 							<h2>Billing Details</h2>
 		              	<div class="row">
 			               <div class="col-md-12">
@@ -147,13 +185,19 @@
 			                  	<label for="country">Select Country</label>
 			                     <div class="form-field">
 			                     	<i class="icon icon-arrow-down3"></i>
-			                        <select name="people" id="people" class="form-control">
+			                        <select name="country" id="people" class="form-control" required autofocus>
 				                      	<option value="#">Select country</option>
 				                        <option value="#">Alaska</option>
 				                        <option value="#">China</option>
 				                        <option value="#">Japan</option>
 				                        <option value="#">Korea</option>
 				                        <option value="#">Philippines</option>
+																<option value="#">Italy</option>
+				                        <option value="#">United states</option>
+				                        <option value="#">England</option>
+				                        <option value="#">France</option>
+				                        <option value="#">Germay</option>
+				                        <option value="#">Spain</option>
 			                        </select>
 			                     </div>
 			                  </div>
@@ -162,74 +206,65 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="fname">First Name</label>
-										<input type="text" id="fname" class="form-control" placeholder="Your firstname">
+										<input type="text" id="fname" name="name" class="form-control" placeholder="{{$userName}}" value="{{$userName}}" required autofocus>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="lname">Last Name</label>
-										<input type="text" id="lname" class="form-control" placeholder="Your lastname">
+										<input type="text" id="lname" name="surname" class="form-control" placeholder="{{$userSurname}}"  value="{{$userSurname}}" required autofocus>
 									</div>
 								</div>
 
-								<div class="col-md-12">
-									<div class="form-group">
-										<label for="companyname">Company Name</label>
-			                    	<input type="text" id="companyname" class="form-control" placeholder="Company Name">
-			                  </div>
-			               </div>
 
 			               <div class="col-md-12">
 									<div class="form-group">
 										<label for="fname">Address</label>
-			                    	<input type="text" id="address" class="form-control" placeholder="Enter Your Address">
-			                  </div>
-			                  <div class="form-group">
-			                    	<input type="text" id="address2" class="form-control" placeholder="Second Address">
-			                  </div>
+			                    @if(!(empty($userAddress)))	<input type="text" id="address" name="address" class="form-control" placeholder="{{$userAddress}}" value="{{$userAddress}}" required autofocus>
+													@else <input type="text" id="address" name ="address" class="form-control" placeholder="Insert your address" required autofocus> @endif
+												</div>
 			               </div>
 
 			               <div class="col-md-12">
 									<div class="form-group">
 										<label for="companyname">Town/City</label>
-			                    	<input type="text" id="towncity" class="form-control" placeholder="Town or City">
+			                    	<input type="text" id="towncity" name ="city" class="form-control" placeholder="Town or City" required autofocus>
 			                  </div>
 			               </div>
 
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="stateprovince">State/Province</label>
-										<input type="text" id="fname" class="form-control" placeholder="State Province">
+										<input type="text" id="fname" name ="province" class="form-control" placeholder="State Province" required autofocus>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="lname">Zip/Postal Code</label>
-										<input type="text" id="zippostalcode" class="form-control" placeholder="Zip / Postal">
+										<input type="text" id="zippostalcode" name ="postalcode" class="form-control" placeholder="Zip / Postal" required autofocus>
 									</div>
 								</div>
 
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="email">E-mail Address</label>
-										<input type="text" id="email" class="form-control" placeholder="State Province">
-									</div>
+										<input type="text" id="email" name ="email" class="form-control" placeholder="{{$userMail}}">
+									</div> 
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="Phone">Phone Number</label>
-										<input type="text" id="zippostalcode" class="form-control" placeholder="">
+										<input type="text" id="zippostalcode"  name ="phone" class="form-control" placeholder="Insert your phone number" required autofocus>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="Phone">Do you have a coupon?</label>
+										<input type="text"  name ="coupon" class="form-control" placeholder="Insert your coupon here" >
 									</div>
 								</div>
 
-								<div class="col-md-12">
-									<div class="form-group">
-										<div class="radio">
-										  <label><input type="radio" name="optradio"> Create an Account? </label>
-										  <label><input type="radio" name="optradio"> Ship to different address</label>
-										</div>
-									</div>
-								</div>
+
 		               </div>
 		            </form>
 					</div>
@@ -237,20 +272,7 @@
 					<div class="col-lg-4">
 						<div class="row">
 							<div class="col-md-12">
-								<div class="cart-detail">
-									<h2>Cart Total</h2>
-									<ul>
-										<li>
-											<span>Subtotal</span> <span>$100.00</span>
-											<ul>
-												<li><span>1 x Product Name</span> <span>$99.00</span></li>
-												<li><span>1 x Product Name</span> <span>$78.00</span></li>
-											</ul>
-										</li>
-										<li><span>Shipping</span> <span>$0.00</span></li>
-										<li><span>Order Total</span> <span>$180.00</span></li>
-									</ul>
-								</div>
+								@include('checkoutcartdetails', [$quantityNamePrice, $carttotal])
 						   </div>
 
 						   <div class="w-100"></div>
@@ -261,28 +283,16 @@
 									<div class="form-group">
 										<div class="col-md-12">
 											<div class="radio">
-											   <label><input type="radio" name="optradio"> Direct Bank Tranfer</label>
+											   <label><input type="radio" name="optradio" required="required"> Cash on delivery </label>
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<div class="radio">
-											   <label><input type="radio" name="optradio"> Check Payment</label>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<div class="radio">
-											   <label><input type="radio" name="optradio"> Paypal</label>
-											</div>
-										</div>
-									</div>
+
+
 									<div class="form-group">
 										<div class="col-md-12">
 											<div class="checkbox">
-											   <label><input type="checkbox" value=""> I have read and accept the terms and conditions</label>
+											   <label><input type="checkbox" value="" required="required"> I have read and accept the terms and conditions</label>
 											</div>
 										</div>
 									</div>
@@ -291,7 +301,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12 text-center">
-								<p><a href="#" class="btn btn-primary">Place an order</a></p>
+								<p><button class="btn btn-primary" form="form10000" value="submit">Place an order</button></p>
 							</div>
 						</div>
 					</div>
@@ -386,6 +396,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 	<!-- jQuery -->
 	 <!-- popper -->
+	 <script src="{{asset('js/rmfromcart.js')}}"></script>
+
 	 <script src="js/popper.min.js"></script>
 	 <!-- bootstrap 4.1 -->
 	 <script src="js/bootstrap.min.js"></script>

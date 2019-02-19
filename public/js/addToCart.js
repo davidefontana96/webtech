@@ -21,32 +21,24 @@ $('.btn-addtocart').click(function(){
                   $('#quantity').attr('max', y);
                   $('#quantity').val(0);
 
-                  /*$('.divider').before(
-                    '<li class="object-in-cart" id="'+returned[5]+'">'+
-                         '<span class="item">'+
-                           '<span class="item-left">'+
-                              '<img src="http://lorempixel.com/50/50/" alt="" />'+
-                               '<span class="item-info">'+
-                                   '<span>'+returned[4]+'</span>'+
-                                   '<span>'+returned[3] + '$' +'</span>'+
-                               '</span>'+
-                           '</span>'+
-                           '<span class="item-right">'+
-                               '<button class="btn btn-xs btn-primary pull-right">x</button>'+
-                           '</span>'+
-                       '</span>'+
-                     '</li>'
-                   );
-                   */
+                  Swal.fire({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Your product has been added in Cart!',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
                 });
 
 
      } else {
 
-       /* $('.js-size').append
-       ('<div class="alert alert-warning">'+
-          '<strong>Warning!</strong> This alert box could indicate a warning that might need attention.'+
-      '</div>')*/
+       Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: 'Check the measurements!'
+      })
      }
 });
 

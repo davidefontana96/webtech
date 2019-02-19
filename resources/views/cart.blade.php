@@ -85,7 +85,6 @@
 												</a>
 													<ul class="dropdown">
 													<li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></li>
-													<li class="active"><a href="cart"><i class="icon-shopping-cart"></i>Cart[0]</a></li>
 													<li><a href="../profile"><i class="profile"></i>profile</a></li>
 
 													</ul>
@@ -155,107 +154,34 @@
 						</div>
 					</div>
 				</div>
-				<div class="row row-pb-lg">
-					<div class="col-md-12">
-						<div class="product-name d-flex">
-							<div class="one-forth text-left px-4">
-								<span>Product Details</span>
-							</div>
-							<div class="one-eight text-center">
-								<span>Price</span>
-							</div>
-							<div class="one-eight text-center">
-								<span>Quantity</span>
-							</div>
-							<div class="one-eight text-center">
-								<span>Total</span>
-							</div>
-							<div class="one-eight text-center px-4">
-								<span>Remove</span>
-							</div>
-						</div>
-						<div class="removefromcart">
-						@include('cartviewpage', [$elements])
-					</div>
+				<div class="removefromcart">
 
-					</div>
-				</div>
-				<div class="row row-pb-lg">
-					<div class="col-md-12">
-						<div class="total-wrap">
-							<div class="row">
-								<div class="col-sm-8">
-									<form action="#">
-										<div class="row form-group">
-											<div class="col-sm-9">
-												<form>
-												<input id="mycoupon" type="text" name="quantity" class="form-control" placeholder="Your Coupon Number..." required="required">
-											</form>
-											</div>
-											<div class="col-sm-3">
-												<p><a id = "applyCoupon" class="btn btn-primary ">Apply Coupon </a></p>
-											</div>
-										</div>
-									</form>
-								</div>
-								<div class="col-sm-4 text-center final-prices">
-								@include('countview', [$total, $discount, $newtotal])
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 
+						@include('cartviewpage', [$elements, $total, $discount, $newtotal])
+
+
+			</div>
+			
 				<div class="row">
 					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
-						<h2>Related Products</h2>
+						<h2>You can also like</h2>
 					</div>
 				</div>
 				<div class="row">
+					@foreach($relatedProduct as $relates)
 					<div class="col-md-3 col-lg-3 mb-4 text-center">
 						<div class="product-entry border">
-							<a href="#" class="prod-img">
-								<img src="images/item-1.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+							<a href="/shoes/{{$relates->id}}/product-detail" class="prod-img">
+								<img src="{{$relates->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
 							</a>
 							<div class="desc">
-								<h2><a href="#">Women's Boots Shoes Maca</a></h2>
-								<span class="price">$139.00</span>
+								<h2><a href="/shoes/{{$relates->id}}/product-detail">{{$relates->name}}</a></h2>
+								<span class="price">Price starting from</span>
+								<span class="price">{{$relates->price}} $</span>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 col-lg-3 mb-4 text-center">
-						<div class="product-entry border">
-							<a href="#" class="prod-img">
-								<img src="images/item-2.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-							</a>
-							<div class="desc">
-								<h2><a href="#">Women's Minam Meaghan</a></h2>
-								<span class="price">$139.00</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-lg-3 mb-4 text-center">
-						<div class="product-entry border">
-							<a href="#" class="prod-img">
-								<img src="images/item-3.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-							</a>
-							<div class="desc">
-								<h2><a href="#">Men's Taja Commissioner</a></h2>
-								<span class="price">$139.00</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-lg-3 mb-4 text-center">
-						<div class="product-entry border">
-							<a href="#" class="prod-img">
-								<img src="images/item-4.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-							</a>
-							<div class="desc">
-								<h2><a href="#">Russ Men's Sneakers</a></h2>
-								<span class="price">$139.00</span>
-							</div>
-						</div>
-					</div>
+					 @endforeach
 				</div>
 			</div>
 		</div>
@@ -351,6 +277,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="js/applyCoupon.js"></script>
 
 	<script src="js/deletefrompagecart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
    <!-- popper -->
    <script src="js/popper.min.js"></script>
    <!-- bootstrap 4.1 -->

@@ -4,36 +4,52 @@
 	<title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+	 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	 	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
 
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="{{asset('css/animate.css')}}">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="{{asset('css/icomoon.css')}}">
+
+	<link rel="stylesheet" href="{{asset('css/cart.css')}}">
+
 	<!-- Ion Icon Fonts-->
-	<link rel="stylesheet" href="css/ionicons.min.css">
+	<link rel="stylesheet" href="{{asset('css/ionicons.min.css')}}">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 
 	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
 
 	<!-- Flexslider  -->
-	<link rel="stylesheet" href="css/flexslider.css">
+	<link rel="stylesheet" href="{{asset('css/flexslider.css')}}">
 
 	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+	<link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
 
 	<!-- Date Picker -->
-	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}">
 	<!-- Flaticons  -->
-	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+	<link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
 
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="{{asset('css/style.css')}}">
+
+	<style>
+	.fa {
+	  font-size: 50px;
+	  cursor: pointer;
+	  user-select: none;
+	}
+
+	.fa:hover {
+	  color: red;
+	}
+	</style>
 
 	</head>
 	<body>
@@ -64,19 +80,49 @@
 							<ul>
 								<li><a href="index">Home</a></li>
 								<li class="has-dropdown active">
-									<a href="men">Men</a>
-									<ul class="dropdown">
-										<li><a href="product-detail">Product Detail</a></li>
-										<li><a href="cart">Shopping Cart</a></li>
-										<li><a href="checkout">Checkout</a></li>
-										<li><a href="order-complete">Order Complete</a></li>
-										<li><a href="add-to-wishlist">Wishlist</a></li>
-									</ul>
+									<a href="shoes/men">Men</a>
+
 								</li>
-								<li><a href="women">Women</a></li>
+								<li><a href="shoes/women">Women</a></li>
 								<li><a href="about">About</a></li>
 								<li><a href="contact">Contact</a></li>
-								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+								<li><a href="/news">News</a></li>
+
+								@guest
+								<li>
+														<a href="{{ route('login') }}">{{ __('Login') }}</a>
+								</li>
+								@if (Route::has('register'))
+								<li>
+														<a href="{{ route('register') }}">{{ __('Register') }}</a>
+								</li>
+
+								<li class="cart"><a href="cart"><i class="icon-shopping-cart"></i>Cart [0]</a></li>
+							  @endif
+								@else
+
+								<li class="has-dropdown" >
+												<a id="navbarDropdown" class="{{ Auth::user()->id }}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+														{{ Auth::user()->name }}
+											  </a>
+													<ul class="dropdown">
+													<li>
+															<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+													</li>
+													</ul>
+																<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+																		@csrf
+																</form>
+
+									</li>
+
+									<li class="dropdown cart" id="dropdown-cart-js">
+
+									@include('cartviews',[ $items, $itemsInCart])
+
+								</li>
+
+									@endguest
 							</ul>
 						</div>
 					</div>
@@ -119,184 +165,52 @@
 
 		<div class="colorlib-product">
 			<div class="container">
-				<div class="row row-pb-lg">
-					<div class="col-md-10 offset-md-1">
-						<div class="process-wrap">
-							<div class="process text-center active">
-								<p><span>01</span></p>
-								<h3>Shopping Cart</h3>
-							</div>
-							<div class="process text-center">
-								<p><span>02</span></p>
-								<h3>Checkout</h3>
-							</div>
-							<div class="process text-center">
-								<p><span>03</span></p>
-								<h3>Order Complete</h3>
-							</div>
-						</div>
-					</div>
-				</div>
+
 				<div class="row row-pb-lg">
 					<div class="col-md-12">
 						<div class="product-name d-flex">
 							<div class="one-forth text-left px-4">
 								<span>Product Details</span>
 							</div>
+
 							<div class="one-eight text-center">
-								<span>Price</span>
+								<span></span>
 							</div>
 							<div class="one-eight text-center">
-								<span>Quantity</span>
+								<span></span>
 							</div>
 							<div class="one-eight text-center">
-								<span>Total</span>
+								<span>Price starting from</span>
 							</div>
 							<div class="one-eight text-center px-4">
 								<span>Remove</span>
 							</div>
 						</div>
-						<div class="product-cart d-flex">
-							<div class="one-forth">
-								<div class="product-img" style="background-image: url(images/item-6.jpg);">
-								</div>
-								<div class="display-tc">
-									<h3>Product Name</h3>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$68.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$120.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<a href="#" class="closed"></a>
-								</div>
-							</div>
-						</div>
-						<div class="product-cart d-flex">
-							<div class="one-forth">
-								<div class="product-img" style="background-image: url(images/item-7.jpg);">
-								</div>
-								<div class="display-tc">
-									<h3>Product Name</h3>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$68.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<form action="#">
-										<input type="text" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
-									</form>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$120.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<a href="#" class="closed"></a>
-								</div>
-							</div>
-						</div>
-						<div class="product-cart d-flex">
-							<div class="one-forth">
-								<div class="product-img" style="background-image: url(images/item-8.jpg);">
-								</div>
-								<div class="display-tc">
-									<h3>Product Name</h3>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$68.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$120.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<a href="#" class="closed"></a>
-								</div>
-							</div>
-						</div>
+						<div class="addtowishlist">
+						@include('wishview', [$products])
+					</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
-						<h2>Shop more</h2>
+						<h2>You can also like</h2>
 					</div>
 				</div>
 				<div class="row">
+					@foreach($relatedProduct as $relates)
 					<div class="col-md-3 col-lg-3 mb-4 text-center">
 						<div class="product-entry border">
-							<a href="#" class="prod-img">
-								<img src="images/item-1.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+							<a href="/shoes/{{$relates->id}}/product-detail" class="prod-img">
+								<img src="{{$relates->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
 							</a>
 							<div class="desc">
-								<h2><a href="#">Women's Boots Shoes Maca</a></h2>
-								<span class="price">$139.00</span>
+								<h2><a href="/shoes/{{$relates->id}}/product-detail">{{$relates->name}}</a></h2>
+								<span class="price">Price starting from</span>
+								<span class="price">{{$relates->price}} $</span>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 col-lg-3 mb-4 text-center">
-						<div class="product-entry border">
-							<a href="#" class="prod-img">
-								<img src="images/item-2.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-							</a>
-							<div class="desc">
-								<h2><a href="#">Women's Minam Meaghan</a></h2>
-								<span class="price">$139.00</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-lg-3 mb-4 text-center">
-						<div class="product-entry border">
-							<a href="#" class="prod-img">
-								<img src="images/item-3.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-							</a>
-							<div class="desc">
-								<h2><a href="#">Men's Taja Commissioner</a></h2>
-								<span class="price">$139.00</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-lg-3 mb-4 text-center">
-						<div class="product-entry border">
-							<a href="#" class="prod-img">
-								<img src="images/item-4.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-							</a>
-							<div class="desc">
-								<h2><a href="#">Russ Men's Sneakers</a></h2>
-								<span class="price">$139.00</span>
-							</div>
-						</div>
-					</div>
+					 @endforeach
 				</div>
 			</div>
 		</div>
@@ -388,28 +302,37 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 	<!-- jQuery -->
    <!-- popper -->
-   <script src="js/popper.min.js"></script>
-   <!-- bootstrap 4.1 -->
-   <script src="js/bootstrap.min.js"></script>
-   <!-- jQuery easing -->
-   <script src="js/jquery.easing.1.3.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Flexslider -->
-	<script src="js/jquery.flexslider-min.js"></script>
-	<!-- Owl carousel -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
-	<!-- Date Picker -->
-	<script src="js/bootstrap-datepicker.js"></script>
-	<!-- Stellar Parallax -->
-	<script src="js/jquery.stellar.min.js"></script>
-	<!-- Main -->
-	<script src="js/main.js"></script>
+	 <script src="{{asset('js/rmfromwishlist.js')}}"></script>
 
-	<script src="js/searchnav.js"></script>
+	 <script src="{{asset('js/rmfromcart.js')}}"></script>
+
+	 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	 
+	 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+	 <script src="{{asset('js/popper.min.js')}}"></script>
+	 <!-- bootstrap 4.1 -->
+	 <script src="{{asset('js/bootstrap.min.js')}}"></script>
+	 <!-- jQuery easing -->
+	 <script src="{{asset('js/jquery.easing.1.3.js')}}"></script>
+ <!-- Waypoints -->
+ <script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
+ <!-- Flexslider -->
+ <script src="{{asset('js/jquery.flexslider-min.js')}}"></script>
+ <!-- Owl carousel -->
+ <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+ <!-- Magnific Popup -->
+ <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+
+ <script src="{{asset('js/magnific-popup-options.js')}}"></script>
+ <!-- Date Picker -->
+ <script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
+ <!-- Stellar Parallax -->
+ <script src="{{asset('js/jquery.stellar.min.js')}}"></script>
+ <!-- Main -->
+ <script src="{{asset('js/main.js')}}"></script>
+
+ <script src="{{asset('js/searchnav.js')}}"></script>
 
 	</body>
 </html>

@@ -47,7 +47,6 @@
             <i class="icon-star-empty"></i>
             @endif
           </span>
-          <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
         </p>
         <p>{{$review->text}}</p>
       </div>
