@@ -42,7 +42,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapShoesRoutes();
 
         $this->mapNewsRoutes();
-        //
+
+        $this->mapUsersRoutes();
     }
 
     /**
@@ -87,6 +88,13 @@ class RouteServiceProvider extends ServiceProvider
            ->middleware('web')
            ->namespace($this->namespace)
            ->group(base_path('routes/news.php'));
+    }
+
+    protected function mapUsersRoutes() {
+      Route::prefix('user')
+           ->middleware('web')
+           ->namespace($this->namespace)
+           ->group(base_path('routes/user.php'));
     }
 
 

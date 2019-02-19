@@ -76,16 +76,14 @@
 					<div class="row">
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
-								<li><a href="index">Home</a></li>
+								<li><a href="../../index">Home</a></li>
 								<li class="has-dropdown active">
-									<a href="shoes/men">Men</a>
+									<a href="../men">Men</a>
 
 								</li>
-								<li><a href="shoes/women">Women</a></li>
-								<li><a href="about">About</a></li>
-								<li><a href="contact">Contact</a></li>
-								<li><a href="news">News</a></li>
-
+								<li><a href="../women">Women</a></li>
+								<li><a href="../../about">About</a></li>
+								<li><a href="../../contact">Contact</a></li>
 								@guest
 								<li>
 														<a href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -165,17 +163,29 @@
 			<div class="container">
 				<div class="row row-pb-lg product-detail-wrap">
 					<div class="col-sm-8">
+						@if(count($images)>1)
 						<div class="owl-carousel">
 							@foreach($images as $image)
 							<div class="item">
 								<div class="product-entry border">
 									<a href="#" class="prod-img">
-										<img src="https://s7d2.scene7.com/is/image/VansBrand/190123-drillchorecoat-2?$SCALE-ORIGINAL$" class="img-fluid" alt="Free html5 bootstrap 4 template">
+										<img src="/images/{{$image->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
 									</a>
 								</div>
 							</div>
 							@endforeach
 						</div>
+					@else
+						@foreach($images as $image)
+						<div class="item">
+							<div class="product-entry border">
+								<a href="#" class="prod-img">
+									<img src="/images/{{$image->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
+								</a>
+							</div>
+						</div>
+						@endforeach
+					@endif
 					</div>
 					<div class="col-sm-4">
 						<div class="product-desc">
@@ -377,6 +387,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+	<!-- jQuery -->
+	<script src="{{asset('js/searchnav.js')}}"></script>
+
+	<script src="{{asset('js/jquery.min.js')}}"></script>
+
 
 	<script src="{{asset('js/selectSize.js')}}"></script>
 
@@ -423,7 +441,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<!-- Main -->
 	<script src="{{asset('js/main.js')}}"></script>
 
-	<script src="{{asset('js/searchnav.js')}}"></script>
 
 
 

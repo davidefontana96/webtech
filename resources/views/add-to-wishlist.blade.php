@@ -299,7 +299,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+	<!-- jQuery -->
+	<script src="{{asset('js/searchnav.js')}}"></script>
 
+	<script src="{{asset('js/jquery.min.js')}}"></script>
 	<!-- jQuery -->
    <!-- popper -->
 	 <script src="{{asset('js/rmfromwishlist.js')}}"></script>
@@ -307,7 +310,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	 <script src="{{asset('js/rmfromcart.js')}}"></script>
 
 	 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-	 
+
 	 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
 	 <script src="{{asset('js/popper.min.js')}}"></script>

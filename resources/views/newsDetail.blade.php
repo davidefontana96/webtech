@@ -161,7 +161,7 @@
 							@foreach($news as $new)
 
 							<h2>{{$new->title}}</h2>
-							<p>{{$new->text}}</p>
+							<p>{{$new->texts}}</p>
 								<h5>pubblicata da: {{$new->name}}</h5>
 						@endforeach
 						</div>
@@ -302,11 +302,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 	</div>
-
-	<!-- jQuery -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+	<!-- jQuery -->
+	<script src="{{asset('js/searchnav.js')}}"></script>
+
+	<script src="{{asset('js/jquery.min.js')}}"></script>
 
    <script src="{{asset('js/popper.min.js')}}"></script>
    <!-- bootstrap 4.1 -->
@@ -328,7 +330,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="{{asset('js/jquery.stellar.min.js')}}"></script>
 	<!-- Main -->
 	<script src="{{asset('js/main.js')}}"></script>
-	<script src="{{asset('js/searchnav.js')}}"></script>   <!-- popper -->
 
 	</body>
 </html>

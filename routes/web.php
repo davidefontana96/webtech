@@ -38,7 +38,7 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/history', 'pastOrdersController@initializePage'); 
+Route::get('/history', 'pastOrdersController@initializePage');
 
 Route::get('/index2', 'IndexController@initializePage2');
 
@@ -72,6 +72,7 @@ Route::get('/profile', '\App\Http\Controllers\Auth\LoginController@profile');
 $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
 Route::get('/prova', 'IndexController@initializePage');
+
 
 
 Route::group(['prefix' => 'admin'], function () {

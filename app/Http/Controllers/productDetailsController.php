@@ -20,8 +20,7 @@ class productDetailsController extends Controller
       ->where('shoes.id', '=', $id)
       ->get();
 
-    $images = DB::table('shoes')
-      ->join('images', 'shoes.id', '=', 'images.id_shoe')
+    $images = DB::table('images')
       ->select('images.path')
       ->where('images.id_shoe', '=', $id )
       ->get();
