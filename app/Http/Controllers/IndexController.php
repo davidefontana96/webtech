@@ -40,7 +40,7 @@ class IndexController extends Controller
            ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id', 'measurements.price')
            ->groupby('shoes.id', 'images.id_shoe')
            ->groupby('shoes.id', 'measurements.id_shoe')
-           ->paginate(6);
+           ->paginate(12);
            if($request->ajax()){
 
             return view('shoesviews',compact('shoes'))->render();
@@ -83,7 +83,7 @@ class IndexController extends Controller
               ->groupby('shoes.id', 'images.id_shoe')
               ->groupby('shoes.id', 'measurements.id_shoe')
 
-              ->paginate(6);
+              ->paginate(12);
 
 
 

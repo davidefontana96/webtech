@@ -94,7 +94,7 @@
 
 
 
-                  @include('profile')
+                  @include('Profile')
 
 
              </div><!--/tab-pane-->

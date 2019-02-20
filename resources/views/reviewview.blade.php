@@ -175,7 +175,7 @@
     </div>
   </div>
   @if($reviews instanceof \Illuminate\Pagination\LengthAwarePaginator )
-  <div class="w-100">
+  <div class="w-100" id="html">
             {{$reviews->links()}}
   </div>
   @endif

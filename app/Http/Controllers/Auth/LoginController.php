@@ -27,7 +27,6 @@ class LoginController extends Controller
      *
      * @var string
      */
-     protected $redirectPath = '/';
 
 
     /**
@@ -44,4 +43,13 @@ class LoginController extends Controller
       Auth::logout();
       return redirect('/index');
 }
+
+            protected function authenticated(Request $request, $user)
+            {
+
+
+             return redirect('/index');
+            }
+
+
 }
