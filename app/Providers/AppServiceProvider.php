@@ -18,7 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      view()->composer('*', function ($view)
+      view()->composer(
+        ['about', 'add-to-wishlist', 'cart', 'checkout', 'contact', 'historicalpurchase', 'index', 'index2', 'men', 'newsDetail', 'newsIndex', 'order-complete', 'product-detail', 'userProfile', 'women'],
+       function ($view)
           {
             $items = DB::table('carts')
                     ->join('measurements', 'measurements.id', '=', 'carts.id_measure')

@@ -24,7 +24,7 @@ $(document).ready(function(){
     var full = 1;
     var testo = $('#message').val();
     var iduser = $('#userid').attr('title');
-    var idshoe = $('.idshoe').attr('id');  
+    var idshoe = $('.idshoe').attr('id');
 
 
     $('#first').siblings().each( function () {
