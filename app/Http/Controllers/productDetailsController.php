@@ -88,23 +88,23 @@ class productDetailsController extends Controller
         }
 
         if(($reviews_counter!=0) && ($fivestars!=0)){
-            $fivepercentage = ($fivestars/$reviews_counter)*100;
+            $fivepercentage = number_format(($fivestars/$reviews_counter)*100, 2);
           } else { $fivepercentage = 0;}
 
         if(($reviews_counter!=0) && ($fourstars!=0)){
-            $fourpercentage = ($fourstars/$reviews_counter)*100;
+            $fourpercentage = number_format(($fourstars/$reviews_counter)*100, 2);
           } else { $fourpercentage = 0;}
 
         if(($reviews_counter!=0) && ($threestars!=0)){
-            $threepercentage = ($threestars/$reviews_counter)*100;
+            $threepercentage = number_format(($threestars/$reviews_counter)*100, 2);
             } else { $threepercentage = 0;}
 
         if(($reviews_counter!=0) && ($twostars!=0)){
-            $twopercentage = ($twostars/$reviews_counter)*100;
+            $twopercentage = number_format(($twostars/$reviews_counter)*100, 2);
             } else { $twopercentage = 0;}
 
         if(($reviews_counter!=0) && ($onestars!=0)){
-            $onepercentage = ($onestars/$reviews_counter)*100;
+            $onepercentage = number_format(($onestars/$reviews_counter)*100, 2);
             } else { $onepercentage = 0;}
         $userid = null;
         $user = auth()->user();

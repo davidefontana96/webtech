@@ -213,11 +213,11 @@
 						</div>
 					</div>
 					<div class="col-lg-9 col-xl-9">
-						<div class="row row-pb-md" id="html">
+						<div class="row row-pb-md" id="html"> 
               @include('shoesviews')
         </div>
 
-				
+
 
 
 
