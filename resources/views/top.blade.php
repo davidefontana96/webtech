@@ -45,7 +45,11 @@
                   @csrf
                  </form>
                </li>
-               <li class="cart"><a href="/cart"><i class="icon-shopping-cart"></i>Cart [0]</a></li>
+               <li class="dropdown cart" id="dropdown-cart-js">
+
+               @include('cartviews',[ $items, $itemsInCart])
+
+             </li>
 
               @endguest
 

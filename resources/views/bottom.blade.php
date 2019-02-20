@@ -84,6 +84,28 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="{{asset('js/jquery.min.js')}}"></script>
 
 
+    	<script src="{{asset('js/selectSize.js')}}"></script>
+
+    	<script src="{{asset('js/addToCart.js')}}"></script>
+
+    		<script src="{{asset('js/starsInsertReview.js')}}"></script>
+
+    		<script src="{{asset('js/plusminus.js')}}"></script>
+
+    		<script src="{{asset('js/review.js')}}"></script>
+
+    		<script src="{{asset('js/rmfromcart.js')}}"></script>
+
+    		<script src="{{asset('js/like.js')}}"></script>
+
+    		<script src="{{asset('js/paginatorreview.js')}}"></script>
+
+    		<script src="{{asset('js/addtowish.js')}}"></script>
+
+    		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+    		<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
       <!-- jQuery -->
        <!-- popper -->
        <script src="{{asset('js/popper.min.js')}}"></script>
@@ -112,3 +134,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       <script src="{{asset('js/formValidation.js')}}"></script>
 
       <script src="{{asset('js/activeNavigation.js')}}"></script>
+
+      <script src="{{asset('js/rmfromwishlist.js')}}"></script>
+
+
+
+
+   	 <!-- bootstrap 4.1 -->
+   	 <!-- jQuery easing -->
+    <!-- Waypoints -->
+    <!-- Flexslider -->
+    <!-- Owl carousel -->
+    <!-- Magnific Popup -->
+
+    <!-- Date Picker -->
+    <!-- Stellar Parallax -->
+    <!-- Main -->
