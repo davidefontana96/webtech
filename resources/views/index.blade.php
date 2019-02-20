@@ -1,46 +1,46 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-	<title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
-
+  <head>
+  <title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	 <meta name="_token" content="{{ csrf_token() }}">
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
 
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Ion Icon Fonts-->
-	<link rel="stylesheet" href="css/ionicons.min.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="{{asset('css/animate.css')}}">
+  <!-- Icomoon Icon Fonts-->
+  <link rel="stylesheet" href="{{asset('css/icomoon.css')}}">
 
-<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
+  <link rel="stylesheet" href="{{asset('css/cart.css')}}">
 
-	<!-- Flexslider  -->
-	<link rel="stylesheet" href="css/flexslider.css">
+  <!-- Ion Icon Fonts-->
+  <link rel="stylesheet" href="{{asset('css/ionicons.min.css')}}">
+  <!-- Bootstrap  -->
+  <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 
-	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+  <!-- Magnific Popup -->
+  <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
 
-	<!-- Date Picker -->
-	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
-	<!-- Flaticons  -->
-	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+  <!-- Flexslider  -->
+  <link rel="stylesheet" href="{{asset('css/flexslider.css')}}">
 
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+  <!-- Owl Carousel -->
+  <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
 
-	<link rel="stylesheet" href="css/style.css">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}">
+  <!-- Flaticons  -->
+  <link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
 
+  <!-- Theme style  -->
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
-	</head>
-	<body>
+  </head>
+  <body>
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<div class="colorlib-loader"></div>
