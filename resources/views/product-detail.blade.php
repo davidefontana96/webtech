@@ -38,17 +38,6 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="{{asset('css/style.css')}}">
-	<style>
-	.fa {
-	  font-size: 50px;
-	  cursor: pointer;
-	  user-select: none;
-	}
-
-	.fa:hover {
-	  color: red;
-	}
-	</style>
 	</head>
 	<body>
 		<meta name="csrf-token" content="{{ csrf_token() }}">
