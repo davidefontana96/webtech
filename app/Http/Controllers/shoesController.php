@@ -15,7 +15,7 @@ use View;
 class shoesController extends Controller
 {
 
-    public function womenShoes(){
+    public function womenShoes(Request $request){
       $styles = DB::select('select name, id from styles');
       $brands= DB::select('select id,name from brands');
      $categories = DB::select('select * from categories');
@@ -31,12 +31,14 @@ class shoesController extends Controller
      //  return view('womenExtends', ['results' => $results]);
      // return view('women');
      //  $styles = Style::all();
+     if($request->ajax())             return view('shoesviews',compact('shoes'))->render();
+
 
      return view('women', compact('categories', 'styles', 'brands', 'shoes' ));
     // return View::make('women', compact('styles', 'shoes' ));
     }
 
-    public function menShoes(){
+    public function menShoes(Request $request){
      $styles = DB::select('select name, id from styles');
      $brands= DB::select('select id,name from brands');
     $categories = DB::select('select * from categories');
@@ -48,7 +50,11 @@ class shoesController extends Controller
          ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id', 'measurements.price')
         ->where('shoes.sex', '=', 'M' )
         ->paginate(12);
+        if($request->ajax()){
 
+         return view('shoesviews',compact('shoes'))->render();
+
+        }
     //  return view('womenExtends', ['results' => $results]);
     // return view('women');
     //  $styles = Style::all();
@@ -108,7 +114,8 @@ class shoesController extends Controller
                 })
                ->where(function($query) use ($categories)
                {
-                 if(!is_null($categories))  $query->whereIn('shoes.id_category',$categories);
+
+               if(!is_null($categories))  $query->whereIn('shoes.id_category',$categories);
 
               })
                ->where(function($query) use($styles)
@@ -177,5 +184,8 @@ class shoesController extends Controller
         // return View::make('shoesviews', compact('shoes'))->render();
         return view('shoesviews', compact('shoes'));
     }
+
+
+
 
 }

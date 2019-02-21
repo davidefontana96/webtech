@@ -11,11 +11,10 @@ jQuery(document).ready(function($){
            select: function(event,ui){
              event.preventDefault();
              if(ui.item.type == 'shoes'){  window.location.href = window.location.origin + '/shoes/' + ui.item.id + '/product-detail';
-              $('#cazzetti').val(window.location.origin + '/shoes/' + ui.item.id + '/product-detail')
            }
              else {
                window.location.href = window.location.origin + '/news/' + 'detail/' + ui.item.id;
-               $('#cazzetti').val('cazzi');
+
              }
                    }
 
@@ -32,7 +31,5 @@ jQuery(document).ready(function($){
 
 
 
-    $('#button').click(function(){
-      window.location.href = $('#cazzetti').val();
-    });
+    
   });

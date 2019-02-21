@@ -148,7 +148,7 @@
 					</div>
 
 			</div>
-		
+
 
 		<div class="colorlib-partner">
 			<div class="container">
@@ -184,13 +184,9 @@
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 	</div>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
-	<!-- jQuery -->
-	<script src="{{asset('js/searchnav.js')}}"></script>
-
-	<script src="{{asset('js/jquery.min.js')}}"></script>
 	   <!-- popper -->
 	   <script src="{{asset('js/popper.min.js')}}"></script>
 	   <!-- bootstrap 4.1 -->
@@ -213,13 +209,13 @@
 		<!-- Main -->
 		<script src="{{asset('js/main.js')}}"></script>
 
-		<script src="{{asset('js/paginator.js')}}"></script>
-
 		<!-- Gestione ajax per brands, style e categories-->
 		<script src="{{asset('js/clickbuttonshoes.js')}}"></script>
+		<script src="{{asset('js/searchnav.js')}}"></script>
 
-		<script src="{{asset('js/activeNavigation.js')}}"></script>
+    <script src="{{asset('js/paginator.js')}}"></script>
 
+    <script src="{{asset('js/activeNavigation.js')}}"></script>
 
 		</body>
 	</html>

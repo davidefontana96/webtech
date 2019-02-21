@@ -212,6 +212,9 @@
 		<!-- Main -->
 		<script src="{{asset('js/main.js')}}"></script>
 
+    <script src="{{asset('js/paginator.js')}}"></script>
+
+
 		<script src="{{asset('js/clickbuttonshoes.js')}}"></script>
 
 		<script src="{{asset('js/activeNavigation.js')}}"></script>

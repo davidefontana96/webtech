@@ -24,7 +24,7 @@ class cartController extends Controller
                 ->join('shoes', 'shoes.id', '=', 'measurements.id_shoe')
                 ->join('images', 'images.id_shoe', '=', 'shoes.id')
                 ->select('shoes.name', 'carts.price', 'carts.quantity', 'carts.subtotal', 'carts.id', 'images.path')
-                ->groupby('shoes.id', 'images.id_shoe')
+                ->groupby('measurements.id', 'images.id_shoe')
                 ->where('carts.id_user', '=', $user->id)
                 ->where('purchased', '=', 0)
                 ->get();
