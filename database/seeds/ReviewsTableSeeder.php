@@ -18,8 +18,8 @@ class ReviewsTableSeeder extends Seeder
          DB::table('reviews')->insert([
          'created_at'     => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now', $timezone = null),
          'text'           => $faker->text($maxNbChars = 200),
-         'id_shoe'        => $faker->numberBetween($min = 1, $max = 100),
-         'id_user'        => $faker->numberBetween($min = 1, $max = 300),
+         'id_shoe'        => $faker->numberBetween($min = 1, $max = 30),
+         'id_user'        => $faker->numberBetween($min = 1, $max = 30),
          'star'           => $faker->numberBetween($min = 1, $max = 5),
          ]);
        }

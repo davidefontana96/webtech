@@ -61,7 +61,7 @@
 					   					<h2 class="head-2">Shoes</h2>
 					   					<h2 class="head-3">Collection</h2>
 					   					<p class="category"><span>New trending shoes</span></p>
-					   					<p><a href="#" class="btn btn-primary">Shop Collection</a></p>
+					   					<p><a href="/index2" class="btn btn-primary">Shop Collection</a></p>
 				   					</div>
 				   				</div>
 				   			</div>
@@ -120,11 +120,29 @@
 
 		<div class="colorlib-product">
 			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
-						<h2>Best Sellers</h2>
-					</div>
-				</div>
+        <div class="colorlib-product">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-6 text-center">
+                <div class="featured">
+                  <a href="/shoes/men" class="featured-img" style="background-image: url(images/men.jpg);"></a>
+                  <div class="desc">
+                    <h2><a href="/shoes/men">Shop Men's Collection</a></h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 text-center">
+                <div class="featured">
+                  <a href="/shoes/women" class="featured-img" style="background-image: url(images/women.jpg);"></a>
+                  <div class="desc">
+                    <h2><a href="/shoes/women">Shop Women's Collection</a></h2>
+                  </div>
+                </div>
+
+    </div>
+            </div>
+          </div>
+        </div>
 				<div class="row row-pb-md">
 					@if(!empty($shoes))
 						@foreach($shoes as $shoe)

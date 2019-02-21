@@ -19,7 +19,7 @@ class NewsTableSeeder extends Seeder
         'created_at'     => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now', $timezone = null),
         'title'        => $faker->name,
         'text'          => $faker->text($maxNbChars = 200),
-        'id_user'       => $faker->numberBetween($min = 1, $max = 11),
+        'id_user'       => $faker->numberBetween($min = 1, $max = 30),
         ]);
       }
     }

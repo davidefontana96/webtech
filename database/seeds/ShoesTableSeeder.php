@@ -19,11 +19,11 @@ class ShoesTableSeeder extends Seeder
         'name'           => $faker->word,
         'details'        => $faker->text($maxNbChars = 200),
         'sex'            => 'F',
-        'id_category'    => $faker->numberBetween($min = 10, $max = 20),
-        'id_style'       => $faker->numberBetween($min = 10, $max = 20),
-        'id_brand'       => $faker->numberBetween($min = 10, $max = 20),
-        'id_promo'       => $faker->numberBetween($min = 10, $max = 20),
-        'id_news'       => $faker->numberBetween($min = 10, $max = 100),
+        'id_category'    => $faker->numberBetween($min = 1, $max = 10),
+        'id_style'       => $faker->numberBetween($min = 1, $max = 10),
+        'id_brand'       => $faker->numberBetween($min = 1, $max = 10),
+        'id_promo'       => $faker->numberBetween($min = 1, $max = 10),
+        'id_news'       => $faker->numberBetween($min = 1, $max = 100),
         ]);
       }
     }
