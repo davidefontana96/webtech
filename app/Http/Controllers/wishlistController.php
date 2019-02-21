@@ -14,8 +14,10 @@ class wishlistController extends Controller
 
       $products = DB::table('wishes_lists')
                 ->join('shoes', 'shoes.id', '=', 'id_shoe')
-                ->select('wishes_lists.price', 'shoes.name', 'wishes_lists.id')
+                ->join('images', 'images.id_shoe', '=', 'shoes.id')
+                ->select('wishes_lists.price', 'shoes.name', 'wishes_lists.id', 'images.path')
                 ->where('id_user', '=', $userid)
+                ->groupby('shoes.id', 'images.id_shoe')
                 ->get('price');
 
 

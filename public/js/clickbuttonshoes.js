@@ -5,7 +5,7 @@ $(document).ready(function() {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-if($("input:checkbox:not(:checked)")) console.log("not checked anyone");
+if($("input:checkbox:not(:checked)"))
 
  $( "input[type=checkbox]" ).on("change", function(e) {
 
@@ -29,12 +29,7 @@ if($("input:checkbox:not(:checked)")) console.log("not checked anyone");
             styles.push($(this).val());
         });
 
-        console.log(window.location.pathname);
-        console.log("-------------------------------------------------------------------------------")
-        console.log($(this).val());
-        console.log(brands);
-        console.log(styles);
-        console.log(categories);
+        
         if(window.location.pathname == '/shoes/men'){
 
         $.get('brands/M', {brands: brands, styles: styles, categories: categories}, function(markup)

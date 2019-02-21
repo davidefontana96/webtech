@@ -1,6 +1,5 @@
 $(document).ready(function(){
   var baseUrl = window.location.pathname;
-  console.log(baseUrl+'/reviewed');
   var numeroReview = 0;
   var itemid = 0;
   var divApp = '';

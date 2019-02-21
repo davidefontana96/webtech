@@ -26,7 +26,6 @@ headers: {
 
           var phone = $("input[name=phone]").val();
 
-          console.log(first_name+ ' '+last_name);
 
           $.ajaxPrefilter(function( options, original_Options, jqXHR ) {
             options.async = true;
@@ -49,7 +48,6 @@ headers: {
                mobile:mobile,
                phone:phone
              }}).done(function( data ) {
-               console.log(data);
                if(data==1){
                Swal.fire({
                  type: 'success',
@@ -58,12 +56,7 @@ headers: {
                  timer: 3000
                });
              }
-            /*  swal({
-              title: "Good job!",
-              icon: "success",
-              button: false,
-              });
-*/
+            
 
 
 

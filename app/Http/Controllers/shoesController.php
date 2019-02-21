@@ -26,7 +26,7 @@ class shoesController extends Controller
          ->groupby('shoes.id', 'measurements.id_shoe')
          ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id', 'measurements.price')
          ->where('shoes.sex', '=', 'F' )
-         ->get();
+         ->paginate(12);
 
      //  return view('womenExtends', ['results' => $results]);
      // return view('women');
@@ -47,7 +47,7 @@ class shoesController extends Controller
          ->groupby('shoes.id', 'measurements.id_shoe')
          ->select('images.path', 'shoes.name', 'shoes.id_brand','shoes.sex','shoes.id', 'measurements.price')
         ->where('shoes.sex', '=', 'M' )
-        ->get();
+        ->paginate(12);
 
     //  return view('womenExtends', ['results' => $results]);
     // return view('women');
@@ -108,8 +108,7 @@ class shoesController extends Controller
                 })
                ->where(function($query) use ($categories)
                {
-
-               if(!is_null($categories))  $query->whereIn('shoes.id_category',$categories);
+                 if(!is_null($categories))  $query->whereIn('shoes.id_category',$categories);
 
               })
                ->where(function($query) use($styles)
@@ -120,7 +119,7 @@ class shoesController extends Controller
               })
                ->groupby('shoes.id', 'images.id_shoe')
                ->groupby('shoes.id', 'measurements.id_shoe')
-               ->get();
+               ->paginate(12);
 
 
 
@@ -178,8 +177,5 @@ class shoesController extends Controller
         // return View::make('shoesviews', compact('shoes'))->render();
         return view('shoesviews', compact('shoes'));
     }
-
-
-
 
 }

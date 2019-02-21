@@ -115,6 +115,8 @@ class cartController extends Controller
                     ->limit(4)
                     ->get();
 
+                    $discount = 0;
+
       return view('cart', compact('elements', 'total', 'discount', 'newtotal','relatedProduct'));
       }
 
@@ -215,9 +217,30 @@ class cartController extends Controller
               ->where('purchased', '=', 0)
               ->sum('subtotal');
 
-      $discount = 0;
+      $items = DB::table('carts')
+              ->join('measurements', 'measurements.id', '=', 'carts.id_measure')
+              ->join('shoes', 'shoes.id', '=', 'measurements.id_shoe')
+              ->join('images', 'images.id_shoe', '=', 'shoes.id')
+              ->select('carts.subtotal','carts.price', 'shoes.name', 'carts.quantity', 'carts.id', 'images.path')
+              ->groupBy('measurements.id_shoe', 'carts.id')
+              ->groupby('shoes.id', 'images.id_shoe')
+              ->where('carts.id_user', '=', $iduser)
+              ->where('carts.purchased', '=', 0)
+              ->get();
 
-     return view('cartviewpage', compact('elements', 'discount', 'newtotal', 'total'));
+      $itemsInCart = DB::table('carts')
+              ->where('id_user', '=', $iduser)
+              ->where('purchased', '=', 0)
+              ->count();
+
+
+      $discount = 0;
+      return response()->json([
+        'cartviewpage_view' => view('cartviewpage', compact('elements', 'discount', 'newtotal', 'total'))->render(),
+        'cart_dx' => view('cartviews', compact('itemsInCart', 'items'))->render()
+      ]);
+
+     //return view('cartviewpage', compact('elements', 'discount', 'newtotal', 'total'));
 
     }
 

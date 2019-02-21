@@ -15,7 +15,6 @@
 
 Route::get('/index', 'IndexController@initializePage');
 
-/*Route::get('/index/{search}', 'IndexController@searchBar');*/
 
 Route::get('/checkout', 'checkoutController@initializePage')->middleware('verified');
 
@@ -46,17 +45,11 @@ Route::get('/index2/fetchData', 'IndexController@initializePage2');
 
 Route::get('/filterFunction', 'IndexController@indexFilter');
 
-// modificare la route con metodo post
 Route::post('/autocomplete','IndexController@autocomplete'); //Instead of Theme your Controller name
 
 Route::get('wishlist', 'wishlistController@initializePage')->middleware('verified');
 
 Route::get('/wishlist/remove', 'wishlistController@removeWish')->middleware('verified');
-
-
-
-// Route di prova per il button load more
-
 
 
 Auth::routes();
@@ -71,8 +64,7 @@ Route::get('/profile', '\App\Http\Controllers\Auth\LoginController@profile');
 
 $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
-Route::get('/prova', 'IndexController@initializePage');
-
+Route::post('/insertM', 'messageController@sendMessage');
 
 
 Route::group(['prefix' => 'admin'], function () {

@@ -79,6 +79,42 @@
 
 
 			@include('bottom')
+    </div>
+
+  	<div class="gototop js-top">
+  		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+  	</div>
+
+  	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+  	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+  	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+
+  	<!-- jQuery -->
+     <!-- popper -->
+     <script src="js/popper.min.js"></script>
+     <!-- bootstrap 4.1 -->
+     <script src="js/bootstrap.min.js"></script>
+     <!-- jQuery easing -->
+     <script src="js/jquery.easing.1.3.js"></script>
+  	<!-- Waypoints -->
+  	<script src="js/jquery.waypoints.min.js"></script>
+  	<!-- Flexslider -->
+  	<script src="js/jquery.flexslider-min.js"></script>
+  	<!-- Owl carousel -->
+  	<script src="js/owl.carousel.min.js"></script>
+  	<!-- Magnific Popup -->
+  	<script src="js/jquery.magnific-popup.min.js"></script>
+  	<script src="js/magnific-popup-options.js"></script>
+  	<!-- Date Picker -->
+  	<script src="js/bootstrap-datepicker.js"></script>
+  	<!-- Stellar Parallax -->
+  	<script src="js/jquery.stellar.min.js"></script>
+  	<!-- Main -->
+  	<script src="js/main.js"></script>
+
+  	<script src="js/searchnav.js"></script>
+
+    <script src="js/activeNavigation.js"></script>
 
 	</body>
 </html>

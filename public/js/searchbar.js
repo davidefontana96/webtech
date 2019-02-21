@@ -1,6 +1,5 @@
 $(document).ready(function
 {
-    console.log("dompronto")
     fetch_shoes_data();
     function searchBar(query = '')
     {

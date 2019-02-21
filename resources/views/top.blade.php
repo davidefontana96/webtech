@@ -18,7 +18,7 @@
       <div class="row">
         <div class="col-sm-12 text-left menu-1">
           <ul id="nav">
-            <li><a href="/index">index</a></li>
+            <li><a href="/index">Home</a></li>
             <li><a href="/shoes/men">Men</a></li>
             <li><a href="/shoes/women">Women</a></li>
             <li><a href="/about">About</a></li>
@@ -32,13 +32,13 @@
             @endif
             @else
               <li class="has-dropdown cart">
-              <a id="navbarDropdown"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+              <a id="navbarDropdown" class="{{Auth::user()->id}}"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
               {{ Auth::user()->name }}
               </a>
                 <ul class="dropdown">
                   <li><a href="/user/profile">Profile</a></li>
                   <li><a href="/wishlist">Wishlist</a></li>
-                  <li><a href="">Historical Purchase</a></li>
+                  <li><a href="/history">Historical Purchase</a></li>
                   <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></li>
                 </ul>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

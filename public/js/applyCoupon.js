@@ -6,7 +6,6 @@ $(document).ready(function(){
       $.get('/cart/couponapply', {coupon:coupon},
             function(response)
             {
-              console.log(response);
               $('.removefromcart').html(response);
               $('#mycoupon').attr('placeholder', 'Your coupon number...');
               $('#mycoupon').val('');

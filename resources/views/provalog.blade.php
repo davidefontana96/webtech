@@ -366,8 +366,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		<script src="{{asset('js/jquery.stellar.min.js')}}"></script>
 		<!-- Main -->
 		<script src="{{asset('js/main.js')}}"></script>
-		<!-- Gestione ajax per brands, style e categories-->
-		<script src="{{asset('js/prova.js')}}"></script>
 
 
 	</body>

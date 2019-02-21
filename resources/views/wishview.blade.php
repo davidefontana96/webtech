@@ -1,7 +1,7 @@
 @foreach($products as $product)
 <div class="product-cart d-flex" id="{{$product->id}}">
   <div class="one-forth">
-    <div class="product-img" style="background-image: url(images/item-6.jpg);">
+    <div class="product-img" style="background-image: url({{$product->path}});">
     </div>
     <div class="display-tc">
       <h3>{{$product->name}}</h3>

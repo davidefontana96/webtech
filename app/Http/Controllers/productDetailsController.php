@@ -156,17 +156,23 @@ class productDetailsController extends Controller
                       ->where('id_user', '=', $userid)
                       ->count();
 
+        $descriptionBrand = DB::table('shoes')
+                      ->join('brands', 'brands.id', '=', 'shoes.id_brand')
+                      ->select('brands.description')
+                      ->where('shoes.id', '=', $id)
+                      ->pluck('brands.description');
+
       if ($request->ajax())
       {
         return view( 'reviewview', compact('reviews', 'reviews_counter', 'fivestars', 'fourstars',
                                             'threestars', 'twostars', 'onestars', 'fivepercentage',
                                             'fourpercentage', 'threepercentage', 'twopercentage',
-                                            'onepercentage', 'alreadyReviewed', 'avatar', 'alreadyWished'));
+                                            'onepercentage', 'alreadyReviewed', 'avatar', 'alreadyWished', 'descriptionBrand'));
       } else
 
       return view('product-detail', compact('shoes', 'images', 'measures', 'reviews', 'reviews_counter',
                                             'fivestars', 'fourstars', 'threestars', 'twostars', 'onestars',
-                                            'fivepercentage', 'fourpercentage', 'threepercentage', 'twopercentage',
+                                            'fivepercentage', 'fourpercentage', 'threepercentage', 'twopercentage', 'descriptionBrand',
                                             'onepercentage', 'alreadyReviewed', 'medium', 'items', 'itemsInCart', 'likedBy', 'alreadyLiked','avatar', 'alreadyWished'));
     }
 
@@ -185,6 +191,7 @@ class productDetailsController extends Controller
                       ->select('price')
                       ->where('size_shoe', '=', $numshoe)
                       ->where('id_shoe', '=', $idShoe)
+                      ->groupBy('id_shoe')
                       ->pluck('price');
 
       $toreturn = Array($availability, $price);
@@ -433,7 +440,7 @@ class productDetailsController extends Controller
 
     public function addLike(Request $request)
     {
-        $iduser = $request->input('iduser');
+        $iduser = Auth()->user()->id;
         $idshoe = $request->input('idshoe');
         $currdate = date("Y-m-d H:i:s");
 
@@ -469,7 +476,7 @@ class productDetailsController extends Controller
 
     public function removeLike(Request $request)
     {
-        $iduser = $request->input('iduser');
+        $iduser = Auth()->user()->id;
         $idshoe = $request->input('idshoe');
 
         DB::table('likes')
@@ -506,8 +513,12 @@ class productDetailsController extends Controller
                       ->where('id_shoe', '=', $idshoe)
                       ->where('id_user', '=', $userid)
                       ->count();
-
-        return view('productinwishview', compact('alreadyWished'));
+        if(empty($userid))
+        {
+          return ('0');
+        } else {
+          return view('productinwishview', compact('alreadyWished'));
+        }
       }
 
       public function removeFromWish(Request $request)

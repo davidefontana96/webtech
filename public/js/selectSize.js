@@ -8,7 +8,6 @@ $(document).ready(function(){
     var idShoe = $('.idshoe').attr('id');
     $.get(baseUrl+'/'+toPass, {toPass:toPass, idShoe:idShoe}, function(markup){
         $('#quantity').attr('max', markup[0]);
-        console.log(markup[0]);
         $('#price').text('$'+markup[1]);
         $('#quantity').val(0);
       });

@@ -137,9 +137,7 @@ class checkoutController extends Controller
                             ->pluck('percentage');
 
           $oldSubtotal = DB::table('carts')->select('subtotal')->where('id', '=', $carts_ids[$i])->pluck('subtotal');
-          echo $oldSubtotal;
           $newcartSubtotal = (($oldSubtotal[0] * (100-$couponpercentage[0])))/100;
-          echo $newcartSubtotal;
           DB::table('compositions')->insert(['created_at' => $currdate, 'id_cart' => $carts_ids[$i], 'id_order' => $id_order ]);
 
 

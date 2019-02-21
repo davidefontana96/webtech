@@ -20,43 +20,21 @@ $(document).ready(function(e) {
                       data: formData, // high importance!
                       processData: false, // high importance!
                       success: function (data) {
-                          console.log(data);
 
                       },
                       error: function (data) {
-                          console.log('Error:', data);
 
                       }
                   });
             }
 
             reader.readAsDataURL(input.files[0]);
-          //  event.preventDefault();
 
-
-
-
-      /*
-      $.ajax({
-        url: 'image',
-        type: 'POST',
-        data: formData.value,
-        contentType: false,
-        processData: false,
-        success: function(result)
-        {
-          console.log(result);
-        }
-        });
-
-      */
         }
     }
 
 
     $(".file-upload").on('change', function(event){
         readURL(this);
-    //    event.preventDefault();
-
     });
 });

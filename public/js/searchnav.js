@@ -10,8 +10,6 @@ jQuery(document).ready(function($){
            autofocus:true,
            select: function(event,ui){
              event.preventDefault();
-             console.log(ui.item)
-             console.log(ui.item.type+'/'+ui.item.id)
              if(ui.item.type == 'shoes'){  window.location.href = window.location.origin + '/shoes/' + ui.item.id + '/product-detail';
               $('#cazzetti').val(window.location.origin + '/shoes/' + ui.item.id + '/product-detail')
            }

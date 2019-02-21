@@ -105,13 +105,59 @@
 							</div>
 						</div>
 					</div>
-					 @endforeach
+					 @endforeach 
 				</div>
 			</div>
 		</div>
 
 		@include('bottom')
+  </div>
 
+  <div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+  </div>
+
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+  	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+  	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+
+  	<!-- jQuery -->
+     <!-- popper -->
+  	 <script src="{{asset('js/rmfromwishlist.js')}}"></script>
+
+  	 <script src="{{asset('js/rmfromcart.js')}}"></script>
+
+  	 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+  	 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+  	 <script src="{{asset('js/popper.min.js')}}"></script>
+  	 <!-- bootstrap 4.1 -->
+  	 <script src="{{asset('js/bootstrap.min.js')}}"></script>
+  	 <!-- jQuery easing -->
+  	 <script src="{{asset('js/jquery.easing.1.3.js')}}"></script>
+   <!-- Waypoints -->
+   <script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
+   <!-- Flexslider -->
+   <script src="{{asset('js/jquery.flexslider-min.js')}}"></script>
+   <!-- Owl carousel -->
+   <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+   <!-- Magnific Popup -->
+   <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+
+   <script src="{{asset('js/magnific-popup-options.js')}}"></script>
+   <!-- Date Picker -->
+   <script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
+   <!-- Stellar Parallax -->
+   <script src="{{asset('js/jquery.stellar.min.js')}}"></script>
+   <!-- Main -->
+   <script src="{{asset('js/main.js')}}"></script>
+
+   <script src="{{asset('js/searchnav.js')}}"></script>
+
+   <script src="js/activeNavigation.js"></script>
 
 	</body>
 </html>
