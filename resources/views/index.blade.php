@@ -61,7 +61,7 @@
 					   					<h2 class="head-2">Shoes</h2>
 					   					<h2 class="head-3">Collection</h2>
 					   					<p class="category"><span>New trending shoes</span></p>
-					   					<p><a href="#" class="btn btn-primary">Shop Collection</a></p>
+					   					<p><a href="/index2" class="btn btn-primary">Shop Collection</a></p>
 				   					</div>
 				   				</div>
 				   			</div>
@@ -131,11 +131,11 @@
 
 							<div class="col-lg-3 mb-4 text-center">
 								<div class="product-entry border">
-									<a href="#" class="prod-img">
-										<img src="/images/{{$shoe->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
+									<a href="/shoes/{{$shoe->id}}/product-detail" class="prod-img">
+										<img src="/{{$shoe->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
 									</a>
 									<div class="desc">
-										<h2><a href="#">{{$shoe->name}}</a></h2>
+										<h2><a href="/shoes/{{$shoe->id}}/product-detail">{{$shoe->name}}</a></h2>
 										<span class="price">${{$shoe->price}}</span>
 									</div>
 								</div>

@@ -21,7 +21,7 @@
 
 <div class="product-cart d-flex">
   <div class="one-forth">
-    <div class="product-img" style="background-image: url(storage/{{$element->path}})">
+    <div class="product-img" style="background-image: url(/{{$element->path}})">
     </div>
     <div class="display-tc">
       <h3>{{$element->name}}</h3>

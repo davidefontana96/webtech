@@ -3,11 +3,11 @@
 
     <div class="col-lg-4 mb-4 text-center" id="brands/{{$shoe->id}}/M">
       <div class="product-entry border">
-        <a href="{{$shoe->id}}/product-detail" class="prod-img">
-          <img src="{{$shoe->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
+        <a href="/shoes/{{$shoe->id}}/product-detail" class="prod-img">
+          <img src="/{{$shoe->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
         </a>
         <div class="desc">
-          <h2><a href="{{$shoe->id}}/product-detail">{{$shoe->name}}</a></h2>
+          <h2><a href="/shoes/{{$shoe->id}}/product-detail">{{$shoe->name}}</a></h2>
           <span class="price">${{$shoe->price}}</span>
         </div>
       </div>

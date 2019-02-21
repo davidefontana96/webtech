@@ -21,7 +21,7 @@ jQuery(document).ready(function($){
         }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 
 
-          var img ='<img src="/images/' +item.path+ '" width="30" height="30" style=" border-radius:50% "alt="Free html5 bootstrap 4 template">'
+          var img ='<img src="/' +item.path+ '" width="30" height="30" style=" border-radius:50% "alt="Free html5 bootstrap 4 template">'
           var form ='<a>' +img +' '+ item.value +' '+ item.type +'</a>';
           return $( "<li>" )
           .data( "ui-autocomplete-item", item )
@@ -31,5 +31,5 @@ jQuery(document).ready(function($){
 
 
 
-    
+
   });
