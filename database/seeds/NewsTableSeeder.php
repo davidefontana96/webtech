@@ -18,8 +18,8 @@ class NewsTableSeeder extends Seeder
         DB::table('news')->insert([
         'created_at'     => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now', $timezone = null),
         'title'        => $faker->name,
-        'text'          => $faker->text($maxNbChars = 200),
-        'id_user'       => $faker->numberBetween($min = 1, $max = 11),
+        'texts'          => $faker->text($maxNbChars = 200),
+        'id_user'       => $faker->numberBetween($min = 10, $max = 30),
         ]);
       }
     }

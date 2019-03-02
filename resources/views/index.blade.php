@@ -120,11 +120,29 @@
 
 		<div class="colorlib-product">
 			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
-						<h2>Best Sellers</h2>
-					</div>
-				</div>
+        <div class="colorlib-product">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-6 text-center">
+                <div class="featured">
+                  <a href="/shoes/men" class="featured-img" style="background-image: url(images/men.jpg);"></a>
+                  <div class="desc">
+                    <h2><a href="/shoes/men">Shop Men's Collection</a></h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 text-center">
+                <div class="featured">
+                  <a href="/shoes/women" class="featured-img" style="background-image: url(images/women.jpg);"></a>
+                  <div class="desc">
+                    <h2><a href="/shoes/women">Shop Women's Collection</a></h2>
+                  </div>
+                </div>
+
+    </div>
+            </div>
+          </div>
+        </div>
 				<div class="row row-pb-md">
 					@if(!empty($shoes))
 						@foreach($shoes as $shoe)
@@ -132,7 +150,7 @@
 							<div class="col-lg-3 mb-4 text-center">
 								<div class="product-entry border">
 									<a href="/shoes/{{$shoe->id}}/product-detail" class="prod-img">
-										<img src="/{{$shoe->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
+										<img src="{{$shoe->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
 									</a>
 									<div class="desc">
 										<h2><a href="/shoes/{{$shoe->id}}/product-detail">{{$shoe->name}}</a></h2>

@@ -31,7 +31,7 @@ $('.btn-addtocart').click(function(){
                 });
 
 
-     } else {
+     } /*else {
 
        Swal.fire({
         type: 'error',
@@ -39,7 +39,7 @@ $('.btn-addtocart').click(function(){
         text: 'Something went wrong!',
         footer: 'Check the measurements!'
       })
-     }
+    }*/
 });
 
 });

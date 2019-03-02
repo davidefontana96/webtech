@@ -67,7 +67,7 @@
 
             <form enctype="multipart/form-data" name="myForm" id="myForm" action="image" method="post" files="true">
               {{ csrf_field() }}
-              <img src="/storage/{{ Auth::user()->avatar }}"class="avatar img-circle img-thumbnail" style="float:left; border-radius:50%; margin-right:25px;">
+              <img src="/storage/images/dog.jpeg"class="avatar img-circle img-thumbnail" style="float:left; border-radius:50%; margin-right:25px;">
 
                 <label>Update Profile Image</label>
                 <input type="file" class="text-center center-block file-upload" id="avatar" name="avatar">

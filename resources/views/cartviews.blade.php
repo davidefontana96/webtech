@@ -8,7 +8,7 @@
       <li class="object-in-cart" id="{{$item->id}}">
           <span class="item">
             <span class="item-left">
-              <img src="/{{$item->path}}" height="50px"  wheight="50px" alt="" />
+              <img src="{{$item->path}}" height="50px"  wheight="50px" alt="" />
                 <span class="item-info">
                     <span>{{$item->name}}</span>
                     <span>{{$item->subtotal}}$</span>

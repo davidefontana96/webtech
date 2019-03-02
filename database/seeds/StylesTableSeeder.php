@@ -21,3 +21,4 @@ class StylesTableSeeder extends Seeder
       }
     }
 }
+ 

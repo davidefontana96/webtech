@@ -27,7 +27,8 @@ class AppServiceProvider extends ServiceProvider
                     ->join('shoes', 'shoes.id', '=', 'measurements.id_shoe')
                     ->join('images', 'images.id_shoe', '=', 'shoes.id')
                     ->select('carts.subtotal','carts.price', 'shoes.name', 'carts.quantity', 'carts.id', 'images.path')
-                    ->groupby('measurements.id', 'images.id_shoe')
+                    ->groupby('measurements.id', 'carts.id')
+                    ->groupBy('shoes.id', 'images.id_shoe')
                     ->where('carts.id_user', '=', Auth::id())
                     ->where('carts.purchased', '=', 0)
                     ->get();

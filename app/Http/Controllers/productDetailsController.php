@@ -379,7 +379,9 @@ class productDetailsController extends Controller
       $items = DB::table('carts')
               ->join('measurements', 'measurements.id', '=', 'carts.id_measure')
               ->join('shoes', 'shoes.id', '=', 'measurements.id_shoe')
-              ->select('carts.subtotal', 'shoes.name', 'carts.quantity', 'carts.id')
+              ->join('images', 'images.id_shoe', '=', 'shoes.id')
+              ->select('carts.subtotal', 'shoes.name', 'carts.quantity', 'carts.id', 'images.path')
+              ->groupby('shoes.id', 'images.id_shoe')
               ->where('id_user', '=', $iduser)
               ->where('purchased', '=', 0)
               ->get();

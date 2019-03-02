@@ -70,7 +70,7 @@
 								<div class="item">
 									<div class="product-entry border">
 										<a href="#" class="prod-img">
-											<img src="/{{$image->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
+											<img src="{{$image->path}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
 										</a>
 									</div>
 								</div>
