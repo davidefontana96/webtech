@@ -15,6 +15,14 @@
 
 Route::get('/index', 'IndexController@initializePage');
 
+// proviamo con una laravel api daje
+Route::get('/provemose', function(){
+  return response()->json([
+    'name' => 'Abigail',
+    'state' => 'CA'
+]);
+});
+
 
 Route::get('/checkout', 'checkoutController@initializePage')->middleware('verified');
 
